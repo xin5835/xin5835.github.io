@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="系统总结下ggplot2的主题、标度、图例设置，方便查询。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ggplot2之主题、标度、图例设置">
+<meta property="og:url" content="http://example.com/2021/01/11/ggplot2%E4%B9%8B%E4%B8%BB%E9%A2%98%E3%80%81%E6%A0%87%E5%BA%A6%E3%80%81%E5%9B%BE%E4%BE%8B%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="系统总结下ggplot2的主题、标度、图例设置，方便查询。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-10T19:29:41.000Z">
+<meta property="article:modified_time" content="2021-01-10T20:33:53.560Z">
+<meta property="article:author" content="Rongxin Feng">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/11/ggplot2%E4%B9%8B%E4%B8%BB%E9%A2%98%E3%80%81%E6%A0%87%E5%BA%A6%E3%80%81%E5%9B%BE%E4%BE%8B%E8%AE%BE%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ggplot2之主题、标度、图例设置 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/ggplot2%E4%B9%8B%E4%B8%BB%E9%A2%98%E3%80%81%E6%A0%87%E5%BA%A6%E3%80%81%E5%9B%BE%E4%BE%8B%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rongxin Feng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ggplot2之主题、标度、图例设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-10 19:29:41 / 修改时间：20:33:53" itemprop="dateCreated datePublished" datetime="2021-01-10T19:29:41Z">2021-01-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>系统总结下ggplot2的主题、标度、图例设置，方便查询。</p>
+<span id="more"></span>
+
+<h1 id="主题设置"><a href="#主题设置" class="headerlink" title="主题设置"></a>主题设置</h1><table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="center">主题元素</th>
+<th align="center">类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">整个图形背景</td>
+<td align="center">plot.background</td>
+<td align="center">element_rect()</td>
+</tr>
+<tr>
+<td align="center">图形标题</td>
+<td align="center">plot.title</td>
+<td align="center">element_text()</td>
+</tr>
+<tr>
+<td align="center">图形边距</td>
+<td align="center">plot.margin</td>
+<td align="center">margin()</td>
+</tr>
+<tr>
+<td align="center">坐标轴刻度</td>
+<td align="center">axis.ticks</td>
+<td align="center">element_line()</td>
+</tr>
+<tr>
+<td align="center">坐标轴标题</td>
+<td align="center">axis.title</td>
+<td align="center">element_text()</td>
+</tr>
+<tr>
+<td align="center">坐标轴标签</td>
+<td align="center">axis.text</td>
+<td align="center">element_text()</td>
+</tr>
+<tr>
+<td align="center">直线和坐标轴</td>
+<td align="center">axis.line</td>
+<td align="center">element_line()</td>
+</tr>
+<tr>
+<td align="center">面板背景</td>
+<td align="center">panel.background</td>
+<td align="center">element_rect()</td>
+</tr>
+<tr>
+<td align="center">面板网格线</td>
+<td align="center">panel.grid</td>
+<td align="center">element_line()</td>
+</tr>
+<tr>
+<td align="center">面板边界</td>
+<td align="center">panel.border</td>
+<td align="center">element_rect()</td>
+</tr>
+<tr>
+<td align="center">图例背景</td>
+<td align="center">legend.background</td>
+<td align="center">element_rect()</td>
+</tr>
+<tr>
+<td align="center">图例符号</td>
+<td align="center">legend.key</td>
+<td align="center">element_rect()</td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">legend.text</td>
+<td align="center">element_text()</td>
+</tr>
+<tr>
+<td align="center">图例标题</td>
+<td align="center">legend.title</td>
+<td align="center">element_text()</td>
+</tr>
+<tr>
+<td align="center">图例边距</td>
+<td align="center">legend.margin</td>
+<td align="center">margin</td>
+</tr>
+<tr>
+<td align="center">图例位置</td>
+<td align="center">legend.postion</td>
+<td align="center">“top,” “bottom,” “left,” “right”</td>
+</tr>
+<tr>
+<td align="center">分面标签背景</td>
+<td align="center">strip.background</td>
+<td align="center">element_rect()</td>
+</tr>
+<tr>
+<td align="center">条状文本</td>
+<td align="center">strip.text</td>
+<td align="center">element_text()</td>
+</tr>
+<tr>
+<td align="center">分面间隔</td>
+<td align="center">panel.spacing</td>
+<td align="center">unit</td>
+</tr>
+</tbody></table>
+<p>theme(element_name = element_function())<br>element_text(), 文本，   标签和标题的字体<br>element_line(), 线条，   线条或线段的颜色或线条类型<br>element_rect(), 矩形区域，背景矩形的颜色或者边界线条类型<br>element_blank() , 空白，  就是不分配相应的绘图空间，即删去这个地方的绘图元素。</p>
+<h1 id="标度"><a href="#标度" class="headerlink" title="标度"></a>标度</h1><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">连续性</th>
+<th align="center">离散型</th>
+<th align="center">自定义</th>
+<th align="center">同一型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_continous</td>
+<td align="center">scale_x_disctrete</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_log10</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_sqrt</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_reverse</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_date</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_datetime</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">坐标轴标度</td>
+<td align="center">scale_x_time</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">颜色标度</td>
+<td align="center">scale_color_continous</td>
+<td align="center">scale_color_disctrete</td>
+<td align="center">scale_color_manual</td>
+<td align="center">scale_color_identity</td>
+</tr>
+<tr>
+<td align="center">颜色标度</td>
+<td align="center">scale_color_distiller</td>
+<td align="center">scale_color_brewer</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">颜色标度</td>
+<td align="center">scale_color_gradient</td>
+<td align="center">scale_color_hue</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">颜色标度</td>
+<td align="center">scale_color_gradient2</td>
+<td align="center">scale_color_grey</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">颜色标度</td>
+<td align="center">scale_color_gradientn</td>
+<td align="center">scale_color_viridis_d</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">颜色标度</td>
+<td align="center">scale_color_viridis_c/d</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">填充标度</td>
+<td align="center">scale_fill_continous</td>
+<td align="center">scale_fill_disctrete</td>
+<td align="center">scale_fill_manual</td>
+<td align="center">scale_fill_identity</td>
+</tr>
+<tr>
+<td align="center">填充标度</td>
+<td align="center">scale_fill_distiller</td>
+<td align="center">scale_fill_brewer</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">填充标度</td>
+<td align="center">scale_fill_gradient</td>
+<td align="center">scale_fill_hue</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">填充标度</td>
+<td align="center">scale_fill_gradient2</td>
+<td align="center">scale_fill_grey</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">填充标度</td>
+<td align="center">scale_fill_gradientn</td>
+<td align="center">scale_fill_viridis_d</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">填充标度</td>
+<td align="center">scale_fill_viridis_c</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">大小标度</td>
+<td align="center">scale_size</td>
+<td align="center"></td>
+<td align="center">scale_size_manual</td>
+<td align="center">scale_size_identity</td>
+</tr>
+<tr>
+<td align="center">大小标度</td>
+<td align="center">scale_size_area</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">大小标度</td>
+<td align="center">scale_radius</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">透明度标度</td>
+<td align="center">scale_x_date</td>
+<td align="center">scale_alpha_disctrete</td>
+<td align="center">scale_alpha_manual</td>
+<td align="center">scale_alpha_identity</td>
+</tr>
+<tr>
+<td align="center">透明度标度</td>
+<td align="center">scale_x_datetime</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">线条标度</td>
+<td align="center"></td>
+<td align="center">scale_linetype</td>
+<td align="center">scale_linetype_manual</td>
+<td align="center">scale_linetype_identity</td>
+</tr>
+<tr>
+<td align="center">线条标度</td>
+<td align="center"></td>
+<td align="center">scale_linetype_discrete</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">形状标度</td>
+<td align="center"></td>
+<td align="center">scale_shape</td>
+<td align="center">scale_shape_manual</td>
+<td align="center">scale_shape_identity</td>
+</tr>
+<tr>
+<td align="center">参数列表</td>
+<td align="center">name limits breaks labels guide na.value</td>
+<td align="center">values</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>每个标度函数内部都有丰富的参数系统</p>
+<p>scale_colour_manual(）<br>palette = function(),<br>limits = NULL,     #坐标或图例的范围区间。连续性c(n, m)，离散型c(“a”, “b”, “c”)<br>name = waiver(),   #坐标和图例的名字，如不要图例的名字，name = NULL<br>labels = waiver(),  #坐标和图例的间隔标签<br>breaks = waiver(),   #控制显示在坐标轴或者图例上的值（元素）<br>minor_breaks = waiver(),<br>values = waiver(),   #参数values 指的是（颜色、形状等）视觉属性值,要么，与数值的顺序一致；要么，与breaks提供的字符型向量长度一致;要么，用命名向量c(“数据标签” = “视觉属性”)提供</p>
+<h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">连续颜色标度</th>
+<th align="center">非连续颜色标度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center">sguides(color = “colorbar”)</td>
+<td align="center">guides(color = “legend”)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">guide_colourbar()</td>
+<td align="center">guide_legend</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">参数</td>
+<td align="center">guide_colourbar</td>
+<td align="center">guide_legend</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">参数</td>
+<td align="center">guide_coloursteps</td>
+<td align="center">guide_bins</td>
+</tr>
+<tr>
+<td align="center">图例标题</td>
+<td align="center">title</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标题</td>
+<td align="center">title.position</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标题</td>
+<td align="center">title.theme</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标题</td>
+<td align="center">title.vjust</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标题</td>
+<td align="center">title.hjust</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">label</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">abel.position</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">label.theme</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">label.vjust</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">label.hjust</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">direction</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例标签</td>
+<td align="center">reverse</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">图例箱体</td>
+<td align="center">size</td>
+<td align="center">barwidth/barheight</td>
+<td align="center">key.width/key.height</td>
+</tr>
+<tr>
+<td align="center">图例箱体</td>
+<td align="center">分箱线</td>
+<td align="center">nbin</td>
+<td align="center">nrow/ncol/byrow</td>
+</tr>
+<tr>
+<td align="center">图例箱体</td>
+<td align="center">刻度线</td>
+<td align="center">ticks/draw.ulim/draw.lim</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/07/%E9%94%99%E8%A7%89/" rel="prev" title="错觉">
+      <i class="fa fa-chevron-left"></i> 错觉
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/19/%E6%88%91%E5%BA%94%E8%AF%A5%E5%92%8C%E6%88%91%E5%96%9C%E6%AC%A2/" rel="next" title="我应该和我喜欢">
+      我应该和我喜欢 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">主题设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">标度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">图例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rongxin Feng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rongxin Feng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
