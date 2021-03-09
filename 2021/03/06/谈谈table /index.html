@@ -28,7 +28,7 @@
 <meta property="og:description" content="table在线性代数、统计学、数据库中都有着非常重要的作用，数据的展现形式和应用基础都建立在table之上。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T04:43:15.741Z">
-<meta property="article:modified_time" content="2021-03-09T08:58:14.935Z">
+<meta property="article:modified_time" content="2021-03-09T09:13:38.777Z">
 <meta property="article:author" content="Rongxin Feng">
 <meta name="twitter:card" content="summary">
 
@@ -199,14 +199,80 @@
 <p>在数据可视化中，对于二维的表中的数据和一维的列向量数据的展示方法也是不同的。点图、常用于二维列向量之间的关系描述，柱状图常用于一维的向量数据展示。</p>
 <h1 id="数据中的表"><a href="#数据中的表" class="headerlink" title="数据中的表"></a>数据中的表</h1><p>数据库的理论知识来源于《集合论与图论》。在集合论中表是由一维的行向量和列向量做笛卡尔积运算，形成表。在数据库中行叫做元组（无顺序），列叫做属性。数据库可以看作一系列n元组做笛卡尔积运算得到。在查询过程中，所有的查询基于属性（列），所有的条件基于元组（行）。数据库可以看作是由n个元组构成的集合（table），这个n个元组都是这个集合（table）的子集。</p>
 <p>我们日常使用的数据库叫做关系型数据库。到底什么是“关系”？和“table”由什么区别？</p>
-<p>+———————+————————————-+<br>| 正式的关系模型术语  | 非正式的日常用语                    |<br>+———————+————————————-+<br>| 关系(relation)      | 表(table)                           |<br>+———————+————————————-+<br>| 元组(tuple)         | 行(row)或记录(record)               |<br>+———————+————————————-+<br>| 势(cardinality)     | 行数(number of rows)                |<br>+———————+————————————-+<br>| 属性(attribute)     | 列(column)或字段(field)             |<br>+———————+————————————-+<br>| 度(degree)          | 列数(number of columns)             |<br>+———————+————————————-+<br>| 定义域(domain)      | 列的取值集合(pool of legal values)  |<br>+———————+————————————-+</p>
+<table>
+<thead>
+<tr>
+<th>正式的关系模型术语</th>
+<th>非正式的日常用语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关系(relation)</td>
+<td>表(table)</td>
+</tr>
+<tr>
+<td>元组(tuple)</td>
+<td>行(row)或记录(record)</td>
+</tr>
+<tr>
+<td>势(cardinality)</td>
+<td>行数(number of rows)</td>
+</tr>
+<tr>
+<td>属性(attribute)</td>
+<td>列(column)或字段(field)</td>
+</tr>
+<tr>
+<td>度(degree)</td>
+<td>列数(number of columns)</td>
+</tr>
+<tr>
+<td>定义域(domain)</td>
+<td>列的取值集合(pool of legal values)</td>
+</tr>
+</tbody></table>
 <ul>
 <li>关系中不允许存在重复的元组，而表中可以存在。</li>
 <li>关系中的元组没有从上往下的顺序，而表中的行有从上往下的顺序。</li>
 <li>关系中的属性没有从左往右的顺序，而表中的列有从左往右的顺序。</li>
 <li>关系中所有的属性的值都是不可分割的，而表中列的值是可以分割的。</li>
 </ul>
-<p>+———————-+————————————-+<br>| 针对列的查询           | 针对行的筛选                        |<br>+———————-+————————————-+<br>| select               | where                               |<br>+———————-+————————————-+<br>| 聚合函数              | having                              |<br>+———————-+————————————-+<br>| group by             | case···when···                      |<br>+———————-+————————————-+<br>| order by             | 谓词（like、between、exists、in等） |<br>+———————-+————————————-+<br>| partition by         | 比较运算符                          |<br>+———————-+————————————-+<br>| 子查询作为新的查询列    |                                     |<br>+———————-+————————————-+<br>| inner join           | union                               |<br>| outer join           | union all                           |<br>|                      | intersect                           |<br>|                      | except                              |<br>+———————-+————————————-+</p>
+<table>
+<thead>
+<tr>
+<th>针对列的查询</th>
+<th>针对行的筛选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>select</td>
+<td>where</td>
+</tr>
+<tr>
+<td>聚合函数</td>
+<td>having</td>
+</tr>
+<tr>
+<td>group by</td>
+<td>case···when···</td>
+</tr>
+<tr>
+<td>order by</td>
+<td>谓词（like、between、exists、in等）</td>
+</tr>
+<tr>
+<td>partition by</td>
+<td>比较运算符</td>
+</tr>
+<tr>
+<td>子查询作为新的查询列</td>
+<td></td>
+</tr>
+<tr>
+<td>inner join outer join</td>
+<td>union union all intersect except</td>
+</tr>
+</tbody></table>
 
     </div>
 
