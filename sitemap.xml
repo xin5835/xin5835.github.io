@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xin5835.github.io/post/%E4%BD%BF%E7%94%A8colab%E6%89%93%E5%BC%80github%E7%9A%84ipynb%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
+  </url><url>
     <loc>https://xin5835.github.io/post/delete-onedrive-on-mac-completely/</loc>
     <lastmod>2023-06-03T11:18:15+08:00</lastmod>
   </url><url>
@@ -150,25 +153,28 @@
     <lastmod>2019-12-09T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/categories/</loc>
-    <lastmod>2023-06-03T11:18:15+08:00</lastmod>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/tags/data-analysis/</loc>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/categories/data-analysis/</loc>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/post/</loc>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/</loc>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/tags/</loc>
+    <lastmod>2023-09-09T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/tags/others/</loc>
     <lastmod>2023-06-03T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/categories/others/</loc>
     <lastmod>2023-06-03T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/post/</loc>
-    <lastmod>2023-06-03T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/</loc>
-    <lastmod>2023-06-03T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/tags/</loc>
-    <lastmod>2023-06-03T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/categories/data-analysis/</loc>
-    <lastmod>2023-04-19T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/tags/python/</loc>
     <lastmod>2023-04-19T11:18:15+08:00</lastmod>
@@ -178,9 +184,6 @@
   </url><url>
     <loc>https://xin5835.github.io/tags/%E6%9D%82/</loc>
     <lastmod>2023-02-08T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/tags/data-analysis/</loc>
-    <lastmod>2022-12-20T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/tags/statistics/</loc>
     <lastmod>2022-04-25T11:18:15+08:00</lastmod>
