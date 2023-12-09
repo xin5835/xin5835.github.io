@@ -6,13 +6,27 @@
     <description>Recent content in Data Analysis on Robert&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Sep 2023 11:18:15 +0800</lastBuildDate><atom:link href="https://xin5835.github.io/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Oct 2023 11:18:15 +0800</lastBuildDate><atom:link href="https://xin5835.github.io/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jupyter notebook自动补全</title>
+      <link>https://xin5835.github.io/post/jupyter-notebook%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</link>
+      <pubDate>Fri, 06 Oct 2023 11:18:15 +0800</pubDate>
+      
+      <guid>https://xin5835.github.io/post/jupyter-notebook%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</guid>
+      <description>jupyter notebook自动补全
+jupyter 7 及以上版本不支持Nbextensions插件了，要想使用Nbextensions插件需要安装notebook6.x版本。
+python目前最新的版本是3.12，notebook经典版本最新的版本号为6.5.6，但是这个版本目前支持的python最新版本为3.11.6。
+安装notebook6.5.6 所以要想使用Nbextensions自动补全，首先应该下载python3.11.6版本，然后使用一下命令完成安装
+# 安装note book6.5.6 pip3 install notebook==6.5.6 # 安装 nbextensions pip3 install jupyter_contrib_nbextensions jupyter contrib nbextension install --user # 安装 nbextensions_configurator pip3 install jupyter_nbextensions_configurator jupyter nbextensions_configurator enable --user 卸载jupyter 如果你安装了jupyter7，首先需要完全卸载掉jupyter7
+pip3 uninstall jupyter #无法卸载完 pip3 uninstall -y jupyter pip3 uninstall -y jupyter_core pip3 uninstall -y jupyter-client pip3 uninstall -y jupyter-console pip3 uninstall -y notebook pip3 uninstall -y qtconsole pip3 uninstall -y nbconvert pip3 uninstall -y nbformat 卸载python 如果安装了高于3.</description>
+    </item>
+    
     <item>
       <title>如何使用colab打开在线ipynb文件</title>
-      <link>https://xin5835.github.io/post/%E4%BD%BF%E7%94%A8colab%E6%89%93%E5%BC%80github%E7%9A%84ipynb%E6%96%87%E4%BB%B6/</link>
+      <link>https://xin5835.github.io/post/%E4%BD%BF%E7%94%A8colab%E6%89%93%E5%BC%80%E5%9C%A8%E7%BA%BFipynb%E6%96%87%E4%BB%B6/</link>
       <pubDate>Sat, 09 Sep 2023 11:18:15 +0800</pubDate>
       
-      <guid>https://xin5835.github.io/post/%E4%BD%BF%E7%94%A8colab%E6%89%93%E5%BC%80github%E7%9A%84ipynb%E6%96%87%E4%BB%B6/</guid>
+      <guid>https://xin5835.github.io/post/%E4%BD%BF%E7%94%A8colab%E6%89%93%E5%BC%80%E5%9C%A8%E7%BA%BFipynb%E6%96%87%E4%BB%B6/</guid>
       <description></description>
     </item>
     
