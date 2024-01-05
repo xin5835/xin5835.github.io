@@ -54,7 +54,29 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="SQL基础教程" />
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+
+<meta property="og:title" content="SQL基础教程" />
 <meta property="og:description" content="SQL基础教程&ndash;MICK著。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" /><meta property="article:section" content="post" />
@@ -893,7 +915,7 @@ GROUPING SETS&mdash;&mdash;-取得期望的积木CUBE</p>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span>
+    <span>&copy; 2024 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

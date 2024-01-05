@@ -54,7 +54,29 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="解决seaborn无法加载数据集错误" />
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+
+<meta property="og:title" content="解决seaborn无法加载数据集错误" />
 <meta property="og:description" content="解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/" /><meta property="article:section" content="post" />
@@ -96,7 +118,7 @@
   "keywords": [
     "Python"
   ],
-  "articleBody": "解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。\n方法一：\n现在终端开启代理环境，具体不可描述\n启动jupyter notebook 或者ipython\nimport requests response = requests.get(\"https://www.google.com\") print(response.status_code) 导入ssl库，执行代码即可\nimport seaborn as sns import ssl # 将默认的HTTPS上下文设置为未验证的上下文 ssl._create_default_https_context = ssl._create_unverified_context penguins = sns.load_dataset(\"penguins\") 备注：\nimport ssl：导入Python的SSL（安全套接层）模块。 ssl._create_default_https_context：这是Python中用于处理HTTPS连接的默认上下文对象。 ssl._create_unverified_context：这是SSL模块中的函数，用于创建一个未验证的上下文，即绕过SSL证书的验证。 ssl._create_default_https_context = ssl._create_unverified_context：将默认的HTTPS上下文设置为未验证的上下文，从而绕过SSL证书验证。 请注意，绕过SSL证书验证可能会导致安全风险，因此在生产环境中应谨慎使用。这通常用于测试或在特定情况下解决与证书问题相关的临时性需求。\n方法二：\n下载seaborn数据库至python启动目录，我是Mac，放在了根目录。\nsns.load_dataset(\"penguins\", data_home='seaborn-data') ",
+  "articleBody": "解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。\n方法一：\n先在终端开启代理环境，具体不可描述\n启动jupyter notebook 或者ipython\nimport requests response = requests.get(\"https://www.google.com\") print(response.status_code) 导入ssl库，执行代码即可\nimport seaborn as sns import ssl # 将默认的HTTPS上下文设置为未验证的上下文 ssl._create_default_https_context = ssl._create_unverified_context penguins = sns.load_dataset(\"penguins\") 备注：\nimport ssl：导入Python的SSL（安全套接层）模块。 ssl._create_default_https_context：这是Python中用于处理HTTPS连接的默认上下文对象。 ssl._create_unverified_context：这是SSL模块中的函数，用于创建一个未验证的上下文，即绕过SSL证书的验证。 ssl._create_default_https_context = ssl._create_unverified_context：将默认的HTTPS上下文设置为未验证的上下文，从而绕过SSL证书验证。 请注意，绕过SSL证书验证可能会导致安全风险，因此在生产环境中应谨慎使用。这通常用于测试或在特定情况下解决与证书问题相关的临时性需求。\n方法二：\n下载seaborn数据库至python启动目录，我是Mac，放在了根目录。\nsns.load_dataset(\"penguins\", data_home='seaborn-data') ",
   "wordCount" : "40",
   "inLanguage": "en",
   "datePublished": "2023-10-11T11:18:15+08:00",
@@ -202,7 +224,7 @@
 <p>方法一：</p>
 <ol>
 <li>
-<p>现在终端开启代理环境，具体不可描述</p>
+<p>先在终端开启代理环境，具体不可描述</p>
 </li>
 <li>
 <p>启动jupyter notebook 或者ipython</p>
@@ -252,7 +274,7 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span>
+    <span>&copy; 2024 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
