@@ -6,8 +6,15 @@
     <description>Recent content in Categories on Robert&#39;s Blog</description>
     <generator>Hugo -- 0.129.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Nov 2023 11:18:15 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Nov 2023 11:18:15 +0800</lastBuildDate>
     <atom:link href="https://xin5835.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python</title>
+      <link>https://xin5835.github.io/categories/python/</link>
+      <pubDate>Mon, 13 Nov 2023 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/categories/python/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Data Analysis</title>
       <link>https://xin5835.github.io/categories/data-analysis/</link>
@@ -34,13 +41,6 @@
       <link>https://xin5835.github.io/categories/statistics/</link>
       <pubDate>Mon, 25 Apr 2022 11:18:15 +0800</pubDate>
       <guid>https://xin5835.github.io/categories/statistics/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Python</title>
-      <link>https://xin5835.github.io/categories/python/</link>
-      <pubDate>Wed, 20 Oct 2021 11:18:15 +0800</pubDate>
-      <guid>https://xin5835.github.io/categories/python/</guid>
       <description></description>
     </item>
     <item>

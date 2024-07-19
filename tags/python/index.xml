@@ -6,8 +6,15 @@
     <description>Recent content in Python on Robert&#39;s Blog</description>
     <generator>Hugo -- 0.129.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Oct 2023 11:18:15 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Nov 2023 11:18:15 +0800</lastBuildDate>
     <atom:link href="https://xin5835.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python读取mysql</title>
+      <link>https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/</link>
+      <pubDate>Mon, 13 Nov 2023 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/</guid>
+      <description>&lt;p&gt;Python读取Mysql数据库&lt;/p&gt;</description>
+    </item>
     <item>
       <title>解决seaborn无法加载数据集错误</title>
       <link>https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/</link>

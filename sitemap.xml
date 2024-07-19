@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/</loc>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
+  </url><url>
     <loc>https://xin5835.github.io/post/marked%E8%AF%AD%E6%B3%95/</loc>
     <lastmod>2023-11-10T11:18:15+08:00</lastmod>
   </url><url>
@@ -162,25 +165,28 @@
     <lastmod>2019-12-09T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/categories/</loc>
-    <lastmod>2023-11-10T11:18:15+08:00</lastmod>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/post/</loc>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/tags/python/</loc>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/categories/python/</loc>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/</loc>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
+  </url><url>
+    <loc>https://xin5835.github.io/tags/</loc>
+    <lastmod>2023-11-13T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/categories/data-analysis/</loc>
     <lastmod>2023-11-10T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/tags/markdown/</loc>
     <lastmod>2023-11-10T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/post/</loc>
-    <lastmod>2023-11-10T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/</loc>
-    <lastmod>2023-11-10T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/tags/</loc>
-    <lastmod>2023-11-10T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/tags/python/</loc>
-    <lastmod>2023-10-11T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/tags/data-analysis/</loc>
     <lastmod>2023-09-09T11:18:15+08:00</lastmod>
@@ -211,9 +217,6 @@
   </url><url>
     <loc>https://xin5835.github.io/tags/machine-learning/</loc>
     <lastmod>2022-02-28T11:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://xin5835.github.io/categories/python/</loc>
-    <lastmod>2021-10-20T11:18:15+08:00</lastmod>
   </url><url>
     <loc>https://xin5835.github.io/tags/sql/</loc>
     <lastmod>2021-10-06T11:18:15+08:00</lastmod>
