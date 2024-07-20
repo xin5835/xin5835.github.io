@@ -259,11 +259,11 @@
   <div class="post-content"><p>numpy基础</p>
 <h2 id="python基础">python基础<a hidden class="anchor" aria-hidden="true" href="#python基础">#</a></h2>
 <p>启动shell</p>
-<pre tabindex="0"><code>ipython
-</code></pre><p>启动jupyter notebook</p>
-<pre tabindex="0"><code>jupyter notebook
-jupyter notebook --port 9999
-</code></pre><p>数据结构</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ipython
+</span></span></code></pre></div><p>启动jupyter notebook</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>jupyter notebook
+</span></span><span style="display:flex;"><span>jupyter notebook --port 9999
+</span></span></code></pre></div><p>数据结构</p>
 <p>list = [val1,val2,val3,val4]<br>
 dict = {key1:val1,key2:val2}<br>
 tuple = (val1,val2,val3,val4)<br>
@@ -301,99 +301,99 @@ set = {val1,val2,val3,val4}</p>
 </ul>
 <h2 id="numpy">numpy<a hidden class="anchor" aria-hidden="true" href="#numpy">#</a></h2>
 <p>导入numpy</p>
-<pre tabindex="0"><code>import numpy as np
-</code></pre><h3 id="理解python中的数据类型">理解Python中的数据类型<a hidden class="anchor" aria-hidden="true" href="#理解python中的数据类型">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>import numpy as np
+</span></span></code></pre></div><h3 id="理解python中的数据类型">理解Python中的数据类型<a hidden class="anchor" aria-hidden="true" href="#理解python中的数据类型">#</a></h3>
 <p>np.array 从 Python 列表创建数组:</p>
-<pre tabindex="0"><code>## 整型数组:
-np.array([1, 4, 2, 5, 3])
-## 嵌套列表构成的多维数组
-np.array([range(i, i + 3) for i in [2, 4, 6]])
-</code></pre><h3 id="从头创建数组">从头创建数组<a hidden class="anchor" aria-hidden="true" href="#从头创建数组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>## 整型数组:
+</span></span><span style="display:flex;"><span>np.array([1, 4, 2, 5, 3])
+</span></span><span style="display:flex;"><span>## 嵌套列表构成的多维数组
+</span></span><span style="display:flex;"><span>np.array([range(i, i + 3) for i in [2, 4, 6]])
+</span></span></code></pre></div><h3 id="从头创建数组">从头创建数组<a hidden class="anchor" aria-hidden="true" href="#从头创建数组">#</a></h3>
 <pre><code>+ 创建一个长度为10的数组，数组的值都是0
 </code></pre>
-<pre tabindex="0"><code>np.zeros(10, dtype=int)
-</code></pre><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是1 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.zeros(10, dtype=int)
+</span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是1 
 </code></pre>
-<pre tabindex="0"><code>np.ones((3, 5), dtype=float)
-</code></pre><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是3.14 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.ones((3, 5), dtype=float)
+</span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是3.14 
 </code></pre>
-<pre tabindex="0"><code>np.full((3, 5), 3.14)
-</code></pre><pre><code>+ 创建一个3×5的浮点型数组，数组的值是一个线性序列 ## 从0开始，到20结束，步长为2
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.full((3, 5), 3.14)
+</span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值是一个线性序列 ## 从0开始，到20结束，步长为2
 </code></pre>
-<pre tabindex="0"><code>np.arange(0, 20, 2)
-</code></pre><pre><code>+ 创建一个5个元素的数组，这5个数均匀地分配到0~1 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.arange(0, 20, 2)
+</span></span></code></pre></div><pre><code>+ 创建一个5个元素的数组，这5个数均匀地分配到0~1 
 </code></pre>
-<pre tabindex="0"><code>np.linspace(0, 1, 5)
-</code></pre><pre><code>+ 创建一个3×3的、在0~1均匀分布的随机数组成的数组 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.linspace(0, 1, 5)
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的、在0~1均匀分布的随机数组成的数组 
 </code></pre>
-<pre tabindex="0"><code>np.random.random((3, 3))
-</code></pre><pre><code>+ 创建一个3×3的、均值为0、方差为1的 正态分布的随机数数组
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.random.random((3, 3))
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的、均值为0、方差为1的 正态分布的随机数数组
 </code></pre>
-<pre tabindex="0"><code>np.random.normal(0, 1, (3, 3))
-</code></pre><pre><code>+ 创建一个3×3的、[0, 10)区间的随机整型数组 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.random.normal(0, 1, (3, 3))
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的、[0, 10)区间的随机整型数组 
 </code></pre>
-<pre tabindex="0"><code>np.random.randint(0, 10, (3, 3))
-</code></pre><pre><code>+ 创建一个3×3的单位矩阵 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.random.randint(0, 10, (3, 3))
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的单位矩阵 
 </code></pre>
-<pre tabindex="0"><code>np.eye(3)
-</code></pre><pre><code>+ 创建一个由3个整型数组成的未初始化的数组,数组的值是内存空间中的任意值
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.eye(3)
+</span></span></code></pre></div><pre><code>+ 创建一个由3个整型数组成的未初始化的数组,数组的值是内存空间中的任意值
 </code></pre>
-<pre tabindex="0"><code>np.empty(3)
-</code></pre><h3 id="数组的属性-">数组的属性 :<a hidden class="anchor" aria-hidden="true" href="#数组的属性-">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.empty(3)
+</span></span></code></pre></div><h3 id="数组的属性-">数组的属性 :<a hidden class="anchor" aria-hidden="true" href="#数组的属性-">#</a></h3>
 <p>确定数组的大小、形状、存储大小、数据类型。</p>
-<pre tabindex="0"><code>.ndim
-.shape
-.size 
-.dtype
-</code></pre><h3 id="数组的索引-">数组的索引 :<a hidden class="anchor" aria-hidden="true" href="#数组的索引-">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>.ndim
+</span></span><span style="display:flex;"><span>.shape
+</span></span><span style="display:flex;"><span>.size 
+</span></span><span style="display:flex;"><span>.dtype
+</span></span></code></pre></div><h3 id="数组的索引-">数组的索引 :<a hidden class="anchor" aria-hidden="true" href="#数组的索引-">#</a></h3>
 <p>获取和设置数组各个元素的值。</p>
-<pre tabindex="0"><code>x[0]
-x[-1]
-##多维索引
-x[0, 0]
-## 修改元素的值
-x[0 , 0] = 12 
-</code></pre><h3 id="数组的切分slice-">数组的切分(slice) :<a hidden class="anchor" aria-hidden="true" href="#数组的切分slice-">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>x[0]
+</span></span><span style="display:flex;"><span>x[-1]
+</span></span><span style="display:flex;"><span>##多维索引
+</span></span><span style="display:flex;"><span>x[0, 0]
+</span></span><span style="display:flex;"><span>## 修改元素的值
+</span></span><span style="display:flex;"><span>x[0 , 0] = 12 
+</span></span></code></pre></div><h3 id="数组的切分slice-">数组的切分(slice) :<a hidden class="anchor" aria-hidden="true" href="#数组的切分slice-">#</a></h3>
 <p>获取或设置更小的子数组。 x[ start: stop: step]，返回视图</p>
-<pre tabindex="0"><code>x[:5] ## 前五个元素
-x[5:] ## 索引五之后的元素
-x[4:7] ## 中间的子数组
-x[::2] ## 每隔一个元素
-x[1::2] ## 每隔一个元素，从索引1开始
-x[::-1] ## 所有元素，逆序的
-x[5::-2] ## 从索引5开始每隔一个元素逆序
-</code></pre><p>多维子数组</p>
-<pre tabindex="0"><code>x2[:2, :3] ## 两行，三列
-x2[:3, ::2] ## 所有行，每隔一列
-x2[::-1, ::-1] ## 逆序
-</code></pre><p>获取数组的行和列 :索引与切片组合起来实现这个功能</p>
-<pre tabindex="0"><code>print(x2[:, 0]) ## x2的第一列
-print(x2[0, :]) ## x2的第一行
-print(x2[0]) ##等于x2[0, :]
-</code></pre><p>非副本视图的子数组</p>
-<pre tabindex="0"><code>.copy()  ## 创建数组的副本
-</code></pre><h3 id="数组的变形-改变给定数组的形状">数组的变形 :改变给定数组的形状。<a hidden class="anchor" aria-hidden="true" href="#数组的变形-改变给定数组的形状">#</a></h3>
-<pre tabindex="0"><code>x = np.array([1, 2, 3])
-## 通过变形获得的行向量 x.reshape((1, 3))
-## 通过newaxis获得的行向量 x[np.newaxis, :]
-## 通过变形获得的列向量 x.reshape((3, 1))
-## 通过newaxis获得的列向量 x[:, np.newaxis]
-</code></pre><h3 id="数组的拼接和分裂-">数组的拼接和分裂 :<a hidden class="anchor" aria-hidden="true" href="#数组的拼接和分裂-">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>x[:5] ## 前五个元素
+</span></span><span style="display:flex;"><span>x[5:] ## 索引五之后的元素
+</span></span><span style="display:flex;"><span>x[4:7] ## 中间的子数组
+</span></span><span style="display:flex;"><span>x[::2] ## 每隔一个元素
+</span></span><span style="display:flex;"><span>x[1::2] ## 每隔一个元素，从索引1开始
+</span></span><span style="display:flex;"><span>x[::-1] ## 所有元素，逆序的
+</span></span><span style="display:flex;"><span>x[5::-2] ## 从索引5开始每隔一个元素逆序
+</span></span></code></pre></div><p>多维子数组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>x2[:2, :3] ## 两行，三列
+</span></span><span style="display:flex;"><span>x2[:3, ::2] ## 所有行，每隔一列
+</span></span><span style="display:flex;"><span>x2[::-1, ::-1] ## 逆序
+</span></span></code></pre></div><p>获取数组的行和列 :索引与切片组合起来实现这个功能</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>print(x2[:, 0]) ## x2的第一列
+</span></span><span style="display:flex;"><span>print(x2[0, :]) ## x2的第一行
+</span></span><span style="display:flex;"><span>print(x2[0]) ##等于x2[0, :]
+</span></span></code></pre></div><p>非副本视图的子数组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>.copy()  ## 创建数组的副本
+</span></span></code></pre></div><h3 id="数组的变形-改变给定数组的形状">数组的变形 :改变给定数组的形状。<a hidden class="anchor" aria-hidden="true" href="#数组的变形-改变给定数组的形状">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>x = np.array([1, 2, 3])
+</span></span><span style="display:flex;"><span>## 通过变形获得的行向量 x.reshape((1, 3))
+</span></span><span style="display:flex;"><span>## 通过newaxis获得的行向量 x[np.newaxis, :]
+</span></span><span style="display:flex;"><span>## 通过变形获得的列向量 x.reshape((3, 1))
+</span></span><span style="display:flex;"><span>## 通过newaxis获得的列向量 x[:, np.newaxis]
+</span></span></code></pre></div><h3 id="数组的拼接和分裂-">数组的拼接和分裂 :<a hidden class="anchor" aria-hidden="true" href="#数组的拼接和分裂-">#</a></h3>
 <p>拼接:np.concatenate、np.vstack 和 np.hstack</p>
-<pre tabindex="0"><code>np.concatenate([x, y])
-## 沿着第一个轴拼接 
-np.concatenate([x, y])
-## 沿着第二个轴拼接(从0开始索引) 
-np.concatenate([x, y], axis=1)
-## 垂直栈数组 
-np.vstack([x, y])
-## 水平栈数组
-np.hstack([x, y])
-</code></pre><p>分裂:np.split、np.hsplit 和 np.vsplit</p>
-<pre tabindex="0"><code>x1, x2, x3 = np.split(x, [3, 5]) ## [3, 5]第3个和第5个未知是分割点
-upper, lower = np.vsplit(grid, [2])
-left, right = np.hsplit(grid, [2])
-</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>np.concatenate([x, y])
+</span></span><span style="display:flex;"><span>## 沿着第一个轴拼接 
+</span></span><span style="display:flex;"><span>np.concatenate([x, y])
+</span></span><span style="display:flex;"><span>## 沿着第二个轴拼接(从0开始索引) 
+</span></span><span style="display:flex;"><span>np.concatenate([x, y], axis=1)
+</span></span><span style="display:flex;"><span>## 垂直栈数组 
+</span></span><span style="display:flex;"><span>np.vstack([x, y])
+</span></span><span style="display:flex;"><span>## 水平栈数组
+</span></span><span style="display:flex;"><span>np.hstack([x, y])
+</span></span></code></pre></div><p>分裂:np.split、np.hsplit 和 np.vsplit</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>x1, x2, x3 = np.split(x, [3, 5]) ## [3, 5]第3个和第5个未知是分割点
+</span></span><span style="display:flex;"><span>upper, lower = np.vsplit(grid, [2])
+</span></span><span style="display:flex;"><span>left, right = np.hsplit(grid, [2])
+</span></span></code></pre></div>
 
   </div>
 

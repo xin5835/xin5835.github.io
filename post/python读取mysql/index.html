@@ -225,19 +225,19 @@
   </header> 
 
   <div class="post-content"><p>Python读取Mysql数据库</p>
-<pre tabindex="0"><code>import pymysql
-import pandas as pd
-
-con = pymysql.connect(host=&#39;rm-xxxxxxxxxxx.rds.aliyuncs.com&#39;,
-                          port=3306,
-                          user=&#39;xxxxxxxxx&#39;,
-                          password=&#39;xxxxxxxx&#39;,
-                          db=&#39;mysql&#39;,
-                          charset=&#34;utf8&#34;)
-                          
-data_sql = pd.read_sql(&#34;select * from ods.cpc limit 10&#34;, con)
-data_sql.to_csv(&#39;test.csv&#39;,encoding=&#34;utf-8_sig&#34;)
-</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>import pymysql
+</span></span><span style="display:flex;"><span>import pandas as pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>con = pymysql.connect(host=&#39;rm-xxxxxxxxxxx.rds.aliyuncs.com&#39;,
+</span></span><span style="display:flex;"><span>                          port=3306,
+</span></span><span style="display:flex;"><span>                          user=&#39;xxxxxxxxx&#39;,
+</span></span><span style="display:flex;"><span>                          password=&#39;xxxxxxxx&#39;,
+</span></span><span style="display:flex;"><span>                          db=&#39;mysql&#39;,
+</span></span><span style="display:flex;"><span>                          charset=&#34;utf8&#34;)
+</span></span><span style="display:flex;"><span>                          
+</span></span><span style="display:flex;"><span>data_sql = pd.read_sql(&#34;select * from ods.cpc limit 10&#34;, con)
+</span></span><span style="display:flex;"><span>data_sql.to_csv(&#39;test.csv&#39;,encoding=&#34;utf-8_sig&#34;)
+</span></span></code></pre></div>
 
   </div>
 

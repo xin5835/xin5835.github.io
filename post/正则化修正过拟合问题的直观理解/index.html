@@ -226,9 +226,9 @@
 
   <div class="post-content"><p>在拟合模型时如果出现了过拟合的情况，一种处理方式：减少模型的特征数量；另一种方式：加入正则项。那么如何理解加入正则项可以修正过拟合问题。</p>
 <p>以多项式模型为例，假设正常的拟合直线为$ y = x^2 $ （蓝色）,若在模型中加入了过多的二项式$ y = x^4 + x^3 +x^2 $（绿色），模型就会出现过拟合的情况。</p>
-<!-- raw HTML omitted -->
+<img src="/images/regularization_1.png" alt="image" width="700" height="500" >
 <p>加入正则项的思想是降低高次项的系数，削弱高次项对模型的影响。如调整4次项和3次项的系数为0.01，$ y= 0.01x^4 + 0.01x^3 +x^2 $，图形如下：</p>
-<!-- raw HTML omitted -->
+<img src="/images/regularization_2.png" alt="image" width="700" height="500" >
 <p>备注：</p>
 <blockquote>
 <p>$ y = x^2 $（蓝色）
