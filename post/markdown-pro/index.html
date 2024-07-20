@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>解决seaborn无法加载数据集错误 | Robert&#39;s Blog</title>
-<meta name="keywords" content="Python">
-<meta name="description" content="解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。">
+<title>markdown颜色、居中、上下标 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Markdown">
+<meta name="description" content="markdown语法">
 <meta name="author" content="">
-<link rel="canonical" href="https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/">
+<link rel="canonical" href="https://xin5835.github.io/post/markdown-pro/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.f9c8307879cd5e8f6870cf3530b91062e2f2bb5edbfa646dc30ee0a54eaad799.css" integrity="sha256-&#43;cgweHnNXo9ocM81MLkQYuLyu17b&#43;mRtww7gpU6q15k=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://xin5835.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/markdown-pro/">
 <noscript>
     <style>
         #theme-toggle,
@@ -80,16 +80,16 @@
 
   
 
-<meta property="og:title" content="解决seaborn无法加载数据集错误" />
-<meta property="og:description" content="解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。" />
+<meta property="og:title" content="markdown颜色、居中、上下标" />
+<meta property="og:description" content="markdown语法" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-10-11T11:18:15+08:00" />
-<meta property="article:modified_time" content="2023-10-11T11:18:15+08:00" />
+<meta property="og:url" content="https://xin5835.github.io/post/markdown-pro/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-11-10T11:18:15+08:00" />
+<meta property="article:modified_time" content="2023-11-10T11:18:15+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="解决seaborn无法加载数据集错误"/>
-<meta name="twitter:description" content="解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。"/>
+<meta name="twitter:title" content="markdown颜色、居中、上下标"/>
+<meta name="twitter:description" content="markdown语法"/>
 
 
 <script type="application/ld+json">
@@ -106,8 +106,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "解决seaborn无法加载数据集错误",
-      "item": "https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/"
+      "name": "markdown颜色、居中、上下标",
+      "item": "https://xin5835.github.io/post/markdown-pro/"
     }
   ]
 }
@@ -116,20 +116,20 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "解决seaborn无法加载数据集错误",
-  "name": "解决seaborn无法加载数据集错误",
-  "description": "解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。\n",
+  "headline": "markdown颜色、居中、上下标",
+  "name": "markdown颜色、居中、上下标",
+  "description": "markdown语法\n",
   "keywords": [
-    "Python"
+    "Markdown"
   ],
-  "articleBody": "解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。\n方法一：\n先在终端开启代理环境，具体不可描述\n启动jupyter notebook 或者ipython\nimport requests response = requests.get(\"https://www.google.com\") print(response.status_code) 导入ssl库，执行代码即可\nimport seaborn as sns import ssl # 将默认的HTTPS上下文设置为未验证的上下文 ssl._create_default_https_context = ssl._create_unverified_context penguins = sns.load_dataset(\"penguins\") 备注：\nimport ssl：导入Python的SSL（安全套接层）模块。 ssl._create_default_https_context：这是Python中用于处理HTTPS连接的默认上下文对象。 ssl._create_unverified_context：这是SSL模块中的函数，用于创建一个未验证的上下文，即绕过SSL证书的验证。 ssl._create_default_https_context = ssl._create_unverified_context：将默认的HTTPS上下文设置为未验证的上下文，从而绕过SSL证书验证。 请注意，绕过SSL证书验证可能会导致安全风险，因此在生产环境中应谨慎使用。这通常用于测试或在特定情况下解决与证书问题相关的临时性需求。\n方法二：\n下载seaborn数据库至python启动目录，我是Mac，放在了根目录。\nsns.load_dataset(\"penguins\", data_home='seaborn-data') ",
-  "wordCount" : "40",
+  "articleBody": "markdown语法\nColor 众生没有真理真相，只有好恶。所以你就有了价值，有了机会。 为文字添加背景色 背景色yellow 设置文字居中 居中 左对齐\n右对齐\n加入上下标 H2O CO2 E = MC2 S = 𝜋r2\nH2O CO2 E = MC2 S = 𝜋r2 ",
+  "wordCount" : "35",
   "inLanguage": "en",
-  "datePublished": "2023-10-11T11:18:15+08:00",
-  "dateModified": "2023-10-11T11:18:15+08:00",
+  "datePublished": "2023-11-10T11:18:15+08:00",
+  "dateModified": "2023-11-10T11:18:15+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/"
+    "@id": "https://xin5835.github.io/post/markdown-pro/"
   },
   "publisher": {
     "@type": "Organization",
@@ -217,64 +217,55 @@
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      解决seaborn无法加载数据集错误
+      markdown颜色、居中、上下标
     </h1>
-    <div class="post-meta"><span title='2023-10-11 11:18:15 +0800 CST'>October 11, 2023</span>
+    <div class="post-meta"><span title='2023-11-10 11:18:15 +0800 CST'>November 10, 2023</span>
 
 </div>
   </header> 
 
-  <div class="post-content"><p>解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。</p>
-<p>方法一：</p>
+  <div class="post-content"><p>markdown语法</p>
 <ol>
-<li>
-<p>先在终端开启代理环境，具体不可描述</p>
-</li>
-<li>
-<p>启动jupyter notebook 或者ipython</p>
-<pre tabindex="0"><code> import requests
-
- response = requests.get(&#34;https://www.google.com&#34;)
- print(response.status_code)
-</code></pre></li>
-<li>
-<p>导入ssl库，执行代码即可</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ssl 
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将默认的HTTPS上下文设置为未验证的上下文</span>
-</span></span><span style="display:flex;"><span>ssl<span style="color:#f92672">.</span>_create_default_https_context <span style="color:#f92672">=</span> ssl<span style="color:#f92672">.</span>_create_unverified_context 
-</span></span><span style="display:flex;"><span>penguins <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>load_dataset(<span style="color:#e6db74">&#34;penguins&#34;</span>)
-</span></span></code></pre></div><p>备注：</p>
-<ul>
-<li><code>import ssl</code>：导入Python的SSL（安全套接层）模块。</li>
-<li><code>ssl._create_default_https_context</code>：这是Python中用于处理HTTPS连接的默认上下文对象。</li>
-<li><code>ssl._create_unverified_context</code>：这是SSL模块中的函数，用于创建一个未验证的上下文，即绕过SSL证书的验证。</li>
-<li><code>ssl._create_default_https_context = ssl._create_unverified_context</code>：将默认的HTTPS上下文设置为未验证的上下文，从而绕过SSL证书验证。</li>
-</ul>
-</li>
+<li>Color</li>
 </ol>
-<p>请注意，绕过SSL证书验证可能会导致安全风险，因此在生产环境中应谨慎使用。这通常用于测试或在特定情况下解决与证书问题相关的临时性需求。</p>
-<p>方法二：</p>
-<p>下载seaborn数据库至python启动目录，我是Mac，放在了根目录。</p>
-<pre tabindex="0"><code>sns.load_dataset(&#34;penguins&#34;, data_home=&#39;seaborn-data&#39;)
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>&lt;font color = #FF1493 &gt; 
+&lt;span style=&#39;color:#FF1493&#39;&gt;众生没有真理真相，只有好恶。所以你就有了价值，有了机会。&lt;/span&gt;
+</code></pre><ol start="2">
+<li>为文字添加背景色</li>
+</ol>
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;背景色yellow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+</code></pre><ol start="3">
+<li>设置文字居中</li>
+</ol>
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>&lt;center&gt;居中&lt;/center&gt;
+&lt;p align=&#34;left&#34;&gt;左对齐&lt;/p&gt;
+&lt;p align=&#34;right&#34;&gt;右对齐&lt;/p&gt;
+</code></pre><ol start="4">
+<li>加入上下标</li>
+</ol>
+<p>H<!-- raw HTML omitted -->2<!-- raw HTML omitted -->O      CO<!-- raw HTML omitted -->2<!-- raw HTML omitted -->          E = MC<!-- raw HTML omitted -->2<!-- raw HTML omitted -->                              S = 𝜋r<!-- raw HTML omitted -->2<!-- raw HTML omitted --></p>
+<pre tabindex="0"><code>H&lt;sub&gt;2&lt;/sub&gt;O      CO&lt;sub&gt;2&lt;/sub&gt;          E = MC&lt;sup&gt;2&lt;/sup&gt;                              S = 𝜋r&lt;sup&gt;2&lt;/sup&gt;
 </code></pre>
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://xin5835.github.io/tags/python/">Python</a></li>
+      <li><a href="https://xin5835.github.io/tags/markdown/">Markdown</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://xin5835.github.io/post/markdown-pro/">
+  <a class="prev" href="https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/">
     <span class="title">« Prev</span>
     <br>
-    <span>markdown颜色、居中、上下标</span>
+    <span>python读取mysql</span>
   </a>
-  <a class="next" href="https://xin5835.github.io/post/jupyter-notebook%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/">
+  <a class="next" href="https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/">
     <span class="title">Next »</span>
     <br>
-    <span>jupyter notebook自动补全</span>
+    <span>解决seaborn无法加载数据集错误</span>
   </a>
 </nav>
 
