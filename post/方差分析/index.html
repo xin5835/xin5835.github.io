@@ -10,7 +10,7 @@
 <meta name="description" content="方差分析案例讲解及计算过程。">
 <meta name="author" content="">
 <link rel="canonical" href="https://xin5835.github.io/post/%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.f9c8307879cd5e8f6870cf3530b91062e2f2bb5edbfa646dc30ee0a54eaad799.css" integrity="sha256-&#43;cgweHnNXo9ocM81MLkQYuLyu17b&#43;mRtww7gpU6q15k=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4b00162468781a93a18e8e8cd38748dddb7e8796cfbd8b37b207cc47b2dd901a.css" integrity="sha256-SwAWJGh4GpOhjo6M04dI3dt&#43;h5bPvYs3sgfMR7LdkBo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://xin5835.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
@@ -122,8 +122,8 @@
   "keywords": [
     "Statistics"
   ],
-  "articleBody": "方差分析案例讲解及计算过程。\n方差分析主要用于检验多组数据的均值是否相等，即$\\mu_1 = \\mu_2= … = \\mu_n $。z检验和t检验主要用于检验两组数据的均值是否相等，即$\\mu_1 = \\mu_2 $ 。\neg: 有三种减肥食物，食用后记录了三次体重减轻的数据，假设显著性水平$ \\alpha $ = 10 % ，问这三种减肥食物的效果是否有差异。\nindex food1 food2 food3 1 3 5 5 2 2 3 6 3 1 4 7 数据中行数为m，列数为n。\ngrand mean: $ \\bar{x} = \\frac{3+2+1+5+3+4+5+6+7}{9} = 4 $\nfood1: $ \\bar{x_1} = \\frac{3+2+1}{3} = 2 $\nfood2: $ \\bar{x_2} = \\frac{5+3+4}{3} = 4 $\nfood1: $ \\bar{x_3} = \\frac{5+6+7}{3} = 6 $\nSum of Squares Total (SST): $$ SST = (3-4)^2 + (2-4)^2 + (1-4)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 +(5-4)^2 + (6-4)^2 + (7-4)^2 = 30 $$ Degree = mn-1=8\nSum of Squares Between (SSB): $$ SSB = (2-4)^2 + (2-4)^2 + (2-4)^2 + (4-4)^2 + (4-4)^2 + (4-4)^2 + (6-4)^2 + (6-4)^2 + (6-4)^2 = 24 $$ Degree = (n-1) = 2\nSum of Squares Within (SSW): $$ SSW = (3-2)^2 + (2-2)^2 + (1-2)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 +(5-6)^2 + (6-6)^2 + (7-6)^2 = 6 $$ Degree = (m-1)n = 6\n$ H_0 :$ food doesn’t have a difference\n$ H_1 :$ food have a difference\n$$ F_statistic = \\frac{\\frac{SSB}{(n-1)}}{\\frac{SSW}{(m-1)n}} = \\frac{\\frac{24}{2}}{\\frac{6}{6}} = 12 $$\n在零假设成立的前提下，如果得到F统计量的概率小于10%，那么我们将拒绝零假设，接受备择假设。对于显著性水平$ \\alpha $ = 10% ，F统计量 = 3.46。\n3.46 \u003c \u003c 12 ,因此，拒绝零假设，接受备择假设，即三种食物得到分数有差异。\n注： 数据和内容搬运自《可汗学院：统计学》。\n",
-  "wordCount" : "204",
+  "articleBody": "方差分析案例讲解及计算过程。\n方差分析主要用于检验多组数据的均值是否相等，即$\\mu_1 = \\mu_2= … = \\mu_n $。z检验和t检验主要用于检验两组数据的均值是否相等，即$\\mu_1 = \\mu_2 $ 。\neg: 有三种减肥食物，食用后记录了三次体重减轻的数据，假设显著性水平$ \\alpha $ = 10 % ，问这三种减肥食物的效果是否有差异。\nindex food1 food2 food3 1 3 5 5 2 2 3 6 3 1 4 7 数据中行数为m，列数为n。\ngrand mean: $ \\bar{x} = \\frac{3+2+1+5+3+4+5+6+7}{9} = 4 $\nfood1: $ \\bar{x_1} = \\frac{3+2+1}{3} = 2 $\nfood2: $ \\bar{x_2} = \\frac{5+3+4}{3} = 4 $\nfood1: $ \\bar{x_3} = \\frac{5+6+7}{3} = 6 $\nSum of Squares Total (SST): $$ SST = (3-4)^2 + (2-4)^2 + (1-4)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 \\newline +(5-4)^2 + (6-4)^2 + (7-4)^2 = 30 $$ Degree = mn-1=8\nSum of Squares Between (SSB): $$ SSB = (2-4)^2 + (2-4)^2 + (2-4)^2 + (4-4)^2 + (4-4)^2 + (4-4)^2 + \\newline (6-4)^2 + (6-4)^2 + (6-4)^2 = 24 $$ Degree = (n-1) = 2\nSum of Squares Within (SSW): $$ SSW = (3-2)^2 + (2-2)^2 + (1-2)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 \\newline +(5-6)^2 + (6-6)^2 + (7-6)^2 = 6 $$ Degree = (m-1)n = 6\n$ H_0 :$ food doesn’t have a difference\n$ H_1 :$ food have a difference\n$$ F_statistic = \\frac{\\frac{SSB}{(n-1)}}{\\frac{SSW}{(m-1)n}} = \\frac{\\frac{24}{2}}{\\frac{6}{6}} = 12 $$\n在零假设成立的前提下，如果得到F统计量的概率小于10%，那么我们将拒绝零假设，接受备择假设。对于显著性水平$ \\alpha $ = 10% ，F统计量 = 3.46。\n3.46 \u003c \u003c 12 ,因此，拒绝零假设，接受备择假设，即三种食物得到分数有差异。\n注： 数据和内容搬运自《可汗学院：统计学》。\n",
+  "wordCount" : "207",
   "inLanguage": "en",
   "datePublished": "2022-04-25T11:18:15+08:00",
   "dateModified": "2022-04-25T11:18:15+08:00",
@@ -263,13 +263,16 @@
 <p>food2: $ \bar{x_2} =  \frac{5+3+4}{3} = 4      $</p>
 <p>food1: $ \bar{x_3} =  \frac{5+6+7}{3} = 6      $</p>
 <p><strong>Sum of Squares Total (SST):</strong>
-$$  SST = (3-4)^2 + (2-4)^2 + (1-4)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 +(5-4)^2 + (6-4)^2 + (7-4)^2 = 30     $$
+$$  SST = (3-4)^2 + (2-4)^2 + (1-4)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 \newline
++(5-4)^2 + (6-4)^2 + (7-4)^2 = 30     $$
 Degree = mn-1=8</p>
 <p><strong>Sum of Squares Between (SSB):</strong>
-$$ SSB = (2-4)^2 + (2-4)^2 + (2-4)^2 + (4-4)^2 + (4-4)^2 + (4-4)^2 + (6-4)^2 + (6-4)^2 + (6-4)^2 = 24     $$
+$$ SSB = (2-4)^2 + (2-4)^2 + (2-4)^2 + (4-4)^2 + (4-4)^2 + (4-4)^2 + \newline
+(6-4)^2 + (6-4)^2 + (6-4)^2 = 24     $$
 Degree = (n-1) = 2</p>
 <p><strong>Sum of Squares Within (SSW):</strong>
-$$ SSW = (3-2)^2 + (2-2)^2 + (1-2)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 +(5-6)^2 + (6-6)^2 + (7-6)^2 = 6     $$
+$$ SSW = (3-2)^2 + (2-2)^2 + (1-2)^2 + (5-4)^2 + (3-4)^2 + (4-4)^2 \newline
++(5-6)^2 + (6-6)^2 + (7-6)^2 = 6     $$
 Degree = (m-1)n = 6</p>
 <p>$ H_0 :$ food doesn&rsquo;t have a difference</p>
 <p>$ H_1 :$ food have a difference</p>

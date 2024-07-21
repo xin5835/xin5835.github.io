@@ -10,7 +10,7 @@
 <meta name="description" content="Python读取Mysql数据库">
 <meta name="author" content="">
 <link rel="canonical" href="https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.f9c8307879cd5e8f6870cf3530b91062e2f2bb5edbfa646dc30ee0a54eaad799.css" integrity="sha256-&#43;cgweHnNXo9ocM81MLkQYuLyu17b&#43;mRtww7gpU6q15k=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4b00162468781a93a18e8e8cd38748dddb7e8796cfbd8b37b207cc47b2dd901a.css" integrity="sha256-SwAWJGh4GpOhjo6M04dI3dt&#43;h5bPvYs3sgfMR7LdkBo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://xin5835.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
@@ -225,18 +225,18 @@
   </header> 
 
   <div class="post-content"><p>Python读取Mysql数据库</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>import pymysql
-</span></span><span style="display:flex;"><span>import pandas as pd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pymysql
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>con = pymysql.connect(host=&#39;rm-xxxxxxxxxxx.rds.aliyuncs.com&#39;,
-</span></span><span style="display:flex;"><span>                          port=3306,
-</span></span><span style="display:flex;"><span>                          user=&#39;xxxxxxxxx&#39;,
-</span></span><span style="display:flex;"><span>                          password=&#39;xxxxxxxx&#39;,
-</span></span><span style="display:flex;"><span>                          db=&#39;mysql&#39;,
-</span></span><span style="display:flex;"><span>                          charset=&#34;utf8&#34;)
+</span></span><span style="display:flex;"><span>con <span style="color:#f92672">=</span> pymysql<span style="color:#f92672">.</span>connect(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rm-xxxxxxxxxxx.rds.aliyuncs.com&#39;</span>,
+</span></span><span style="display:flex;"><span>                          port<span style="color:#f92672">=</span><span style="color:#ae81ff">3306</span>,
+</span></span><span style="display:flex;"><span>                          user<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xxxxxxxxx&#39;</span>,
+</span></span><span style="display:flex;"><span>                          password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xxxxxxxx&#39;</span>,
+</span></span><span style="display:flex;"><span>                          db<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mysql&#39;</span>,
+</span></span><span style="display:flex;"><span>                          charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf8&#34;</span>)
 </span></span><span style="display:flex;"><span>                          
-</span></span><span style="display:flex;"><span>data_sql = pd.read_sql(&#34;select * from ods.cpc limit 10&#34;, con)
-</span></span><span style="display:flex;"><span>data_sql.to_csv(&#39;test.csv&#39;,encoding=&#34;utf-8_sig&#34;)
+</span></span><span style="display:flex;"><span>data_sql <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;select * from ods.cpc limit 10&#34;</span>, con)
+</span></span><span style="display:flex;"><span>data_sql<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;test.csv&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8_sig&#34;</span>)
 </span></span></code></pre></div>
 
   </div>
