@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>美国健康保险业务探索性分析 | Robert&#39;s Blog</title>
+<meta name="keywords" content="R">
+<meta name="description" content="健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E7%BE%8E%E5%9B%BD%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%A9%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E7%BE%8E%E5%9B%BD%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%A9%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E7%BE%8E%E5%9B%BD%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%A9%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="美国健康保险业务探索性分析">
+  <meta property="og:description" content="健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-06-20T11:18:15+08:00">
+    <meta property="article:modified_time" content="2021-06-20T11:18:15+08:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="美国健康保险业务探索性分析">
+<meta name="twitter:description" content="健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "美国健康保险业务探索性分析",
+      "item": "https://xin5835.github.io/post/%E7%BE%8E%E5%9B%BD%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%A9%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "美国健康保险业务探索性分析",
+  "name": "美国健康保险业务探索性分析",
+  "description": "健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。\n",
+  "keywords": [
+    "R"
+  ],
+  "articleBody": "健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。\n背景 健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。\n一、可以了解用户在医疗费用支出上的的最大、最小值和平均支出费用这些人群分别有什么特点。\n二、医疗费用支出与那些因素有关，那些是主要决定因素，如何才能精确的对待不同的人群设定保险额度，以达到资源的最优运用。\n三、有没有模型可以反映出大部分用户在健康保险费用支出上的关系，模型的表现如何，是否有大量的异常数据和立群值。\n四、依据分析过程，提出相关建议。\n目录 一、加载包并读取数据 1.1加载包 1.2读取数据 1.3变量注释 二、数据清洗 2.1检查缺失值 2.2数据概览 2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框 三、变量统计以及可视化 3.1insurance分布图 3.2年龄分布图 3.3性别分布图 3.4bmi因素分布图 3.5儿童个数分布图 3.6smoker因素分布图 3.7地区因素分布图 四、相关性探索 五、建立模型 5.1多元线性模型 5.2多重线性 5.2.1以smoker为分组对age变量做多重线性模型的可视化 5.5.2.2以smoker为分组对bmi变量的多重线性模型可视化 六、结论 一、加载包并读取数据 1.1加载包 library(tidyverse) library(psych) library(ggridges) library(broom.mixed) library(viridis)#调色 library(modelr) library(lme4) library(patchwork) 1.2读取数据 insurance \u003c- read_csv(\"~/workspace/insurance.csv\") insurance 1.3变量注释 序号 变量 注释 1 age 年龄 2 sex 性别 3 bmi 身体质量指数，成人标准值（18.5-23.9），算法：kg/(m^2) 4 children 小孩数量 5 smoker 是否吸烟 6 region 地区 7 charges 投保费用 二、数据清洗 2.1检查缺失值 insurance %\u003e% summarise_all( ~ sum(is.na(.)) ) 各个变量均没有缺失值。\n2.2数据概览 summary(insurance) 数据集有1338行（观测值），7个变量，3个字符型向量，4个数字型向量。\n该数据集主要是健康保险费用用支出收集的相关数据，自变量包括用户的年龄、性别、身体质量指数、小孩数量、是否吸烟、地区。\n2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框 insu_df \u003c- insurance %\u003e% mutate(sex = factor(sex), smoker = factor(smoker), region = factor(region), children = factor(children) ) insu_df 三、变量统计以及可视化 3.1 insurance分布图 insurance %\u003e% ggplot(aes(charges, ..density.., fill = I(\"#d45087\"))) + geom_histogram(bins = 50) + geom_density()+ theme(legend.position = \"none\") tibble(low_charges = nrow(filter(insu_df,charges\u003c15000 )), middle_charges = nrow(filter(insu_df,charges\u003e=15000 \u0026 charges\u003c50000)), high_charges = nrow(filter(insu_df, charges\u003e=50000)), ) 健康保险支出费用集中在1.5万美元以下，占比73.3%。1.5万-5万之间占比26.2%，5万以上占比0.5%。这三个区间段的支出费用差距较大，应采取不同的运营策略。\n3.2年龄分布图 insu_df %\u003e% ggplot(aes(age, fill = I(\"#d45087\")))+ geom_bar()+ theme(legend.position = \"none\") p1 \u003c- insu_df %\u003e% ggplot(aes(age, charges))+ geom_point(color = I(\"#d45087\")) p2 \u003c- insu_df %\u003e% ggplot(aes(age, charges, color = smoker))+ geom_point() p1+p2 图形表明：\n1.年龄条形图显示，投保费用中20岁以下的人数占比最高，20岁以上人数分布均匀。\n2.抽烟群体的保险支出费用比非抽烟人群的保险支出费用要高，都成线性增长趋势。\n3.年龄和保险支出费用呈线性关系，但是这种关系应该收到其他因素的影响，表现为多层线性关系。\n4.依照是否吸烟对数据进行分组，支出费用小于20000美金的用户中，线性关系非常明显，数据分布集中，离群值较少。\n5.红色和绿色重叠部分，由于数据集中没有关于抽烟支数的记录，猜测可能是偶尔吸烟和不吸烟的人群。\n6.医疗费用支出最高的用户可能是老烟民。\n3.3性别分布图 p1 \u003c- insu_df %\u003e% count(sex) %\u003e% ggplot(aes(sex, n, fill = I(\"#d45087\")))+ geom_col()+ theme(legend.position = \"none\") p2 \u003c- insu_df %\u003e% ggplot(aes(charges, sex, fill = sex)) + ggridges::geom_density_ridges() p3 \u003c- insu_df %\u003e% ggplot(aes(sex, charges, fill = sex))+ geom_boxplot() (p1+p2)/p3 性别因素，样本中男女人数均衡，费用支出无大的差异。\n3.4bmi分布图 p1 \u003c- insu_df %\u003e% ggplot(aes(x = bmi, y =stat(density)))+ geom_histogram( aes(fill = I(“#d45087”)), bins = 50)+ theme(legend.position = “none”)+ geom_density() p2 \u003c- insu_df %\u003e% ggplot(aes(x = bmi, charges, color = charges))+ geom_point()+ scale_color_viridis(option = “E”) p3 \u003c- insu_df %\u003e% ggplot(aes(factor(age), bmi, color =I(“#d45087”)))+ geom_point()+ geom_jitter()+ stat_summary(fun.y= mean, colour = “blue”, geom = “point”, size = 5) (p1+p2)/p3 bmi数据呈常态分布，用户各个年龄段的平均bmi为30，bmi范围集中（25-35），bmi与保险支出看不到明显的线性关系。不能单纯的把bmi的高低作为保险费用高低的评价标准。 关于令人惊奇的是，bmi因素，并不像主观认定的，越肥胖的人，健康程度越差，健康费用支出越多。\n3.5儿童个数分布图 p1 \u003c- insu_df %\u003e% count(children) %\u003e% ggplot(aes(children, n))+ geom_col( aes(fill = I(\"#d45087\")))+ theme(legend.position = \"none\") p2 \u003c- insu_df %\u003e% ggplot(aes(children, charges, fill = children))+ geom_boxplot() p1+p2 没有儿童的用户大约占比44%。儿童数量越多，保险费用出现大金额的概率越低。\n3.6吸烟因素分布图 p1 \u003c- insu_df %\u003e% ggplot(aes(smoker,charges, fill = smoker))+ geom_boxplot() p2 \u003c- insu_df %\u003e% ggplot(aes(charges, fill = smoker, alpha = 0.5))+ geom_density() p1/p2 费用支出在吸烟因素中的表现，区别非常大。非吸烟用户的支出费用在100-1600美元浮动；吸烟用户的波动范围为15000-55000。吸烟用户的保险支出费用最小值和非吸烟用户支出费用的最大值持平。\n可以清晰的看到制约健康保险费用的关键因素中，是否吸烟是其中重要因素之一。\n3.7地区因素分布图 p1 \u003c- insu_df %\u003e% count(region) %\u003e% ggplot(aes(region, n, width = 0.7, fill = I(\"#d45087\")))+ geom_col()+ coord_flip()+ theme(legend.position = \"none\") p2 \u003c- insu_df %\u003e% ggplot(aes(charges, region, fill = region))+ ggridges::geom_density_ridges() p3 \u003c- insu_df %\u003e% ggplot(aes(region, charges, fill = region))+ geom_boxplot()+ coord_flip() p1+(p2/p3) 地区因素中，四个地区在费用支出上数据表现没有大的差异性。\n四、相关性探索 insu_df \u003c- within(insu_df,{ smoke \u003c- NA smoke[smoker == \"yes\"] \u003c- 1 smoke[smoker == \"no\"] \u003c- 0}) insu_df[c(\"age\", \"bmi\", \"children\", \"smoke\", \"charges\")] %\u003e% pairs.panels(stars = TRUE, main=\"Insurance Scatterplot Matrix\") 可以看到charges同smoker、age、bmi都呈现正相关，charges同smoke的相关系数达到了0.79。是否吸烟已经成了影响健康费用的决定性因素。\n五、建立模型 5.1多元线性模型 mod1 \u003c- lm(charges ~ smoker+age+bmi+children+region, data = insu_df) summary(mod1) 在p值\u003c0.001水平下，截距、吸烟人群、年龄、bmi和2个儿童的回归系数都非常显著。该模型可以解释75%的变异。\nmod2 \u003c- lm(charges ~ smoker+age+bmi, data = insu_df) summary(mod2) 模型2的决定系数为74.8，各变量的回归系数都非常显著。\n5.2多重线性模型 mod3 \u003c- lmer(charges ~ age + (1 + age | smoker), data = insu_df) mod3 以是否吸烟对把数据分为两组，可以看到是否吸烟对于年龄因素在保险费用支出上的变化效应。\n5.2.1以smoker为分组对age变量的多重线性模型可视化 insu_df %\u003e% add_predictions(mod3) %\u003e% ggplot(aes( age, charges, color = smoker)) + geom_point() + geom_line(aes(x = age, y = pred)) 该模型对不抽烟的用户拟合的还是比较好的，但是对于吸烟的用户拟合直线明显感觉有些粗旷。或许与吸烟的量以及其他因素有关，导致该模型拟合的绿色直线，不够好。\nmod4 \u003c- lmer(charges ~ bmi + (1 + bmi | smoker), data = insu_df) mod4 该模型以不吸烟组作为参数对照，可以看到是否吸烟对于bmi因素在保险费用支出上的变化效应。\n5.2.2以smoker为分组对bmi变量的多重线性模型可视化 insu_df %\u003e% add_predictions(mod4) %\u003e% ggplot(aes( bmi, charges, color = smoker)) + geom_point() + geom_line(aes(x = bmi, y = pred)) 这个模型的解释能力很好，吸烟人群的随着bmi的增加，支付费用高速增加；非吸烟人群随着bmi的增加，支出增加的相对要缓慢些。\n结论 1.美国居民医疗费用支出集中15000美元以下，占比73.3%。1.5万-5万之间占比26.2%。这两部分共占据了99.5%的医疗费用支出情况。\n2.健康保险费用在性别和地区上没有明显的差异。\n3.从模型上看，医疗费用支出同bmi、smoker、age这三个变量表现出较高的相关性。其中，吸烟与否对与费用影响很大。具体来说吸烟人群中年龄大又肥胖的人群，费用支出非常高。对于非吸烟人群，哪怕胖一些，支出费用也不会非常之高。\n4.在制定健康保险策略是，应从总体上把用户分为吸烟或者非吸烟用户，然后再去看用户的年龄和bmi情况，这样可以更优的使用保险资源。同时，应鼓励人们戒烟，并适当的进行减肥活动。\n",
+  "wordCount" : "504",
+  "inLanguage": "en",
+  "datePublished": "2021-06-20T11:18:15+08:00",
+  "dateModified": "2021-06-20T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E7%BE%8E%E5%9B%BD%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%A9%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      美国健康保险业务探索性分析
+    </h1>
+    <div class="post-meta"><span title='2021-06-20 11:18:15 +0800 CST'>June 20, 2021</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e8%83%8c%e6%99%af" aria-label="背景">背景</a></li>
+                <li>
+                    <a href="#%e7%9b%ae%e5%bd%95" aria-label="目录">目录</a></li>
+                <li>
+                    <a href="#%e4%b8%80%e5%8a%a0%e8%bd%bd%e5%8c%85%e5%b9%b6%e8%af%bb%e5%8f%96%e6%95%b0%e6%8d%ae" aria-label="一、加载包并读取数据">一、加载包并读取数据</a><ul>
+                        
+                <li>
+                    <a href="#11%e5%8a%a0%e8%bd%bd%e5%8c%85" aria-label="1.1加载包">1.1加载包</a></li>
+                <li>
+                    <a href="#12%e8%af%bb%e5%8f%96%e6%95%b0%e6%8d%ae" aria-label="1.2读取数据">1.2读取数据</a></li>
+                <li>
+                    <a href="#13%e5%8f%98%e9%87%8f%e6%b3%a8%e9%87%8a" aria-label="1.3变量注释">1.3变量注释</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e6%95%b0%e6%8d%ae%e6%b8%85%e6%b4%97" aria-label="二、数据清洗">二、数据清洗</a><ul>
+                        
+                <li>
+                    <a href="#21%e6%a3%80%e6%9f%a5%e7%bc%ba%e5%a4%b1%e5%80%bc" aria-label="2.1检查缺失值">2.1检查缺失值</a></li>
+                <li>
+                    <a href="#22%e6%95%b0%e6%8d%ae%e6%a6%82%e8%a7%88" aria-label="2.2数据概览">2.2数据概览</a></li>
+                <li>
+                    <a href="#23%e5%b0%86sex-smokerregion%e5%8f%98%e9%87%8f%e8%bd%ac%e6%8d%a2%e4%b8%ba%e5%9b%a0%e5%ad%90%e5%b9%b6%e4%bf%9d%e7%95%99%e5%9c%a8insu_df%e6%95%b0%e6%8d%ae%e6%a1%86" aria-label="2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框">2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%89%e5%8f%98%e9%87%8f%e7%bb%9f%e8%ae%a1%e4%bb%a5%e5%8f%8a%e5%8f%af%e8%a7%86%e5%8c%96" aria-label="三、变量统计以及可视化">三、变量统计以及可视化</a><ul>
+                        
+                <li>
+                    <a href="#31-insurance%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.1 insurance分布图">3.1 insurance分布图</a></li>
+                <li>
+                    <a href="#32%e5%b9%b4%e9%be%84%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.2年龄分布图">3.2年龄分布图</a></li>
+                <li>
+                    <a href="#33%e6%80%a7%e5%88%ab%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.3性别分布图">3.3性别分布图</a></li>
+                <li>
+                    <a href="#34bmi%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.4bmi分布图">3.4bmi分布图</a></li>
+                <li>
+                    <a href="#35%e5%84%bf%e7%ab%a5%e4%b8%aa%e6%95%b0%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.5儿童个数分布图">3.5儿童个数分布图</a></li>
+                <li>
+                    <a href="#36%e5%90%b8%e7%83%9f%e5%9b%a0%e7%b4%a0%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.6吸烟因素分布图">3.6吸烟因素分布图</a></li>
+                <li>
+                    <a href="#37%e5%9c%b0%e5%8c%ba%e5%9b%a0%e7%b4%a0%e5%88%86%e5%b8%83%e5%9b%be" aria-label="3.7地区因素分布图">3.7地区因素分布图</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%9b%e7%9b%b8%e5%85%b3%e6%80%a7%e6%8e%a2%e7%b4%a2" aria-label="四、相关性探索">四、相关性探索</a></li>
+                <li>
+                    <a href="#%e4%ba%94%e5%bb%ba%e7%ab%8b%e6%a8%a1%e5%9e%8b" aria-label="五、建立模型">五、建立模型</a><ul>
+                        
+                <li>
+                    <a href="#51%e5%a4%9a%e5%85%83%e7%ba%bf%e6%80%a7%e6%a8%a1%e5%9e%8b" aria-label="5.1多元线性模型">5.1多元线性模型</a></li></ul>
+                </li>
+                <li>
+                    <a href="#52%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e6%a8%a1%e5%9e%8b" aria-label="5.2多重线性模型">5.2多重线性模型</a><ul>
+                        
+                <li>
+                    <a href="#521%e4%bb%a5smoker%e4%b8%ba%e5%88%86%e7%bb%84%e5%af%b9age%e5%8f%98%e9%87%8f%e7%9a%84%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e6%a8%a1%e5%9e%8b%e5%8f%af%e8%a7%86%e5%8c%96" aria-label="5.2.1以smoker为分组对age变量的多重线性模型可视化">5.2.1以smoker为分组对age变量的多重线性模型可视化</a></li>
+                <li>
+                    <a href="#522%e4%bb%a5smoker%e4%b8%ba%e5%88%86%e7%bb%84%e5%af%b9bmi%e5%8f%98%e9%87%8f%e7%9a%84%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e6%a8%a1%e5%9e%8b%e5%8f%af%e8%a7%86%e5%8c%96" aria-label="5.2.2以smoker为分组对bmi变量的多重线性模型可视化">5.2.2以smoker为分组对bmi变量的多重线性模型可视化</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%bb%93%e8%ae%ba" aria-label="结论">结论</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。</p>
+<h2 id="背景">背景<a hidden class="anchor" aria-hidden="true" href="#背景">#</a></h2>
+<p>健康保险在医疗健康系统中发挥着重要的作用，研究健康保险费用支出的相关性及对影响因素间的模型预测，对于合理设置保险金额，调配保险资源的有效使用，具有重要的意义。</p>
+<p>一、可以了解用户在医疗费用支出上的的最大、最小值和平均支出费用这些人群分别有什么特点。</p>
+<p>二、医疗费用支出与那些因素有关，那些是主要决定因素，如何才能精确的对待不同的人群设定保险额度，以达到资源的最优运用。</p>
+<p>三、有没有模型可以反映出大部分用户在健康保险费用支出上的关系，模型的表现如何，是否有大量的异常数据和立群值。</p>
+<p>四、依据分析过程，提出相关建议。</p>
+<h2 id="目录">目录<a hidden class="anchor" aria-hidden="true" href="#目录">#</a></h2>
+<pre><code>一、加载包并读取数据
+    1.1加载包
+    1.2读取数据
+    1.3变量注释
+二、数据清洗
+    2.1检查缺失值
+    2.2数据概览
+    2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框
+三、变量统计以及可视化
+    3.1insurance分布图
+    3.2年龄分布图
+    3.3性别分布图
+    3.4bmi因素分布图
+    3.5儿童个数分布图
+    3.6smoker因素分布图
+    3.7地区因素分布图
+四、相关性探索
+五、建立模型
+    5.1多元线性模型
+    5.2多重线性
+    5.2.1以smoker为分组对age变量做多重线性模型的可视化
+    5.5.2.2以smoker为分组对bmi变量的多重线性模型可视化
+六、结论
+</code></pre>
+<h2 id="一加载包并读取数据">一、加载包并读取数据<a hidden class="anchor" aria-hidden="true" href="#一加载包并读取数据">#</a></h2>
+<h3 id="11加载包">1.1加载包<a hidden class="anchor" aria-hidden="true" href="#11加载包">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(psych)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggridges)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(broom.mixed)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(viridis)<span style="color:#75715e">#调色</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(modelr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(patchwork)
+</span></span></code></pre></div><h3 id="12读取数据">1.2读取数据<a hidden class="anchor" aria-hidden="true" href="#12读取数据">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insurance <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_csv</span>(<span style="color:#e6db74">&#34;~/workspace/insurance.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>insurance
+</span></span></code></pre></div><h3 id="13变量注释">1.3变量注释<a hidden class="anchor" aria-hidden="true" href="#13变量注释">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">序号</th>
+          <th style="text-align: left">变量</th>
+          <th style="text-align: left">注释</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">age</td>
+          <td style="text-align: left">年龄</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">2</td>
+          <td style="text-align: left">sex</td>
+          <td style="text-align: left">性别</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">3</td>
+          <td style="text-align: left">bmi</td>
+          <td style="text-align: left">身体质量指数，成人标准值（18.5-23.9），算法：kg/(m^2)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">4</td>
+          <td style="text-align: left">children</td>
+          <td style="text-align: left">小孩数量</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">5</td>
+          <td style="text-align: left">smoker</td>
+          <td style="text-align: left">是否吸烟</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">6</td>
+          <td style="text-align: left">region</td>
+          <td style="text-align: left">地区</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">7</td>
+          <td style="text-align: left">charges</td>
+          <td style="text-align: left">投保费用</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="二数据清洗">二、数据清洗<a hidden class="anchor" aria-hidden="true" href="#二数据清洗">#</a></h2>
+<h3 id="21检查缺失值">2.1检查缺失值<a hidden class="anchor" aria-hidden="true" href="#21检查缺失值">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insurance <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">summarise_all</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">~</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">is.na</span>(.))
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><p>各个变量均没有缺失值。</p>
+<h3 id="22数据概览">2.2数据概览<a hidden class="anchor" aria-hidden="true" href="#22数据概览">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(insurance)
+</span></span></code></pre></div><p>数据集有1338行（观测值），7个变量，3个字符型向量，4个数字型向量。</p>
+<p>该数据集主要是健康保险费用用支出收集的相关数据，自变量包括用户的年龄、性别、身体质量指数、小孩数量、是否吸烟、地区。</p>
+<h3 id="23将sex-smokerregion变量转换为因子并保留在insu_df数据框">2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框<a hidden class="anchor" aria-hidden="true" href="#23将sex-smokerregion变量转换为因子并保留在insu_df数据框">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">&lt;-</span> insurance <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mutate</span>(sex <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(sex),
+</span></span><span style="display:flex;"><span>           smoker <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(smoker),
+</span></span><span style="display:flex;"><span>           region <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(region),
+</span></span><span style="display:flex;"><span>           children <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(children)
+</span></span><span style="display:flex;"><span>           ) 
+</span></span><span style="display:flex;"><span>insu_df
+</span></span></code></pre></div><h2 id="三变量统计以及可视化">三、变量统计以及可视化<a hidden class="anchor" aria-hidden="true" href="#三变量统计以及可视化">#</a></h2>
+<h3 id="31-insurance分布图">3.1 insurance分布图<a hidden class="anchor" aria-hidden="true" href="#31-insurance分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insurance <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, ..density.., fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>))) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_histogram</span>(bins <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_density</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tibble</span>(low_charges <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(<span style="color:#a6e22e">filter</span>(insu_df,charges<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">15000</span> )),
+</span></span><span style="display:flex;"><span>       middle_charges <span style="color:#f92672">=</span>  <span style="color:#a6e22e">nrow</span>(<span style="color:#a6e22e">filter</span>(insu_df,charges<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">15000</span> <span style="color:#f92672">&amp;</span> charges<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">50000</span>)),
+</span></span><span style="display:flex;"><span>       high_charges <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(<span style="color:#a6e22e">filter</span>(insu_df, charges<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">50000</span>)),
+</span></span><span style="display:flex;"><span>         )
+</span></span></code></pre></div><p>健康保险支出费用集中在1.5万美元以下，占比73.3%。1.5万-5万之间占比26.2%，5万以上占比0.5%。这三个区间段的支出费用差距较大，应采取不同的运营策略。</p>
+<h3 id="32年龄分布图">3.2年龄分布图<a hidden class="anchor" aria-hidden="true" href="#32年龄分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(age, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_bar</span>()<span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(age, charges))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_point</span>(color <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>))
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(age, charges, color <span style="color:#f92672">=</span> smoker))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_point</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>p2
+</span></span></code></pre></div><p>图形表明：</p>
+<p>1.年龄条形图显示，投保费用中20岁以下的人数占比最高，20岁以上人数分布均匀。</p>
+<p>2.抽烟群体的保险支出费用比非抽烟人群的保险支出费用要高，都成线性增长趋势。</p>
+<p>3.年龄和保险支出费用呈线性关系，但是这种关系应该收到其他因素的影响，表现为多层线性关系。</p>
+<p>4.依照是否吸烟对数据进行分组，支出费用小于20000美金的用户中，线性关系非常明显，数据分布集中，离群值较少。</p>
+<p>5.红色和绿色重叠部分，由于数据集中没有关于抽烟支数的记录，猜测可能是偶尔吸烟和不吸烟的人群。</p>
+<p>6.医疗费用支出最高的用户可能是老烟民。</p>
+<h3 id="33性别分布图">3.3性别分布图<a hidden class="anchor" aria-hidden="true" href="#33性别分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">count</span>(sex) <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(sex, n, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_col</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, sex, fill <span style="color:#f92672">=</span> sex)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>     ggridges<span style="color:#f92672">::</span><span style="color:#a6e22e">geom_density_ridges</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(sex, charges, fill <span style="color:#f92672">=</span> sex))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#a6e22e">geom_boxplot</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(p1<span style="color:#f92672">+</span>p2)<span style="color:#f92672">/</span>p3
+</span></span></code></pre></div><p>性别因素，样本中男女人数均衡，费用支出无大的差异。</p>
+<h3 id="34bmi分布图">3.4bmi分布图<a hidden class="anchor" aria-hidden="true" href="#34bmi分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bmi, y <span style="color:#f92672">=</span><span style="color:#a6e22e">stat</span>(density)))<span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_histogram</span>( <span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(“<span style="color:#75715e">#d45087”)), bins = 50)+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> “none”)<span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_density</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bmi, charges, color <span style="color:#f92672">=</span> charges))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_color_viridis</span>(option <span style="color:#f92672">=</span> “E”)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(<span style="color:#a6e22e">factor</span>(age), bmi, color <span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(“<span style="color:#75715e">#d45087”)))+             geom_point()+ </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_jitter</span>()<span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">stat_summary</span>(fun.y<span style="color:#f92672">=</span> mean, colour <span style="color:#f92672">=</span> “blue”, geom <span style="color:#f92672">=</span> “point”, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>) 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>(p1<span style="color:#f92672">+</span>p2)<span style="color:#f92672">/</span>p3
+</span></span></code></pre></div><p>bmi数据呈常态分布，用户各个年龄段的平均bmi为30，bmi范围集中（25-35），bmi与保险支出看不到明显的线性关系。不能单纯的把bmi的高低作为保险费用高低的评价标准。
+关于令人惊奇的是，bmi因素，并不像主观认定的，越肥胖的人，健康程度越差，健康费用支出越多。</p>
+<h3 id="35儿童个数分布图">3.5儿童个数分布图<a hidden class="anchor" aria-hidden="true" href="#35儿童个数分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">count</span>(children) <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(children, n))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_col</span>( <span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(children, charges, fill <span style="color:#f92672">=</span> children))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_boxplot</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>p2
+</span></span></code></pre></div><p>没有儿童的用户大约占比44%。儿童数量越多，保险费用出现大金额的概率越低。</p>
+<h3 id="36吸烟因素分布图">3.6吸烟因素分布图<a hidden class="anchor" aria-hidden="true" href="#36吸烟因素分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(smoker,charges, fill <span style="color:#f92672">=</span> smoker))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_boxplot</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, fill <span style="color:#f92672">=</span> smoker, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_density</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">/</span>p2
+</span></span></code></pre></div><p>费用支出在吸烟因素中的表现，区别非常大。非吸烟用户的支出费用在100-1600美元浮动；吸烟用户的波动范围为15000-55000。吸烟用户的保险支出费用最小值和非吸烟用户支出费用的最大值持平。</p>
+<p>可以清晰的看到制约健康保险费用的关键因素中，是否吸烟是其中重要因素之一。</p>
+<h3 id="37地区因素分布图">3.7地区因素分布图<a hidden class="anchor" aria-hidden="true" href="#37地区因素分布图">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">count</span>(region) <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(region, n, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.7</span>, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_col</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">coord_flip</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, region, fill <span style="color:#f92672">=</span> region))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      ggridges<span style="color:#f92672">::</span><span style="color:#a6e22e">geom_density_ridges</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(region, charges, fill <span style="color:#f92672">=</span> region))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_boxplot</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">coord_flip</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>(p2<span style="color:#f92672">/</span>p3)
+</span></span></code></pre></div><p>地区因素中，四个地区在费用支出上数据表现没有大的差异性。</p>
+<h2 id="四相关性探索">四、相关性探索<a hidden class="anchor" aria-hidden="true" href="#四相关性探索">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">within</span>(insu_df,{
+</span></span><span style="display:flex;"><span>                    smoke <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NA</span> 
+</span></span><span style="display:flex;"><span>                    smoke[smoker <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;yes&#34;</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                    smoke[smoker <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;no&#34;</span>]  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>insu_df<span style="color:#a6e22e">[c</span>(<span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#e6db74">&#34;bmi&#34;</span>, <span style="color:#e6db74">&#34;children&#34;</span>, <span style="color:#e6db74">&#34;smoke&#34;</span>, <span style="color:#e6db74">&#34;charges&#34;</span>)] <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">pairs.panels</span>(stars <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Insurance Scatterplot Matrix&#34;</span>)
+</span></span></code></pre></div><p>可以看到charges同smoker、age、bmi都呈现正相关，charges同smoke的相关系数达到了0.79。是否吸烟已经成了影响健康费用的决定性因素。</p>
+<h2 id="五建立模型">五、建立模型<a hidden class="anchor" aria-hidden="true" href="#五建立模型">#</a></h2>
+<h3 id="51多元线性模型">5.1多元线性模型<a hidden class="anchor" aria-hidden="true" href="#51多元线性模型">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mod1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(charges <span style="color:#f92672">~</span> smoker<span style="color:#f92672">+</span>age<span style="color:#f92672">+</span>bmi<span style="color:#f92672">+</span>children<span style="color:#f92672">+</span>region, data <span style="color:#f92672">=</span> insu_df)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(mod1)
+</span></span></code></pre></div><p>在p值&lt;0.001水平下，截距、吸烟人群、年龄、bmi和2个儿童的回归系数都非常显著。该模型可以解释75%的变异。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mod2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(charges <span style="color:#f92672">~</span> smoker<span style="color:#f92672">+</span>age<span style="color:#f92672">+</span>bmi, data <span style="color:#f92672">=</span> insu_df)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(mod2)
+</span></span></code></pre></div><p>模型2的决定系数为74.8，各变量的回归系数都非常显著。</p>
+<h2 id="52多重线性模型">5.2多重线性模型<a hidden class="anchor" aria-hidden="true" href="#52多重线性模型">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mod3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(charges <span style="color:#f92672">~</span> age <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> age <span style="color:#f92672">|</span> smoker), data <span style="color:#f92672">=</span> insu_df)
+</span></span><span style="display:flex;"><span>mod3
+</span></span></code></pre></div><p>以是否吸烟对把数据分为两组，可以看到是否吸烟对于年龄因素在保险费用支出上的变化效应。</p>
+<h3 id="521以smoker为分组对age变量的多重线性模型可视化">5.2.1以smoker为分组对age变量的多重线性模型可视化<a hidden class="anchor" aria-hidden="true" href="#521以smoker为分组对age变量的多重线性模型可视化">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_predictions</span>(mod3) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>( age, charges, color <span style="color:#f92672">=</span> smoker)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> age, y <span style="color:#f92672">=</span> pred)) 
+</span></span></code></pre></div><p>该模型对不抽烟的用户拟合的还是比较好的，但是对于吸烟的用户拟合直线明显感觉有些粗旷。或许与吸烟的量以及其他因素有关，导致该模型拟合的绿色直线，不够好。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mod4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(charges <span style="color:#f92672">~</span> bmi <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> bmi <span style="color:#f92672">|</span> smoker), data <span style="color:#f92672">=</span> insu_df)
+</span></span><span style="display:flex;"><span>mod4
+</span></span></code></pre></div><p>该模型以不吸烟组作为参数对照，可以看到是否吸烟对于bmi因素在保险费用支出上的变化效应。</p>
+<h3 id="522以smoker为分组对bmi变量的多重线性模型可视化">5.2.2以smoker为分组对bmi变量的多重线性模型可视化<a hidden class="anchor" aria-hidden="true" href="#522以smoker为分组对bmi变量的多重线性模型可视化">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_predictions</span>(mod4) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>( bmi, charges, color <span style="color:#f92672">=</span> smoker)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bmi, y <span style="color:#f92672">=</span> pred)) 
+</span></span></code></pre></div><p>这个模型的解释能力很好，吸烟人群的随着bmi的增加，支付费用高速增加；非吸烟人群随着bmi的增加，支出增加的相对要缓慢些。</p>
+<h2 id="结论">结论<a hidden class="anchor" aria-hidden="true" href="#结论">#</a></h2>
+<p>1.美国居民医疗费用支出集中15000美元以下，占比73.3%。1.5万-5万之间占比26.2%。这两部分共占据了99.5%的医疗费用支出情况。</p>
+<p>2.健康保险费用在性别和地区上没有明显的差异。</p>
+<p>3.从模型上看，医疗费用支出同bmi、smoker、age这三个变量表现出较高的相关性。其中，吸烟与否对与费用影响很大。具体来说吸烟人群中年龄大又肥胖的人群，费用支出非常高。对于非吸烟人群，哪怕胖一些，支出费用也不会非常之高。</p>
+<p>4.在制定健康保险策略是，应从总体上把用户分为吸烟或者非吸烟用户，然后再去看用户的年龄和bmi情况，这样可以更优的使用保险资源。同时，应鼓励人们戒烟，并适当的进行减肥活动。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/r/">R</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E9%87%91%E5%88%9A%E7%BB%8F%E5%9C%A8%E8%AF%B4%E4%BB%80%E4%B9%88/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>《金刚经》在说什么</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+    <span class="title">Next »</span>
+    <br>
+    <span>SQL基础教程</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

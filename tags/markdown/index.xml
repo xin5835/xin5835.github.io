@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Markdown on Robert&#39;s Blog</title>
+    <link>https://xin5835.github.io/tags/markdown/</link>
+    <description>Recent content in Markdown on Robert&#39;s Blog</description>
+    <generator>Hugo -- 0.155.3</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Nov 2023 11:18:15 +0800</lastBuildDate>
+    <atom:link href="https://xin5835.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>markdown颜色、居中、上下标</title>
+      <link>https://xin5835.github.io/post/markdown-pro/</link>
+      <pubDate>Fri, 10 Nov 2023 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/markdown-pro/</guid>
+      <description>&lt;p&gt;markdown语法&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>markdown语法</title>
+      <link>https://xin5835.github.io/post/markdown%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Thu, 23 Sep 2021 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/markdown%E8%AF%AD%E6%B3%95/</guid>
+      <description>&lt;p&gt;markdown语法案例教学。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

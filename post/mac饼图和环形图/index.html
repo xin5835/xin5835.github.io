@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>mac饼图和环形图 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Python">
+<meta name="description" content="mac饼图和环形图，并开启中文字体支持。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/mac%E9%A5%BC%E5%9B%BE%E5%92%8C%E7%8E%AF%E5%BD%A2%E5%9B%BE/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/mac%E9%A5%BC%E5%9B%BE%E5%92%8C%E7%8E%AF%E5%BD%A2%E5%9B%BE/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/mac%E9%A5%BC%E5%9B%BE%E5%92%8C%E7%8E%AF%E5%BD%A2%E5%9B%BE/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="mac饼图和环形图">
+  <meta property="og:description" content="mac饼图和环形图，并开启中文字体支持。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-02-24T11:18:15+08:00">
+    <meta property="article:modified_time" content="2023-02-24T11:18:15+08:00">
+    <meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac饼图和环形图">
+<meta name="twitter:description" content="mac饼图和环形图，并开启中文字体支持。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "mac饼图和环形图",
+      "item": "https://xin5835.github.io/post/mac%E9%A5%BC%E5%9B%BE%E5%92%8C%E7%8E%AF%E5%BD%A2%E5%9B%BE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "mac饼图和环形图",
+  "name": "mac饼图和环形图",
+  "description": "mac饼图和环形图，并开启中文字体支持。\n",
+  "keywords": [
+    "Python"
+  ],
+  "articleBody": "mac饼图和环形图，并开启中文字体支持。\nimport matplotlib.pyplot as plt plt.rcParams['font.family'] = 'Arial Unicode MS' # 显示中文字体 x = [1, 5, 4, 3] labels = ['a', 'b', 'c', 'd'] plt.subplot(121) # 饼图 plt.pie(x, labels=labels) plt.title(\"饼图\") plt.subplot(122) # 环形图 plt.pie(x, labels=labels, wedgeprops={ 'width': 0.5}, colors=['#ff9999','#66b3ff','#99ff99','#ffcc99'], autopct='%1.2f%%') plt.title(\"环形图\") plt.show() ",
+  "wordCount" : "42",
+  "inLanguage": "en",
+  "datePublished": "2023-02-24T11:18:15+08:00",
+  "dateModified": "2023-02-24T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/mac%E9%A5%BC%E5%9B%BE%E5%92%8C%E7%8E%AF%E5%BD%A2%E5%9B%BE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      mac饼图和环形图
+    </h1>
+    <div class="post-meta"><span title='2023-02-24 11:18:15 +0800 CST'>February 24, 2023</span>
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>mac饼图和环形图，并开启中文字体支持。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;font.family&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Arial Unicode MS&#39;</span> <span style="color:#75715e"># 显示中文字体</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>labels <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">121</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 饼图</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x, labels<span style="color:#f92672">=</span>labels)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;饼图&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">122</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 环形图</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x, labels<span style="color:#f92672">=</span>labels, wedgeprops<span style="color:#f92672">=</span>{ <span style="color:#e6db74">&#39;width&#39;</span>: <span style="color:#ae81ff">0.5</span>},
+</span></span><span style="display:flex;"><span>        colors<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;#ff9999&#39;</span>,<span style="color:#e6db74">&#39;#66b3ff&#39;</span>,<span style="color:#e6db74">&#39;#99ff99&#39;</span>,<span style="color:#e6db74">&#39;#ffcc99&#39;</span>],
+</span></span><span style="display:flex;"><span>        autopct<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1.2f%%</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;环形图&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img alt="pie_picture.png" loading="lazy" src="https://s2.loli.net/2023/05/24/7geB9JGZUfhTs64.png"></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/svm%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>SVM分类算法</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E8%AF%AB%E5%AD%90%E4%B9%A6/">
+    <span class="title">Next »</span>
+    <br>
+    <span>诫子书</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>SQL基础教程 | Robert&#39;s Blog</title>
+<meta name="keywords" content="SQL">
+<meta name="description" content="SQL基础教程&ndash;MICK著。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="SQL基础教程">
+  <meta property="og:description" content="SQL基础教程–MICK著。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-03-19T11:18:15+08:00">
+    <meta property="article:modified_time" content="2021-03-19T11:18:15+08:00">
+    <meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL基础教程">
+<meta name="twitter:description" content="SQL基础教程&ndash;MICK著。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "SQL基础教程",
+      "item": "https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SQL基础教程",
+  "name": "SQL基础教程",
+  "description": "SQL基础教程\u0026ndash;MICK著。\n",
+  "keywords": [
+    "SQL"
+  ],
+  "articleBody": "SQL基础教程–MICK著。\nSELECT 语句的顺序： FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY\nSQL基础 DDL(Data Definition Language，数据定义语言) CREATE:创建数据库和表等对象 DROP: 删除数据库和表等对象 ALTER: 修改数据库和表等对象的结构 DML(Data Manipulation Language，数据操纵语言) SELECT:查询表中的数据 INSERT:向表中插入新数据 UPDATE:更新表中的数据 DELETE:删除表中的数据 DCL(Data Control Language，数据控制语言) COMMIT: 确认对数据库中的数据进行的变更 ROLLBACK :取消对数据库中的数据进行的变更 GRANT: 赋予用户操作权限 REVOKE: 取消用户的操作权限 SQL的基本书写规则：\n;结尾 关键字大写 表名首字母大写 其余列名小写 常数书写方式固定（字符串、日期、数字） CREATE DATABASE 语句 CREATE DATABASE shop; # 创建数据库 shop CREATE TABLE语句 # 创建Product表 CREATE TABLE Product (product_id CHAR(4) NOT NULL, product_name VARCHAR(100) NOT NULL, product_type VARCHAR(32) NOT NULL, sale_prioce INTEGER , purchase_price INTEGER , regist_date DATE DATE , PRIMARY KEY (product_id)); 命名规则\n我们只能使用半角英文字母、数字、下划线(_)作为数据库、表和 列的名称 名称必须以半角英文字母开头 名称不能重复。 数据类型的指定\nINTEGER 型用来指定存储整数的列的数据类型(数字型)，不能存储小数。 CHAR型 固定长度字符型。 VARCHAR型 可变长字符串 DATE型 用来指定存储日期(年月日)的列的数据类型 约束设置\nNOT NULL约束 主键约束 ：唯一识别出表中观测数据的一组列 表的删除(DROP TABLE语句) # 删除 Product 表 DROP TABLE Product; 添加列的ALTER TABLE语句 ALTER TABLE Product ADD COLUMN product_name_pinyin VARCHAR(100); 删除列的ALTER TABLE语句 ALTER TABLE Product DROP COLUMN product_name_pinyin; 向 Product 表中插入数据 -- DML:插入数据 START/BEGIN TRANSACTION; INSERT INTO Product VALUES ('0001', 'T恤衫', '衣服', 1000, 500, '2009-09-20'); INSERT INTO Product VALUES ('0002', '打孔器', '办公用品', 500, 320, '2009-09-11'); INSERT INTO Product VALUES ('0003', '运动T恤','衣服', 4000, 2800, NULL); INSERT INTO Product VALUES ('0004', '菜刀', '厨房用具', 3000, 2800, '2009-09-20'); INSERT INTO Product VALUES ('0005', '高压锅', '厨房用具',6800, 5000,'2009-01-15'); INSERT INTO Product VALUES ('0006', '叉子', '厨房用具', 500, NULL, '2009-09-20'); INSERT INTO Product VALUES ('0007', '擦菜板', '厨房用具', 880, 790, '2008-04-28'); INSERT INTO Product VALUES ('0008', '圆珠笔', '办公用品', 100, NULL,'2009-11-11'); COMMIT; 列的查询 SELECT product_id, product_name, purchase_price FROM Product; SELECT * FROM Product; 为列设定别名 : 使用 AS 关键字为列设定别名 SELECT product_id AS id, product_name AS name, purchase_price AS price FROM Product; #设定中文别名 SELECT product_id AS \"商品编号\", product_name AS \"商品名称\", purchase_price AS \"进货单价\" FROM Product; 查询常数 SELECT '商品' AS string, 38 AS number, '2009-02-24' AS date, product_id, product_name FROM Product; DISTINCT去重—DISTINCT 关键字只能用在第一个列名之前 DISTINCT 删除 product_type 列中重复的数据 SELECT DISTINCT product_type FROM Product; WHERE 语句来选择记录 # 选取 product_type 列为'衣服'的记录的 SELECT product_name, product_type FROM Product WHERE product_type = '衣服'; --条件表达式 运算符 算术运算符（+， -, *, /）\n比较运算符（\u003e , \u003e=, =, \u003c, \u003c=, \u003c\u003e), 在where子句生成表达式\n逻辑运算符\nNOT, AND, OR - NOT 不能单独使用 - AND 运算符优先于 OR 运算符 - AND逻辑积，OR逻辑和 IN, NOT IN, EXIST, NOT EXIST TRUE, FALSE, UNKNOWN 聚合与排序 聚合函数 ：阶数会改变，多行变成一行 COUNT:计算表中的记录数(行数) SUM : 合计值 AVG : 平均值 MAX: 最大值 MIN : 最小值\n注：\n1.COUNT(*)包含缺失值的行 2.COUNT(COLUMN)不包含缺失值的行 3.平均是会忽视缺失值及其个数 4.MAX/MIN 函数几乎适用于所有数据类型的列。SUM/AVG 函数只适用于数值类型的列。\n对表进行分组 使用聚合函数和GROUP BY子句时需要注意以下4点。\n只能写在SELECT子句之中 GROUP BY子句中不能使用SELECT子句中列的别名 GROUP BY子句的聚合结果是无序的 WHERE子句中不能使用聚合函数 GROUP BY 子句中指定的列称为聚合键或者分组列\n##与聚合函数和GROUP BY子句有关的常见错误\n多写了列 用了别名 where子句用了聚合函数，这种情况应该使用having group by后无序状态 为聚合结果指定条件 where指定行的条件 having指定组的条件 使用 HAVING 子句时 SELECT 语句的顺序 SELECT → FROM → WHERE → GROUP BY → HAVING HAVING 子句的构成要素\n常数 聚合函数 GROUP BY子句中指定的列名(即聚合键) 对查询结果进行排序 ORDER BY子句 —-DESC /ASC\n子句的书写顺序 1.SELECT子句→2.FROM子句→3.WHERE子句→4.GROUP BY子句→ 5. HAVING 子句 → 6. ORDER BY 子句 注意：\nGROUP BY不能使用别名 ORDER BY可以使用别名 ORDER BY子句中可以使用的列 SELECT子句中未包含的列也可以在ORDER BY子句中使用 ORDER BY子句中也可以使用聚合函数 第 4 章 数据更新 数据的插入(INSERT 语句的使用方法) 数据的删除(DELETE 语句的使用方法) 数据的更新(UPDATE 语句的使用方法) INSERT 语句 列清单——–值清单\nINSERT INTO \u003c表名\u003e (列1, 列2, 列3, ......) VALUES (值1, 值2, 值3, ......); 从其他表中复制数据 INSERT INTO ProductCopy (product_id,) SELECT product_id, product_name FROM Product; 按列复制的 插入是按行插入 INSERT语句每 次执行一行数据的插入。\n数据的删除 DROP TABLE 语句可以将表完全删除 DELETE 语句会留下表(容器)，而删除表中的全部数据 drop table删除表或者列，DELETE是按行删除 搜索型 DELETE即添加where条件表达式 DELETE语句中不能使用GROUP BY、 HAVING和ORDER BY三类子句， 数据的更新(UPDATE语句) 更新是按列更新，即按集合元组更新\n指定条件的 UPDATE 语句(搜索型 UPDATE)\n多列更新 事务：在同一个处理单元中执行的一系列更新处理的集合\n四种特性：\n原子性(atomicity)：事务要么全执行、要不全不执行 一致性(consistency)：受到数据库提前设置的约束，如：主键/NOT NULL 隔离性(isolation)：事务之间互不干扰，不能嵌套，是独立的，不提交事务，别人看不见 持久性(durability)：很好的保存、恢复特性 语法： 案例： BEGIN /START TRANSACTION; -- 将运动 T 恤的销售单价降低1000 日元 UPDATE Product SET sale_price = sale_price - 1000 WHERE product_name = ' 运动 T 恤 '; COMMIT; BEGIN TRANSACTION; -- 将 T 恤衫的销售单价上浮 1000 日元 UPDATE Product SET sale_price = sale_price + 1000 WHERE product_name = 'T 恤衫 '; COMMIT; 第 5 章 复杂查询 —-视图 子查询 关联子查询 视图：临时的表，保存的是 SELECT 语句 优点：\n节省储存空间 提高SELECT效率 语法： 创建视图： CREATE VIEW 视图名称 (\u003c 视图列名 1\u003e, \u003c 视图列名 2\u003e, …… ) AS \u003cSELECT 语句 \u003e 创建案例+定义视图： CREATE VIEW ProductSum (product_type, cnt_product) AS SELECT product_type, COUNT(*) FROM Product GROUP BY product_type; 使用视图： SELECT product_type, cnt_product) FROM ProductSum; 流程：\n执行定义视图的 SELECT 语句 以视图为基础创建视图的多重视图 —–降低性能\n视图缺点： 定义视图时不能使用ORDER BY子句 可以更新视图的条件： 1.SELECT 子句中未使用 DISTINCT 2.FROM 子句中只有一张表 3.未使用GROUP BY子句 4.未使用 HAVING 子句\n删除视图：DROP VIEW语句\n子查询：就是一次性视图(SELECT语句)。 子查询的层数原则上没有限制\n标量子查询就是返回单一值的子查询。 返回单一值需要+groupby/sum等聚合函数 在WHERE子句中不能使用聚合函数 标量子查询的书写位置\n能够使用常数或者列名的 地方，无论是 SELECT 子句、GROUP BY 子句、HAVING 子句，还是 ORDER BY子句，几乎所有的地方都可以使用。\n关联子查询 :用聚合函数分组 SELECT product_type, product_name, sale_price FROM Product AS P1 1 WHERE sale_price \u003e (SELECT AVG(sale_price) FROM Product AS P2 WHERE P1.product_type = P2.product_type # 该条件就是成功的关键! GROUP BY product_type); group by：返回一行 关联子查询：组内比较 partition by：分组排序 函数的种类 算术函数（用来进行数值计算的函数） 字符串函数（用来进行字符串操作的函数） 日期函数（用来进行日期操作的函数） 转换函数（用来转换数据类型和值的函数） 聚合函数（用来进行数据聚合的函数） 算术函数( + - * /) ABS——绝对值 SELECT m, ABS(m) AS abs_col FROM SampleMath; MOD——求余// 计算除法（n ÷ p）的余数 SELECT n, p, MOD(n, p) AS mod_col FROM SampleMath; ROUND——四舍五入 // 对 m 列的数值进行 n 列位数的四舍五入处理 SELECT m, n, ROUND(m, n) AS round_col FROM SampleMath; 字符串函数 # 拼接字符串 | | ， MySQL使用 CONCAT 函数 SQL Server使用“+” 效果：abc + de = abcde // MySQL SELECT str1, str2, str3, CONCAT(str1, str2, str3) AS str_concat FROM SampleStr; // Oracle DB2 PostgreSQL SELECT str1, str2, str3, str1 | | str2 | | str3 AS str_concat FROM SampleStr WHERE str1 = ' 山田 '; # LENGTH——字符串长度 SELECT str1, LENGTH(str1) AS len_str FROM SampleStr; # LOWER——小写转换， UPPER——大写转换 SELECT str1, LOWER(str1) AS low_str FROM SampleStr WHERE str1 IN ('ABC', 'aBC', 'abc', ' 山田 '); # REPLACE——字符串的替换 SELECT str1, str2, str3, REPLACE(str1, str2, str3) AS rep_str FROM SampleStr; # SUBSTRING——字符串的截取 SELECT str1, SUBSTRING(str1 FROM 3 FOR 2) AS sub_str FROM SampleStr; 日期函数 # CURRENT_DATE——当前日期 SELECT CURRENT_DATE; FROM dual; # CURRENT_TIME——当前时间 SELECT CURRENT_TIME; # CURRENT_TIMESTAMP——当前日期和时间 SELECT CURRENT_TIMESTAMP; # EXTRACT——截取日期元素 SELECT CURRENT_TIMESTAMP, EXTRACT(YEAR FROM CURRENT_TIMESTAMP) AS year, EXTRACT(MONTH FROM CURRENT_TIMESTAMP) AS month, EXTRACT(DAY FROM CURRENT_TIMESTAMP) AS day, EXTRACT(HOUR FROM CURRENT_TIMESTAMP) AS hour, EXTRACT(MINUTE FROM CURRENT_TIMESTAMP) AS minute, EXTRACT(SECOND FROM CURRENT_TIMESTAM ) AS second; ##转换函数\nCAST——数据类型转换\n将字符串类型转换为数值类型\n// MySQL SELECT CAST('0001' AS SIGNED INTEGER) AS int_col; 谓词 ：返回值为真值—–（TRUE/ FALSE/UNKNOWN） 的函数 LIKE BETWEEN IS NULL / IS NOT NULL IN EXISTS\n# LIKE——字符串的部分一致查询,模糊 ------ 前方一致查询 中间一致查询 后方一致查询 SELECT * FROM SampleLike WHERE strcol LIKE 'ddd%';-------或LIKE '%ddd%'或 LIKE '%ddd' # BETWEEN ——范围查询 SELECT product_name, sale_price FROM Product WHERE sale_price BETWEEN 100 AND 1000; # IS NULL 、 IS NOT NULL ——判断是否为 NULL SELECT product_name, purchase_price FROM Product WHERE purchase_price IS NULL; ---选取出purchase_price（不）为 NULL 的商品 # IN / NOT IN —— OR 的简便用法 SELECT product_name, purchase_price FROM Product WHERE purchase_price = 320 OR purchase_price = 500 OR purchase_price = 5000; SELECT product_name, purchase_price FROM Product WHERE purchase_price IN (320, 500, 5000); 子查询作为 IN 谓词的参数 IN谓词(NOT IN谓词) 参数 将子查询作为IN的参数 将视图作为 IN 的参数 将表作为 IN 的参数\n为什么使用子查询——-各个商店销售的商品变化，导致ShopProduct表内大阪店销售的商品变化。如果 SELECT 语句中没有使用子查询的话，一旦商品发生了改变，那么 SELECT 语句也不得不进行修改 。\nProduct 表\nproduct_id (商品编号) product_name (商品名称) product_type (商品种类) sale_price (销售单价) purchase_price (进货单价) regist_date (登记日期) 0001 T恤衫 衣服 1000 500 2009-09-20 0002 打孔器 办公用品 500 320 2009-09-11 0003 叉子 厨房用具 500 2009-09-20 ShopProduct(商店商品)表\nshop_id (商店) shop_name (商店名称) product_id (商品编号) quantity (数量) 000A 东京 0001 (T 恤衫） 30 000A 东京 0002(打孔器) 50 000B 名古屋 0002 003(运动 T 恤) 30 问题：取出“大阪店(000C)在售商品(product_id)的销售单价(sale_price)”\n-- 取得“在大阪店销售的商品的销售单价” SELECT product_name, sale_price FROM Product WHERE product_id IN (SELECT product_id FROM ShopProduct WHERE shop_id = '000C'); -- 子查询展开后的结果 SELECT product_name, sale_price FROM Product WHERE product_id IN ('0003', '0004', '0006', '0007'); CASE表达式 case表达式是函数的一种，进行的是运算功能\n搜索case表达式即加上where\nCASE WHEN \u003c求值表达式\u003e THEN \u003c表达式\u003e WHEN \u003c求值表达式\u003e THEN \u003c表达式\u003e WHEN \u003c求值表达式\u003e THEN \u003c表达式\u003e . . ELSE \u003c表达式\u003e END 窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing 窗口函数的语法 \u003c 窗口函数 \u003e OVER ([ PARTITION BY \u003c 列清单 \u003e] ORDER BY \u003c 排序用列清单 \u003e) 不能用于where子句和GROUP BY 子句 能够作为窗口函数的聚合函数（SUM、AVG、COUNT、MAX、MIN） RANK、DENSE_RANK、ROW_NUMBER 等专用窗口函数 专用窗口函数（排序） RANK 1 位、1 位、1 位、4 位…… DENSE_RANK 函数 1 位、1 位、1 位、2 位…… ROW_NUMBER 函数 1 位、2 位、3 位、4 位…… --------根据不同的商品种类，按照销售单价从低到高的顺序创建排序表 SELECT product_name, product_type, sale_price, RANK () OVER (PARTITION BY product_type -------有PARTITION BY则分组，无PARTITION BY则不分组 ORDER BY sale_price) AS ranking FROM Product; SELECT product_name, product_type, sale_price, RANK () OVER (ORDER BY sale_price) AS ranking, DENSE_RANK () OVER (ORDER BY sale_price) AS dense_ranking, ROW_NUMBER () OVER (ORDER BY sale_price) AS row_num FROM Product; 聚合函数—-就是统计函数 // SUM 函数 SELECT product_id, product_name, sale_price, SUM (sale_price) OVER (ORDER BY product_id) AS current_sum AVG (sale_price) OVER (ORDER BY product_id) AS current_avg FROM Product; FROM Product; 移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前 / FOLLOWING之后 指定“最靠近的3行”作为汇总对象\nSELECT product_id, product_name, sale_price, AVG (sale_price) OVER (ORDER BY product_id ROWS 2 PRECEDING) AS moving_avg -------ROWS （“行”）和 PRECEDING （“之前”），截止到之前2行 FROM Product; GROUPING运算符——–同时得出小计和合计 ROLLUP———同时得出小计和合计 CUBE——–立体展示数据 GROUPING SETS——-取得期望的积木CUBE\nSELECT product_type, SUM(sale_price) AS sum_price FROM Product GROUP BY product_type WITH ROLLUP; // 与 ROLLUP 的结果相比， CUBE 的结果中多出了几行记录 SELECT CASE WHEN GROUPING(product_type) = 1 THEN ' 商品种类 合计 ' ELSE product_type END AS product_type, CASE WHEN GROUPING(regist_date) = 1 THEN ' 登记日期 合计 ' ELSE CAST(regist_date AS VARCHAR(16)) END AS regist_date, SUM(sale_price) AS sum_price FROM Product GROUP BY CUBE(product_type, regist_date); SELECT CASE WHEN GROUPING(product_type) = 1 THEN ' 商品种类 合计 ' ELSE product_type END AS product_type, CASE WHEN GROUPING(regist_date) = 1 THEN ' 登记日期 合计 ' ELSE CAST(regist_date AS VARCHAR(16)) END AS regist_date, SUM(sale_price) AS sum_price FROM Product GROUP BY GROUPING SETS (product_type, regist_date); ",
+  "wordCount" : "1373",
+  "inLanguage": "en",
+  "datePublished": "2021-03-19T11:18:15+08:00",
+  "dateModified": "2021-03-19T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      SQL基础教程
+    </h1>
+    <div class="post-meta"><span title='2021-03-19 11:18:15 +0800 CST'>March 19, 2021</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul><ul>
+                <li>
+                    <a href="#sql%e5%9f%ba%e7%a1%80" aria-label="SQL基础">SQL基础</a><ul>
+                        
+                <li>
+                    <a href="#ddldata-definition-language%e6%95%b0%e6%8d%ae%e5%ae%9a%e4%b9%89%e8%af%ad%e8%a8%80" aria-label="DDL(Data Definition Language，数据定义语言)">DDL(Data Definition Language，数据定义语言)</a></li>
+                <li>
+                    <a href="#dmldata-manipulation-language%e6%95%b0%e6%8d%ae%e6%93%8d%e7%ba%b5%e8%af%ad%e8%a8%80" aria-label="DML(Data Manipulation Language，数据操纵语言)">DML(Data Manipulation Language，数据操纵语言)</a></li>
+                <li>
+                    <a href="#dcldata-control-language%e6%95%b0%e6%8d%ae%e6%8e%a7%e5%88%b6%e8%af%ad%e8%a8%80" aria-label="DCL(Data Control Language，数据控制语言)">DCL(Data Control Language，数据控制语言)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#create-database-%e8%af%ad%e5%8f%a5" aria-label="CREATE DATABASE 语句">CREATE DATABASE 语句</a></li>
+                <li>
+                    <a href="#create-table%e8%af%ad%e5%8f%a5" aria-label="CREATE TABLE语句">CREATE TABLE语句</a></li>
+                <li>
+                    <a href="#%e8%a1%a8%e7%9a%84%e5%88%a0%e9%99%a4drop-table%e8%af%ad%e5%8f%a5" aria-label="表的删除(DROP TABLE语句)">表的删除(DROP TABLE语句)</a></li>
+                <li>
+                    <a href="#%e6%b7%bb%e5%8a%a0%e5%88%97%e7%9a%84alter-table%e8%af%ad%e5%8f%a5" aria-label="添加列的ALTER TABLE语句">添加列的ALTER TABLE语句</a></li>
+                <li>
+                    <a href="#%e5%88%a0%e9%99%a4%e5%88%97%e7%9a%84alter-table%e8%af%ad%e5%8f%a5" aria-label="删除列的ALTER TABLE语句">删除列的ALTER TABLE语句</a></li>
+                <li>
+                    <a href="#%e5%90%91-product-%e8%a1%a8%e4%b8%ad%e6%8f%92%e5%85%a5%e6%95%b0%e6%8d%ae" aria-label="向 Product 表中插入数据">向 Product 表中插入数据</a></li>
+                <li>
+                    <a href="#%e5%88%97%e7%9a%84%e6%9f%a5%e8%af%a2" aria-label="列的查询">列的查询</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%ba%e5%88%97%e8%ae%be%e5%ae%9a%e5%88%ab%e5%90%8d--%e4%bd%bf%e7%94%a8-as-%e5%85%b3%e9%94%ae%e5%ad%97%e4%b8%ba%e5%88%97%e8%ae%be%e5%ae%9a%e5%88%ab%e5%90%8d" aria-label="为列设定别名 : 使用 AS 关键字为列设定别名">为列设定别名 : 使用 AS 关键字为列设定别名</a></li>
+                <li>
+                    <a href="#%e6%9f%a5%e8%af%a2%e5%b8%b8%e6%95%b0" aria-label="查询常数">查询常数</a></li>
+                <li>
+                    <a href="#distinct%e5%8e%bb%e9%87%8ddistinct-%e5%85%b3%e9%94%ae%e5%ad%97%e5%8f%aa%e8%83%bd%e7%94%a8%e5%9c%a8%e7%ac%ac%e4%b8%80%e4%b8%aa%e5%88%97%e5%90%8d%e4%b9%8b%e5%89%8d" aria-label="DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前">DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前</a></li>
+                <li>
+                    <a href="#where-%e8%af%ad%e5%8f%a5%e6%9d%a5%e9%80%89%e6%8b%a9%e8%ae%b0%e5%bd%95" aria-label="WHERE 语句来选择记录">WHERE 语句来选择记录</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%bf%90%e7%ae%97%e7%ac%a6" aria-label="运算符">运算符</a></li>
+                <li>
+                    <a href="#%e8%81%9a%e5%90%88%e4%b8%8e%e6%8e%92%e5%ba%8f" aria-label="聚合与排序">聚合与排序</a></li>
+                <li>
+                    <a href="#%e5%af%b9%e8%a1%a8%e8%bf%9b%e8%a1%8c%e5%88%86%e7%bb%84" aria-label="对表进行分组">对表进行分组</a></li>
+                <li>
+                    <a href="#%e4%b8%ba%e8%81%9a%e5%90%88%e7%bb%93%e6%9e%9c%e6%8c%87%e5%ae%9a%e6%9d%a1%e4%bb%b6" aria-label="为聚合结果指定条件">为聚合结果指定条件</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8-having-%e5%ad%90%e5%8f%a5%e6%97%b6-select-%e8%af%ad%e5%8f%a5%e7%9a%84%e9%a1%ba%e5%ba%8f" aria-label="使用 HAVING 子句时 SELECT 语句的顺序">使用 HAVING 子句时 SELECT 语句的顺序</a></li>
+                <li>
+                    <a href="#%e5%af%b9%e6%9f%a5%e8%af%a2%e7%bb%93%e6%9e%9c%e8%bf%9b%e8%a1%8c%e6%8e%92%e5%ba%8f" aria-label="对查询结果进行排序">对查询结果进行排序</a></li>
+                <li>
+                    <a href="#%e5%ad%90%e5%8f%a5%e7%9a%84%e4%b9%a6%e5%86%99%e9%a1%ba%e5%ba%8f" aria-label="子句的书写顺序">子句的书写顺序</a><ul>
+                        
+                <li>
+                    <a href="#order-by%e5%ad%90%e5%8f%a5%e4%b8%ad%e5%8f%af%e4%bb%a5%e4%bd%bf%e7%94%a8%e7%9a%84%e5%88%97" aria-label="ORDER BY子句中可以使用的列">ORDER BY子句中可以使用的列</a></li></ul>
+                </li></ul>
+                    
+                <li>
+                    <a href="#%e7%ac%ac-4-%e7%ab%a0-%e6%95%b0%e6%8d%ae%e6%9b%b4%e6%96%b0" aria-label="第 4 章 数据更新">第 4 章 数据更新</a><ul>
+                        
+                <li>
+                    <a href="#insert-%e8%af%ad%e5%8f%a5" aria-label="INSERT 语句">INSERT 语句</a></li>
+                <li>
+                    <a href="#%e4%bb%8e%e5%85%b6%e4%bb%96%e8%a1%a8%e4%b8%ad%e5%a4%8d%e5%88%b6%e6%95%b0%e6%8d%ae" aria-label="从其他表中复制数据">从其他表中复制数据</a></li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e7%9a%84%e5%88%a0%e9%99%a4" aria-label="数据的删除">数据的删除</a></li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e7%9a%84%e6%9b%b4%e6%96%b0update%e8%af%ad%e5%8f%a5" aria-label="数据的更新(UPDATE语句)">数据的更新(UPDATE语句)</a></li>
+                <li>
+                    <a href="#%e5%a4%9a%e5%88%97%e6%9b%b4%e6%96%b0" aria-label="多列更新">多列更新</a><ul>
+                        
+                <li>
+                    <a href="#%e8%af%ad%e6%b3%95" aria-label="语法：">语法：</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%ac%ac-5-%e7%ab%a0-%e5%a4%8d%e6%9d%82%e6%9f%a5%e8%af%a2--%e8%a7%86%e5%9b%be-%e5%ad%90%e6%9f%a5%e8%af%a2-%e5%85%b3%e8%81%94%e5%ad%90%e6%9f%a5%e8%af%a2" aria-label="第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询">第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询</a><ul>
+                        
+                <li>
+                    <a href="#%e8%a7%86%e5%9b%be%e4%b8%b4%e6%97%b6%e7%9a%84%e8%a1%a8%e4%bf%9d%e5%ad%98%e7%9a%84%e6%98%af-select-%e8%af%ad%e5%8f%a5" aria-label="视图：临时的表，保存的是 SELECT 语句">视图：临时的表，保存的是 SELECT 语句</a><ul>
+                        
+                <li>
+                    <a href="#%e8%af%ad%e6%b3%95-1" aria-label="语法：">语法：</a></li>
+                <li>
+                    <a href="#%e8%a7%86%e5%9b%be%e7%bc%ba%e7%82%b9" aria-label="视图缺点：">视图缺点：</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%ad%90%e6%9f%a5%e8%af%a2%e5%b0%b1%e6%98%af%e4%b8%80%e6%ac%a1%e6%80%a7%e8%a7%86%e5%9b%beselect%e8%af%ad%e5%8f%a5" aria-label="子查询：就是一次性视图(SELECT语句)。">子查询：就是一次性视图(SELECT语句)。</a></li>
+                <li>
+                    <a href="#%e5%85%b3%e8%81%94%e5%ad%90%e6%9f%a5%e8%af%a2-%e7%94%a8%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0%e5%88%86%e7%bb%84" aria-label="关联子查询 :用聚合函数分组">关联子查询 :用聚合函数分组</a></li>
+                <li>
+                    <a href="#%e5%87%bd%e6%95%b0%e7%9a%84%e7%a7%8d%e7%b1%bb" aria-label="函数的种类">函数的种类</a></li>
+                <li>
+                    <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0" aria-label="字符串函数">字符串函数</a></li>
+                <li>
+                    <a href="#%e6%97%a5%e6%9c%9f%e5%87%bd%e6%95%b0" aria-label="日期函数">日期函数</a></li>
+                <li>
+                    <a href="#%e8%b0%93%e8%af%8d-%e8%bf%94%e5%9b%9e%e5%80%bc%e4%b8%ba%e7%9c%9f%e5%80%bctrue-falseunknown-%e7%9a%84%e5%87%bd%e6%95%b0" aria-label="谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数">谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数</a></li>
+                <li>
+                    <a href="#case%e8%a1%a8%e8%be%be%e5%bc%8f" aria-label="CASE表达式">CASE表达式</a></li>
+                <li>
+                    <a href="#%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0%e5%8f%88%e7%a7%b0%e5%88%86%e6%9e%90%e5%87%bd%e6%95%b0%e7%ae%80%e7%a7%b0olap-%e6%98%af-online-analytical-processing" aria-label="窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing">窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%93%e7%94%a8%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0%e6%8e%92%e5%ba%8f" aria-label="专用窗口函数（排序）">专用窗口函数（排序）</a></li>
+                <li>
+                    <a href="#%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0-%e5%b0%b1%e6%98%af%e7%bb%9f%e8%ae%a1%e5%87%bd%e6%95%b0" aria-label="聚合函数&mdash;-就是统计函数">聚合函数&mdash;-就是统计函数</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%a7%bb%e5%8a%a8%e5%b9%b3%e5%9d%87moving-average%e6%8a%8a%e6%8f%a1%e6%9c%80%e8%bf%91%e7%8a%b6%e6%80%81rows-5-preceding%e4%b9%8b%e5%89%8d----following%e4%b9%8b%e5%90%8e" aria-label="移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后">移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>SQL基础教程&ndash;MICK著。</p>
+<p><strong>SELECT 语句的顺序： FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY</strong></p>
+<h2 id="sql基础">SQL基础<a hidden class="anchor" aria-hidden="true" href="#sql基础">#</a></h2>
+<h3 id="ddldata-definition-language数据定义语言">DDL(Data Definition Language，数据定义语言)<a hidden class="anchor" aria-hidden="true" href="#ddldata-definition-language数据定义语言">#</a></h3>
+<ul>
+<li>CREATE:创建数据库和表等对象</li>
+<li>DROP: 删除数据库和表等对象</li>
+<li>ALTER: 修改数据库和表等对象的结构</li>
+</ul>
+<h3 id="dmldata-manipulation-language数据操纵语言">DML(Data Manipulation Language，数据操纵语言)<a hidden class="anchor" aria-hidden="true" href="#dmldata-manipulation-language数据操纵语言">#</a></h3>
+<ul>
+<li>SELECT:查询表中的数据</li>
+<li>INSERT:向表中插入新数据</li>
+<li>UPDATE:更新表中的数据</li>
+<li>DELETE:删除表中的数据</li>
+</ul>
+<h3 id="dcldata-control-language数据控制语言">DCL(Data Control Language，数据控制语言)<a hidden class="anchor" aria-hidden="true" href="#dcldata-control-language数据控制语言">#</a></h3>
+<ul>
+<li>COMMIT: 确认对数据库中的数据进行的变更</li>
+<li>ROLLBACK :取消对数据库中的数据进行的变更</li>
+<li>GRANT: 赋予用户操作权限</li>
+<li>REVOKE: 取消用户的操作权限</li>
+</ul>
+<p>SQL的基本书写规则：</p>
+<ul>
+<li>;结尾</li>
+<li>关键字大写</li>
+<li>表名首字母大写</li>
+<li>其余列名小写</li>
+<li>常数书写方式固定（字符串、日期、数字）</li>
+</ul>
+<h2 id="create-database-语句">CREATE DATABASE 语句<a hidden class="anchor" aria-hidden="true" href="#create-database-语句">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> shop; <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建数据库</span> shop
+</span></span></code></pre></div><h2 id="create-table语句">CREATE TABLE语句<a hidden class="anchor" aria-hidden="true" href="#create-table语句">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建</span>Product表
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Product 
+</span></span><span style="display:flex;"><span>(product_id          CHAR(<span style="color:#ae81ff">4</span>)         <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>product_name         VARCHAR(<span style="color:#ae81ff">100</span>)    <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>product_type         VARCHAR(<span style="color:#ae81ff">32</span>)     <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>sale_prioce          INTEGER        ,
+</span></span><span style="display:flex;"><span>purchase_price       INTEGER        ,
+</span></span><span style="display:flex;"><span>regist_date DATE     DATE           ,
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (product_id));
+</span></span></code></pre></div><p><strong>命名规则</strong></p>
+<ul>
+<li>我们只能使用半角英文字母、数字、下划线(_)作为数据库、表和 列的名称</li>
+<li>名称必须以半角英文字母开头</li>
+<li>名称不能重复。</li>
+</ul>
+<p><strong>数据类型的指定</strong></p>
+<ul>
+<li>INTEGER 型用来指定存储整数的列的数据类型(数字型)，不能存储小数。</li>
+<li>CHAR型  固定长度字符型。</li>
+<li>VARCHAR型  可变长字符串</li>
+<li>DATE型 用来指定存储日期(年月日)的列的数据类型</li>
+</ul>
+<p><strong>约束设置</strong></p>
+<ul>
+<li>NOT NULL约束</li>
+<li>主键约束 ：唯一识别出表中观测数据的一组列</li>
+</ul>
+<h2 id="表的删除drop-table语句">表的删除(DROP TABLE语句)<a hidden class="anchor" aria-hidden="true" href="#表的删除drop-table语句">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除</span> Product <span style="color:#960050;background-color:#1e0010">表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> Product;
+</span></span></code></pre></div><h2 id="添加列的alter-table语句">添加列的ALTER TABLE语句<a hidden class="anchor" aria-hidden="true" href="#添加列的alter-table语句">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> Product <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> product_name_pinyin VARCHAR(<span style="color:#ae81ff">100</span>);
+</span></span></code></pre></div><h2 id="删除列的alter-table语句">删除列的ALTER TABLE语句<a hidden class="anchor" aria-hidden="true" href="#删除列的alter-table语句">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> Product <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">COLUMN</span> product_name_pinyin;
+</span></span></code></pre></div><h2 id="向-product-表中插入数据">向 Product 表中插入数据<a hidden class="anchor" aria-hidden="true" href="#向-product-表中插入数据">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- DML:插入数据
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">START</span><span style="color:#f92672">/</span><span style="color:#66d9ef">BEGIN</span> <span style="color:#66d9ef">TRANSACTION</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0001&#39;</span>, <span style="color:#e6db74">&#39;T恤衫&#39;</span>, <span style="color:#e6db74">&#39;衣服&#39;</span>, <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">500</span>, <span style="color:#e6db74">&#39;2009-09-20&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0002&#39;</span>, <span style="color:#e6db74">&#39;打孔器&#39;</span>, <span style="color:#e6db74">&#39;办公用品&#39;</span>, <span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">320</span>, <span style="color:#e6db74">&#39;2009-09-11&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0003&#39;</span>, <span style="color:#e6db74">&#39;运动T恤&#39;</span>,<span style="color:#e6db74">&#39;衣服&#39;</span>, <span style="color:#ae81ff">4000</span>, <span style="color:#ae81ff">2800</span>, <span style="color:#66d9ef">NULL</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0004&#39;</span>, <span style="color:#e6db74">&#39;菜刀&#39;</span>, <span style="color:#e6db74">&#39;厨房用具&#39;</span>, <span style="color:#ae81ff">3000</span>, <span style="color:#ae81ff">2800</span>, <span style="color:#e6db74">&#39;2009-09-20&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0005&#39;</span>, <span style="color:#e6db74">&#39;高压锅&#39;</span>, <span style="color:#e6db74">&#39;厨房用具&#39;</span>,<span style="color:#ae81ff">6800</span>, <span style="color:#ae81ff">5000</span>,<span style="color:#e6db74">&#39;2009-01-15&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0006&#39;</span>, <span style="color:#e6db74">&#39;叉子&#39;</span>, <span style="color:#e6db74">&#39;厨房用具&#39;</span>, <span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">NULL</span>, <span style="color:#e6db74">&#39;2009-09-20&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0007&#39;</span>, <span style="color:#e6db74">&#39;擦菜板&#39;</span>, <span style="color:#e6db74">&#39;厨房用具&#39;</span>, <span style="color:#ae81ff">880</span>, <span style="color:#ae81ff">790</span>, <span style="color:#e6db74">&#39;2008-04-28&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Product <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;0008&#39;</span>, <span style="color:#e6db74">&#39;圆珠笔&#39;</span>, <span style="color:#e6db74">&#39;办公用品&#39;</span>, <span style="color:#ae81ff">100</span>, <span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;2009-11-11&#39;</span>);
+</span></span><span style="display:flex;"><span>           
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">COMMIT</span>;
+</span></span></code></pre></div><h2 id="列的查询">列的查询<a hidden class="anchor" aria-hidden="true" href="#列的查询">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_id, product_name, purchase_price <span style="color:#66d9ef">FROM</span> Product;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><h3 id="为列设定别名--使用-as-关键字为列设定别名">为列设定别名 : 使用 AS 关键字为列设定别名<a hidden class="anchor" aria-hidden="true" href="#为列设定别名--使用-as-关键字为列设定别名">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_id <span style="color:#66d9ef">AS</span> id, product_name <span style="color:#66d9ef">AS</span> name, purchase_price <span style="color:#66d9ef">AS</span> price
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">设定中文别名</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_id <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">&#34;商品编号&#34;</span>, product_name <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">&#34;商品名称&#34;</span>,
+</span></span><span style="display:flex;"><span>       purchase_price <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">&#34;进货单价&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><h3 id="查询常数">查询常数<a hidden class="anchor" aria-hidden="true" href="#查询常数">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;商品&#39;</span> <span style="color:#66d9ef">AS</span> string, <span style="color:#ae81ff">38</span> <span style="color:#66d9ef">AS</span> number, <span style="color:#e6db74">&#39;2009-02-24&#39;</span> <span style="color:#66d9ef">AS</span> date, product_id, product_name
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><h3 id="distinct去重distinct-关键字只能用在第一个列名之前">DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前<a hidden class="anchor" aria-hidden="true" href="#distinct去重distinct-关键字只能用在第一个列名之前">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DISTINCT</span> <span style="color:#960050;background-color:#1e0010">删除</span> product_type <span style="color:#960050;background-color:#1e0010">列中重复的数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> product_type <span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><h3 id="where-语句来选择记录">WHERE 语句来选择记录<a hidden class="anchor" aria-hidden="true" href="#where-语句来选择记录">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">选取</span> product_type <span style="color:#960050;background-color:#1e0010">列为</span><span style="color:#e6db74">&#39;衣服&#39;</span><span style="color:#960050;background-color:#1e0010">的记录的</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, product_type 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> product_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;衣服&#39;</span>;   <span style="color:#75715e">--条件表达式
+</span></span></span></code></pre></div><h2 id="运算符">运算符<a hidden class="anchor" aria-hidden="true" href="#运算符">#</a></h2>
+<ul>
+<li>
+<p>算术运算符（+， -,  *, /）</p>
+</li>
+<li>
+<p>比较运算符（&gt; , &gt;=, =, &lt;, &lt;=, &lt;&gt;), 在where子句生成表达式</p>
+</li>
+<li>
+<p>逻辑运算符</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">NOT</span>, <span style="color:#66d9ef">AND</span>, <span style="color:#66d9ef">OR</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">-</span> <span style="color:#66d9ef">NOT</span> <span style="color:#960050;background-color:#1e0010">不能单独使用</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">-</span> <span style="color:#66d9ef">AND</span> <span style="color:#960050;background-color:#1e0010">运算符优先于</span> <span style="color:#66d9ef">OR</span> <span style="color:#960050;background-color:#1e0010">运算符</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">-</span> AND逻辑积<span style="color:#960050;background-color:#1e0010">，</span>OR逻辑和
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">IN</span>, <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">IN</span>, EXIST, <span style="color:#66d9ef">NOT</span> EXIST
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TRUE</span>, <span style="color:#66d9ef">FALSE</span>, <span style="color:#66d9ef">UNKNOWN</span>
+</span></span></code></pre></div><h2 id="聚合与排序">聚合与排序<a hidden class="anchor" aria-hidden="true" href="#聚合与排序">#</a></h2>
+<p><strong>聚合函数</strong> ：阶数会改变，多行变成一行
+COUNT:计算表中的记录数(行数) SUM : 合计值 AVG : 平均值 MAX: 最大值 MIN : 最小值</p>
+<p>注：</p>
+<p>1.COUNT(*)包含缺失值的行
+2.COUNT(COLUMN)不包含缺失值的行
+3.平均是会忽视缺失值及其个数
+4.MAX/MIN 函数几乎适用于所有数据类型的列。SUM/AVG 函数只适用于数值类型的列。</p>
+<h2 id="对表进行分组">对表进行分组<a hidden class="anchor" aria-hidden="true" href="#对表进行分组">#</a></h2>
+<p>使用聚合函数和GROUP BY子句时需要注意以下4点。</p>
+<ol>
+<li>只能写在SELECT子句之中</li>
+<li>GROUP BY子句中不能使用SELECT子句中列的别名</li>
+<li>GROUP BY子句的聚合结果是无序的</li>
+<li>WHERE子句中不能使用聚合函数</li>
+</ol>
+<p>GROUP BY 子句中指定的列称为聚合键或者分组列</p>
+<p>##与聚合函数和GROUP BY子句有关的常见错误</p>
+<ul>
+<li>多写了列</li>
+<li>用了别名</li>
+<li>where子句用了聚合函数，这种情况应该使用having</li>
+<li>group by后无序状态</li>
+</ul>
+<h2 id="为聚合结果指定条件">为聚合结果指定条件<a hidden class="anchor" aria-hidden="true" href="#为聚合结果指定条件">#</a></h2>
+<ul>
+<li>where指定行的条件</li>
+<li>having指定组的条件</li>
+</ul>
+<h2 id="使用-having-子句时-select-语句的顺序">使用 HAVING 子句时 SELECT 语句的顺序<a hidden class="anchor" aria-hidden="true" href="#使用-having-子句时-select-语句的顺序">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#66d9ef">FROM</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#66d9ef">HAVING</span>
+</span></span></code></pre></div><p>HAVING 子句的构成要素</p>
+<ul>
+<li>常数</li>
+<li>聚合函数</li>
+<li>GROUP BY子句中指定的列名(即聚合键)</li>
+</ul>
+<h2 id="对查询结果进行排序">对查询结果进行排序<a hidden class="anchor" aria-hidden="true" href="#对查询结果进行排序">#</a></h2>
+<p>ORDER BY子句 &mdash;-DESC /ASC</p>
+<h2 id="子句的书写顺序">子句的书写顺序<a hidden class="anchor" aria-hidden="true" href="#子句的书写顺序">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>.SELECT子句<span style="color:#960050;background-color:#1e0010">→</span><span style="color:#ae81ff">2</span>.FROM子句<span style="color:#960050;background-color:#1e0010">→</span><span style="color:#ae81ff">3</span>.WHERE子句<span style="color:#960050;background-color:#1e0010">→</span><span style="color:#ae81ff">4</span>.<span style="color:#66d9ef">GROUP</span> BY子句<span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#ae81ff">5</span>. <span style="color:#66d9ef">HAVING</span> <span style="color:#960050;background-color:#1e0010">子句</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#ae81ff">6</span>. <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#960050;background-color:#1e0010">子句</span>
+</span></span></code></pre></div><p>注意：</p>
+<ul>
+<li>GROUP BY不能使用别名</li>
+<li>ORDER BY可以使用别名</li>
+</ul>
+<h3 id="order-by子句中可以使用的列">ORDER BY子句中可以使用的列<a hidden class="anchor" aria-hidden="true" href="#order-by子句中可以使用的列">#</a></h3>
+<ul>
+<li>SELECT子句中未包含的列也可以在ORDER BY子句中使用</li>
+<li>ORDER BY子句中也可以使用聚合函数</li>
+</ul>
+<h1 id="第-4-章-数据更新">第 4 章 数据更新<a hidden class="anchor" aria-hidden="true" href="#第-4-章-数据更新">#</a></h1>
+<ul>
+<li>数据的插入(INSERT 语句的使用方法)</li>
+<li>数据的删除(DELETE 语句的使用方法)</li>
+<li>数据的更新(UPDATE 语句的使用方法)</li>
+</ul>
+<h2 id="insert-语句">INSERT 语句<a hidden class="anchor" aria-hidden="true" href="#insert-语句">#</a></h2>
+<p>列清单&mdash;&mdash;&ndash;值清单</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">表名</span><span style="color:#f92672">&gt;</span> (<span style="color:#960050;background-color:#1e0010">列</span><span style="color:#ae81ff">1</span>, <span style="color:#960050;background-color:#1e0010">列</span><span style="color:#ae81ff">2</span>, <span style="color:#960050;background-color:#1e0010">列</span><span style="color:#ae81ff">3</span>, ......) <span style="color:#66d9ef">VALUES</span> (<span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">1</span>, <span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">2</span>, <span style="color:#960050;background-color:#1e0010">值</span><span style="color:#ae81ff">3</span>, ......);
+</span></span></code></pre></div><h2 id="从其他表中复制数据">从其他表中复制数据<a hidden class="anchor" aria-hidden="true" href="#从其他表中复制数据">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ProductCopy (product_id,)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_id, product_name
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">按列复制的</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">插入是按行插入</span>
+</span></span></code></pre></div><p>INSERT语句每 次执行一行数据的插入。</p>
+<h2 id="数据的删除">数据的删除<a hidden class="anchor" aria-hidden="true" href="#数据的删除">#</a></h2>
+<ul>
+<li>DROP TABLE 语句可以将表完全删除</li>
+<li>DELETE 语句会留下表(容器)，而删除表中的全部数据</li>
+<li>drop table删除表或者列，DELETE是按行删除</li>
+<li>搜索型 DELETE即添加where条件表达式</li>
+<li>DELETE语句中不能使用GROUP BY、 HAVING和ORDER BY三类子句，</li>
+</ul>
+<h2 id="数据的更新update语句">数据的更新(UPDATE语句)<a hidden class="anchor" aria-hidden="true" href="#数据的更新update语句">#</a></h2>
+<p>更新是按列更新，即按集合元组更新</p>
+<p>指定条件的 UPDATE 语句(搜索型 UPDATE)</p>
+<h2 id="多列更新">多列更新<a hidden class="anchor" aria-hidden="true" href="#多列更新">#</a></h2>
+<p>事务：在同一个处理单元中执行的一系列更新处理的集合</p>
+<p>四种特性：</p>
+<ul>
+<li>原子性(atomicity)：事务要么全执行、要不全不执行</li>
+<li>一致性(consistency)：受到数据库提前设置的约束，如：主键/NOT NULL</li>
+<li>隔离性(isolation)：事务之间互不干扰，不能嵌套，是独立的，不提交事务，别人看不见</li>
+<li>持久性(durability)：很好的保存、恢复特性</li>
+</ul>
+<h3 id="语法">语法：<a hidden class="anchor" aria-hidden="true" href="#语法">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">案例：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span> <span style="color:#f92672">/</span><span style="color:#66d9ef">START</span> <span style="color:#66d9ef">TRANSACTION</span>;
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">-- 将运动 T 恤的销售单价降低1000 日元
+</span></span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">UPDATE</span> Product 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SET</span> sale_price <span style="color:#f92672">=</span> sale_price <span style="color:#f92672">-</span> <span style="color:#ae81ff">1000</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">WHERE</span> product_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; 运动 T 恤 &#39;</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">COMMIT</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span> <span style="color:#66d9ef">TRANSACTION</span>;
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">-- 将 T 恤衫的销售单价上浮 1000 日元
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">UPDATE</span> Product 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SET</span> sale_price <span style="color:#f92672">=</span> sale_price <span style="color:#f92672">+</span> <span style="color:#ae81ff">1000</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">WHERE</span> product_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;T 恤衫 &#39;</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">COMMIT</span>;
+</span></span></code></pre></div><h1 id="第-5-章-复杂查询--视图-子查询-关联子查询">第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询<a hidden class="anchor" aria-hidden="true" href="#第-5-章-复杂查询--视图-子查询-关联子查询">#</a></h1>
+<h2 id="视图临时的表保存的是-select-语句">视图：临时的表，保存的是 SELECT 语句<a hidden class="anchor" aria-hidden="true" href="#视图临时的表保存的是-select-语句">#</a></h2>
+<p>优点：</p>
+<ul>
+<li>节省储存空间</li>
+<li>提高SELECT效率</li>
+</ul>
+<h3 id="语法-1">语法：<a hidden class="anchor" aria-hidden="true" href="#语法-1">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">创建视图：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">VIEW</span> <span style="color:#960050;background-color:#1e0010">视图名称</span> (<span style="color:#f92672">&lt;</span> <span style="color:#960050;background-color:#1e0010">视图列名</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>, <span style="color:#f92672">&lt;</span> <span style="color:#960050;background-color:#1e0010">视图列名</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;</span>, <span style="color:#960050;background-color:#1e0010">……</span> ) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">SELECT</span> <span style="color:#960050;background-color:#1e0010">语句</span> <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">创建案例</span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">定义视图：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">VIEW</span> ProductSum (product_type, cnt_product) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_type, <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) 
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">FROM</span> Product
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> product_type;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">使用视图：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_type, cnt_product) 
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">FROM</span> ProductSum;
+</span></span></code></pre></div><p>流程：</p>
+<p>执行定义视图的 SELECT 语句
+以视图为基础创建视图的多重视图 &mdash;&ndash;降低性能</p>
+<h3 id="视图缺点">视图缺点：<a hidden class="anchor" aria-hidden="true" href="#视图缺点">#</a></h3>
+<p>定义视图时不能使用ORDER BY子句
+可以更新视图的条件：
+1.SELECT 子句中未使用 DISTINCT
+2.FROM 子句中只有一张表
+3.未使用GROUP BY子句
+4.未使用 HAVING 子句</p>
+<p>删除视图：DROP VIEW语句</p>
+<h2 id="子查询就是一次性视图select语句">子查询：就是一次性视图(SELECT语句)。<a hidden class="anchor" aria-hidden="true" href="#子查询就是一次性视图select语句">#</a></h2>
+<p>子查询的层数原则上没有限制</p>
+<ul>
+<li>标量子查询就是返回单一值的子查询。</li>
+<li>返回单一值需要+groupby/sum等聚合函数</li>
+<li>在WHERE子句中不能使用聚合函数</li>
+</ul>
+<p>标量子查询的书写位置</p>
+<p>能够使用常数或者列名的 地方，无论是 SELECT 子句、GROUP BY 子句、HAVING 子句，还是 ORDER BY子句，几乎所有的地方都可以使用。</p>
+<h2 id="关联子查询-用聚合函数分组">关联子查询 :用聚合函数分组<a hidden class="anchor" aria-hidden="true" href="#关联子查询-用聚合函数分组">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_type, product_name, sale_price
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product <span style="color:#66d9ef">AS</span> P1 <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> sale_price <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(sale_price)
+</span></span><span style="display:flex;"><span>                         <span style="color:#66d9ef">FROM</span> Product <span style="color:#66d9ef">AS</span> P2 
+</span></span><span style="display:flex;"><span>                     <span style="color:#66d9ef">WHERE</span> P1.product_type <span style="color:#f92672">=</span> P2.product_type   <span style="color:#f92672">#</span>   <span style="color:#960050;background-color:#1e0010">该条件就是成功的关键</span><span style="color:#f92672">!</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> product_type);
+</span></span></code></pre></div><ul>
+<li>group by：返回一行</li>
+<li>关联子查询：组内比较</li>
+<li>partition by：分组排序</li>
+</ul>
+<h2 id="函数的种类">函数的种类<a hidden class="anchor" aria-hidden="true" href="#函数的种类">#</a></h2>
+<ul>
+<li>算术函数（用来进行数值计算的函数）</li>
+<li>字符串函数（用来进行字符串操作的函数）</li>
+<li>日期函数（用来进行日期操作的函数）</li>
+<li>转换函数（用来转换数据类型和值的函数）</li>
+<li>聚合函数（用来进行数据聚合的函数）</li>
+<li>算术函数( + - * /)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ABS</span><span style="color:#960050;background-color:#1e0010">——绝对值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> m,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">ABS</span>(m) <span style="color:#66d9ef">AS</span> abs_col 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">FROM</span> SampleMath;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MOD</span><span style="color:#960050;background-color:#1e0010">——求余</span><span style="color:#f92672">//</span> <span style="color:#960050;background-color:#1e0010">计算除法（</span>n <span style="color:#960050;background-color:#1e0010">÷</span> p<span style="color:#960050;background-color:#1e0010">）的余数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> n, p,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">MOD</span>(n, p) <span style="color:#66d9ef">AS</span> mod_col 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">FROM</span> SampleMath;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ROUND<span style="color:#960050;background-color:#1e0010">——四舍五入</span>   <span style="color:#f92672">//</span> <span style="color:#960050;background-color:#1e0010">对</span> m <span style="color:#960050;background-color:#1e0010">列的数值进行</span> n <span style="color:#960050;background-color:#1e0010">列位数的四舍五入处理</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> m, n,
+</span></span><span style="display:flex;"><span>        ROUND(m, n) <span style="color:#66d9ef">AS</span> round_col 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleMath;
+</span></span></code></pre></div><h2 id="字符串函数">字符串函数<a hidden class="anchor" aria-hidden="true" href="#字符串函数">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span>      <span style="color:#960050;background-color:#1e0010">拼接字符串</span>  <span style="color:#f92672">|</span> <span style="color:#f92672">|</span> <span style="color:#960050;background-color:#1e0010">，</span> MySQL使用 CONCAT <span style="color:#960050;background-color:#1e0010">函数</span>    <span style="color:#66d9ef">SQL</span> Server使用<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">”</span>   <span style="color:#960050;background-color:#1e0010">效果：</span>abc <span style="color:#f92672">+</span> de <span style="color:#f92672">=</span> abcde
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> MySQL
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> str1, str2, str3,
+</span></span><span style="display:flex;"><span>        CONCAT(str1, str2, str3) <span style="color:#66d9ef">AS</span> str_concat 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleStr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> Oracle  DB2  PostgreSQL
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> str1, str2, str3,
+</span></span><span style="display:flex;"><span>        str1 <span style="color:#f92672">|</span> <span style="color:#f92672">|</span> str2 <span style="color:#f92672">|</span> <span style="color:#f92672">|</span> str3 <span style="color:#66d9ef">AS</span> str_concat 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleStr 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">WHERE</span> str1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; 山田 &#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>     <span style="color:#66d9ef">LENGTH</span><span style="color:#960050;background-color:#1e0010">——字符串长度</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> str1,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">LENGTH</span>(str1) <span style="color:#66d9ef">AS</span> len_str 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleStr;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>      <span style="color:#66d9ef">LOWER</span><span style="color:#960050;background-color:#1e0010">——小写转换，</span>  <span style="color:#66d9ef">UPPER</span><span style="color:#960050;background-color:#1e0010">——大写转换</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> str1, 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">LOWER</span>(str1) <span style="color:#66d9ef">AS</span> low_str
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleStr 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">WHERE</span> str1 <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;ABC&#39;</span>, <span style="color:#e6db74">&#39;aBC&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39; 山田 &#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>       <span style="color:#66d9ef">REPLACE</span><span style="color:#960050;background-color:#1e0010">——字符串的替换</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> str1, str2, str3,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">REPLACE</span>(str1, str2, str3) <span style="color:#66d9ef">AS</span> rep_str 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleStr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>       <span style="color:#66d9ef">SUBSTRING</span><span style="color:#960050;background-color:#1e0010">——字符串的截取</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> str1,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SUBSTRING</span>(str1 <span style="color:#66d9ef">FROM</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">FOR</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">AS</span> sub_str 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SampleStr;
+</span></span></code></pre></div><h2 id="日期函数">日期函数<a hidden class="anchor" aria-hidden="true" href="#日期函数">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span>    <span style="color:#66d9ef">CURRENT_DATE</span><span style="color:#960050;background-color:#1e0010">——当前日期</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CURRENT_DATE</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> dual;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>    <span style="color:#66d9ef">CURRENT_TIME</span><span style="color:#960050;background-color:#1e0010">——当前时间</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CURRENT_TIME</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>    <span style="color:#66d9ef">CURRENT_TIMESTAMP</span><span style="color:#960050;background-color:#1e0010">——当前日期和时间</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>    <span style="color:#66d9ef">EXTRACT</span><span style="color:#960050;background-color:#1e0010">——截取日期元素</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,         
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">YEAR</span> <span style="color:#66d9ef">FROM</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>)        <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">year</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">MONTH</span> <span style="color:#66d9ef">FROM</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>)       <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">month</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">DAY</span> <span style="color:#66d9ef">FROM</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>)         <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">day</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">EXTRACT</span>(HOUR <span style="color:#66d9ef">FROM</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>)        <span style="color:#66d9ef">AS</span> hour,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">MINUTE</span> <span style="color:#66d9ef">FROM</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>)      <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">minute</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">SECOND</span> <span style="color:#66d9ef">FROM</span> CURRENT_TIMESTAM )      <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">second</span>;
+</span></span></code></pre></div><p>##转换函数</p>
+<p><strong>CAST——数据类型转换</strong></p>
+<p>将字符串类型转换为数值类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">//</span> MySQL
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CAST</span>(<span style="color:#e6db74">&#39;0001&#39;</span> <span style="color:#66d9ef">AS</span> SIGNED INTEGER) <span style="color:#66d9ef">AS</span> int_col;
+</span></span></code></pre></div><h2 id="谓词-返回值为真值true-falseunknown-的函数">谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数<a hidden class="anchor" aria-hidden="true" href="#谓词-返回值为真值true-falseunknown-的函数">#</a></h2>
+<p>LIKE BETWEEN IS NULL / IS NOT NULL IN EXISTS</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span>       <span style="color:#66d9ef">LIKE</span><span style="color:#960050;background-color:#1e0010">——字符串的部分一致查询</span>,<span style="color:#960050;background-color:#1e0010">模糊</span> <span style="color:#75715e">------  前方一致查询   中间一致查询   后方一致查询
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> SampleLike <span style="color:#66d9ef">WHERE</span> strcol <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;ddd%&#39;</span>;<span style="color:#75715e">-------或LIKE &#39;%ddd%&#39;或 LIKE &#39;%ddd&#39;
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>    <span style="color:#66d9ef">BETWEEN</span> <span style="color:#960050;background-color:#1e0010">——范围查询</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, sale_price
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> sale_price <span style="color:#66d9ef">BETWEEN</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">AND</span> <span style="color:#ae81ff">1000</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>       <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NULL</span> <span style="color:#960050;background-color:#1e0010">、</span> <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#960050;background-color:#1e0010">——判断是否为</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, purchase_price 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> purchase_price <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NULL</span>;   <span style="color:#75715e">---选取出purchase_price（不）为 NULL 的商品
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>           <span style="color:#66d9ef">IN</span> <span style="color:#f92672">/</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">IN</span> <span style="color:#960050;background-color:#1e0010">——</span> <span style="color:#66d9ef">OR</span> <span style="color:#960050;background-color:#1e0010">的简便用法</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, purchase_price 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> purchase_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">320</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">OR</span> purchase_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">OR</span> purchase_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, purchase_price
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product 
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> purchase_price <span style="color:#66d9ef">IN</span> (<span style="color:#ae81ff">320</span>, <span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">5000</span>);
+</span></span></code></pre></div><p>子查询作为 IN 谓词的参数
+IN谓词(NOT IN谓词) 参数
+将子查询作为IN的参数
+将视图作为 IN 的参数
+将表作为 IN 的参数</p>
+<p>为什么使用子查询&mdash;&mdash;-各个商店销售的商品变化，导致ShopProduct表内大阪店销售的商品变化。如果 SELECT 语句中没有使用子查询的话，一旦商品发生了改变，那么 SELECT 语句也不得不进行修改 。</p>
+<p>Product 表</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">product_id (商品编号)</th>
+          <th style="text-align: center">product_name (商品名称)</th>
+          <th style="text-align: center">product_type  (商品种类)</th>
+          <th style="text-align: center">sale_price (销售单价)</th>
+          <th style="text-align: center">purchase_price (进货单价)</th>
+          <th style="text-align: center">regist_date (登记日期)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">0001</td>
+          <td style="text-align: center">T恤衫</td>
+          <td style="text-align: center">衣服</td>
+          <td style="text-align: center">1000</td>
+          <td style="text-align: center">500</td>
+          <td style="text-align: center">2009-09-20</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">0002</td>
+          <td style="text-align: center">打孔器</td>
+          <td style="text-align: center">办公用品</td>
+          <td style="text-align: center">500</td>
+          <td style="text-align: center">320</td>
+          <td style="text-align: center">2009-09-11</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">0003</td>
+          <td style="text-align: center">叉子</td>
+          <td style="text-align: center">厨房用具</td>
+          <td style="text-align: center">500</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center">2009-09-20</td>
+      </tr>
+  </tbody>
+</table>
+<p>ShopProduct(商店商品)表</p>
+<table>
+  <thead>
+      <tr>
+          <th>shop_id  (商店)</th>
+          <th>shop_name  (商店名称)</th>
+          <th>product_id  (商品编号)</th>
+          <th>quantity  (数量)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>000A</td>
+          <td>东京</td>
+          <td>0001  (T 恤衫）</td>
+          <td>30</td>
+      </tr>
+      <tr>
+          <td>000A</td>
+          <td>东京</td>
+          <td>0002(打孔器)</td>
+          <td>50</td>
+      </tr>
+      <tr>
+          <td>000B</td>
+          <td>名古屋</td>
+          <td>0002  003(运动 T 恤)</td>
+          <td>30</td>
+      </tr>
+  </tbody>
+</table>
+<p>问题：取出“大阪店(000C)在售商品(product_id)的销售单价(sale_price)”</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 取得“在大阪店销售的商品的销售单价” 
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, sale_price
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">WHERE</span> product_id <span style="color:#66d9ef">IN</span> (<span style="color:#66d9ef">SELECT</span> product_id
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">FROM</span> ShopProduct
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">WHERE</span> shop_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;000C&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 子查询展开后的结果
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, sale_price
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> product_id <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;0003&#39;</span>, <span style="color:#e6db74">&#39;0004&#39;</span>, <span style="color:#e6db74">&#39;0006&#39;</span>, <span style="color:#e6db74">&#39;0007&#39;</span>);
+</span></span></code></pre></div><h2 id="case表达式">CASE表达式<a hidden class="anchor" aria-hidden="true" href="#case表达式">#</a></h2>
+<p>case表达式是函数的一种，进行的是运算功能</p>
+<p>搜索case表达式即加上where</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">求值表达式</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">THEN</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">求值表达式</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">THEN</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">求值表达式</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">THEN</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">ELSE</span> <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">表达式</span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
+</span></span></code></pre></div><h2 id="窗口函数又称分析函数简称olap-是-online-analytical-processing">窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing<a hidden class="anchor" aria-hidden="true" href="#窗口函数又称分析函数简称olap-是-online-analytical-processing">#</a></h2>
+<pre><code>窗口函数的语法
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span> <span style="color:#960050;background-color:#1e0010">窗口函数</span> <span style="color:#f92672">&gt;</span> OVER ([ PARTITION <span style="color:#66d9ef">BY</span> <span style="color:#f92672">&lt;</span> <span style="color:#960050;background-color:#1e0010">列清单</span> <span style="color:#f92672">&gt;</span>] 
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#f92672">&lt;</span> <span style="color:#960050;background-color:#1e0010">排序用列清单</span> <span style="color:#f92672">&gt;</span>)
+</span></span></code></pre></div><ul>
+<li>不能用于where子句和GROUP BY 子句</li>
+<li>能够作为窗口函数的聚合函数（SUM、AVG、COUNT、MAX、MIN）</li>
+<li>RANK、DENSE_RANK、ROW_NUMBER 等专用窗口函数</li>
+</ul>
+<h3 id="专用窗口函数排序">专用窗口函数（排序）<a hidden class="anchor" aria-hidden="true" href="#专用窗口函数排序">#</a></h3>
+<ul>
+<li>RANK 1 位、1 位、1 位、4 位……</li>
+<li>DENSE_RANK 函数   1 位、1 位、1 位、2 位……</li>
+<li>ROW_NUMBER 函数    1 位、2 位、3 位、4 位……</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">--------根据不同的商品种类，按照销售单价从低到高的顺序创建排序表
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, product_type, sale_price,
+</span></span><span style="display:flex;"><span>    RANK () OVER (PARTITION <span style="color:#66d9ef">BY</span> product_type    <span style="color:#75715e">-------有PARTITION BY则分组，无PARTITION BY则不分组
+</span></span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> sale_price) <span style="color:#66d9ef">AS</span> ranking 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Product;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_name, product_type, sale_price,
+</span></span><span style="display:flex;"><span>    RANK () OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> sale_price) <span style="color:#66d9ef">AS</span> ranking, 
+</span></span><span style="display:flex;"><span>    DENSE_RANK () OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> sale_price) <span style="color:#66d9ef">AS</span> dense_ranking, 
+</span></span><span style="display:flex;"><span>    ROW_NUMBER () OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> sale_price) <span style="color:#66d9ef">AS</span> row_num 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><h3 id="聚合函数-就是统计函数">聚合函数&mdash;-就是统计函数<a hidden class="anchor" aria-hidden="true" href="#聚合函数-就是统计函数">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">//</span> <span style="color:#66d9ef">SUM</span> <span style="color:#960050;background-color:#1e0010">函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_id, product_name, sale_price,
+</span></span><span style="display:flex;"><span>　  <span style="color:#66d9ef">SUM</span> (sale_price) OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> product_id) <span style="color:#66d9ef">AS</span> current_sum 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">AVG</span> (sale_price) OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> product_id) <span style="color:#66d9ef">AS</span> current_avg <span style="color:#66d9ef">FROM</span> Product;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><h2 id="移动平均moving-average把握最近状态rows-5-preceding之前----following之后">移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后<a hidden class="anchor" aria-hidden="true" href="#移动平均moving-average把握最近状态rows-5-preceding之前----following之后">#</a></h2>
+<p>指定“最靠近的3行”作为汇总对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_id, product_name, sale_price,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">AVG</span> (sale_price) OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> product_id 
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">ROWS</span> <span style="color:#ae81ff">2</span> PRECEDING) <span style="color:#66d9ef">AS</span> moving_avg  <span style="color:#75715e">-------ROWS （“行”）和 PRECEDING （“之前”），截止到之前2行
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Product;
+</span></span></code></pre></div><p>GROUPING运算符&mdash;&mdash;&ndash;同时得出小计和合计
+ROLLUP&mdash;&mdash;&mdash;同时得出小计和合计
+CUBE&mdash;&mdash;&ndash;立体展示数据
+GROUPING SETS&mdash;&mdash;-取得期望的积木CUBE</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> product_type, <span style="color:#66d9ef">SUM</span>(sale_price) <span style="color:#66d9ef">AS</span> sum_price 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> product_type <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">ROLLUP</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> <span style="color:#960050;background-color:#1e0010">与</span> <span style="color:#66d9ef">ROLLUP</span> <span style="color:#960050;background-color:#1e0010">的结果相比，</span> <span style="color:#66d9ef">CUBE</span> <span style="color:#960050;background-color:#1e0010">的结果中多出了几行记录</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">GROUPING</span>(product_type) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39; 商品种类 合计 &#39;</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">ELSE</span> product_type <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> product_type,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">GROUPING</span>(regist_date) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39; 登记日期 合计 &#39;</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">ELSE</span> <span style="color:#66d9ef">CAST</span>(regist_date <span style="color:#66d9ef">AS</span> VARCHAR(<span style="color:#ae81ff">16</span>)) <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> regist_date,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SUM</span>(sale_price) <span style="color:#66d9ef">AS</span> sum_price 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">CUBE</span>(product_type, regist_date);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">GROUPING</span>(product_type) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39; 商品种类 合计 &#39;</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">ELSE</span> product_type <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> product_type,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">GROUPING</span>(regist_date) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39; 登记日期 合计 &#39;</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">ELSE</span> <span style="color:#66d9ef">CAST</span>(regist_date <span style="color:#66d9ef">AS</span> VARCHAR(<span style="color:#ae81ff">16</span>)) <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> regist_date,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SUM</span>(sale_price) <span style="color:#66d9ef">AS</span> sum_price 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Product 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">GROUPING</span> <span style="color:#66d9ef">SETS</span> (product_type, regist_date);
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/sql/">SQL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E7%BE%8E%E5%9B%BD%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%A9%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>美国健康保险业务探索性分析</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E6%88%98%E7%95%A5%E5%88%86%E6%9E%90-%E4%BB%8E%E5%BA%8A%E5%9E%AB%E9%94%80%E9%87%8F%E4%B8%8B%E6%BB%91%E8%AF%B4%E8%B5%B7/">
+    <span class="title">Next »</span>
+    <br>
+    <span>战略分析-从床垫销量下滑说起</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

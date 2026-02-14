@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>SQL数据库学习总结 | Robert&#39;s Blog</title>
+<meta name="keywords" content="SQL">
+<meta name="description" content="意义：
+1.创建数据库的好处，控制多位用户同时访问的行为
+2.数据库名称不能有空格
+3.命令结束用分号，好的代码习惯">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="SQL数据库学习总结">
+  <meta property="og:description" content="意义： 1.创建数据库的好处，控制多位用户同时访问的行为 2.数据库名称不能有空格 3.命令结束用分号，好的代码习惯">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-10-06T11:18:15+08:00">
+    <meta property="article:modified_time" content="2021-10-06T11:18:15+08:00">
+    <meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL数据库学习总结">
+<meta name="twitter:description" content="意义：
+1.创建数据库的好处，控制多位用户同时访问的行为
+2.数据库名称不能有空格
+3.命令结束用分号，好的代码习惯">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "SQL数据库学习总结",
+      "item": "https://xin5835.github.io/post/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SQL数据库学习总结",
+  "name": "SQL数据库学习总结",
+  "description": "意义： 1.创建数据库的好处，控制多位用户同时访问的行为 2.数据库名称不能有空格 3.命令结束用分号，好的代码习惯\n",
+  "keywords": [
+    "SQL"
+  ],
+  "articleBody": "意义： 1.创建数据库的好处，控制多位用户同时访问的行为 2.数据库名称不能有空格 3.命令结束用分号，好的代码习惯\n一、创建函数 1.创建数据库 create database #关系型数据库 / RDBMS /Relational Database Management System\nCREAT DATABASE gregs_list 创建表 creat table 和R的mutate函数很像\n第一列 第二列 doughnut_name doughnut_type blooberry#覆盆子 filled rockstar#摇滚明星 cruller#油条 CREAT TABLE doughnut_list ( doughnut_nameVARCHAR(10), #VARCHAR == variable character doughnut_typeVARCHAR(6) ); 数据类型：\n数据类型 解释 用法 CHARACTER/CHAR 必须加上数据的长度 CHAR–邮编/单个字符F或 M CHAR(1) DECJMAL/DEC 十进制 表示小数、百分比DEC(6,2)#6表示6位数，2表示两位小数，如5678.39 INTEGER/INT 整数 库存 BLOB 文本数据 一段文字 DATE/TIME/DATETIME 日期和时间 1.查看创建的表 DESC\nDESC my_contacts; # DESC == describe 2.使用数据库 use database\nUSE gregs_list 3.删除表及表中数据drop table\nDROP TABLE my_contacts eg:\nCREAT DATABASE gregs_list; USE gregs_list; CREAT TABLE my_contacts ( last_nameVACHAR(20), first_nameVARCHR(30), #not null == don't accept null email VARCHR(50) NOTNULL, birthday DATE, gender CHAR(1), profession VARCHAR(50), location VACHAR(50), status_VARCHAR(20), interests VARCHAR(20), seeking VARCHAR(100), cost DEC(4,2) NOTNULL DEFAULT 1.00 # 没有的值用1.00填充 ); 二、按行输入数据( INSERT INTO) INSERT INTIO your_table (column_name1, column_name2, ...) VALUES ('values1', 'value2', ...); eg: INSERT INTIO doughnut_purchases (donut_type, dozens, topping, location, price) VALUES ('jelly', 3, 'sprinkles', 'Grover\\' Mill' 3.50); # \\表示后面的是前面的一部分 \\ = '' 注释：INSERT语句加单引号—CHAR/VARCHAR/DATE/BLOB INSERT语句不加单引号—DEC/INT\n改变列表顺序：列名和数据值一起调整即可 省略列名：列名可以省略不写，数据值必须全部填入 省略部分列：对应的列名和数据值即可 没有值的列：只填写知道的列名和数据值 三、查询 SELECT 单引号( 字符和日期) 不用引号（数字） CHAR DEC VARCHAR INT DATE DATETIME/TME/ TIMESTAMP BLOB 通配符 NOT必须接在WHERE之后，但是和IN搭配例外\n符号 含义 eg \u003c\u003e 表示不等于 BETWEEN/ NOT BETWEEN 相当于\u003c=\u0026\u003e= SELECT drink_name FROM drink_info WHERE drink_name BETWEEN ‘G’ AND ‘P’ LIKE/NOT LIKE SELECT drink_name FROM drink_info WHERE NOT carbs BETWEEN 3 AND 5 %abc abc% 以abc结尾/以abc开头 AND / OR,用NOT搭配 且/或 SELECT * FROM easy_drinks WHERE NOT main = ‘soda’ AND NOT main = ‘iced tea’ ; IN/ NOT IN IN前面的字符在后面的集合中 SELECT date_time FROM black_book WHERE rating IN ( ‘innovative’, ‘fabulous’, ‘delightful’); SELECT * FROM my_contacts 条件查询\nSELECT * # * means all column FROM my_contacts WHERE first_name = 'Anne'; # = means is 结合查询\nSELECT location FROM doughnut_ratings WHERE type = 'plain glazed' AND rating = 10; SELECT location FROM doughnut_ratings WHERE type LIKE '%plain' # \"通配符%在前表示以plain结尾\" AND # \"AND结合两个where子句\"\" rating = 10; 用IS NULL选择NULL\nSELECT drink_name FROM drink_info WHERE calories IS NULL 四、DELETE AND UPDATE DELETE FROM clown_info WHERE activities = 'dancing'; 注释：1.不能删除列以及列中的值 2.可以删除一行或多行或所有行\n更改变量中的值 #INSERT INTO 和DELETE同时执行 ，与R差异大,这里的思路是先增加新行，然后删除旧的行\n# \"把表中所有yellow值改为gold\" INSERT INTO drink_info VALUES ('Blackthorn', 3, 8.4, 'gold', 'Y', 33), ('Greyhound', 4, 14, 'gold', 'Y', 50); DELETE FROM drink_info WHERE color = 'yellow'; 防止删错，用select确定真正想改变的记录（这样的方式并不高效）\n#1. \"选择要删除颜色为为黄色的行\" SELECT * FROM drink_info WHERE color = 'yellow'; #2. \"用insert插入新纪录\" INSERT INTO drink_info VALUES ('Blackthorn', 3, 8.4, 'gold', 'Y', 33), ('Greyhound', 4, 14, 'gold', 'Y', 50); #3.\"用delete删除旧记录\"\" DELETE FROM drink_info WHERE color = 'yellow'; 更高效的方式UPDATE SET #update不删除任何内容，只是替换旧记录\nUPDATE your_table SET first_column = 'glazed' second_column = 'plain glazed'; UPDATE my_contacts SET state = RIGHT (location, 2) # \"提取州字符串，并存储为state列\"\" 注释：1.UPDATE改变的是一列或者所有列， 2.可以更新一行或者多行，用where控制\nUPDATE doughnut_ratings SET type = 'glazed' # \"指定的新值\"\" WHERE type = 'plain glazed'; 优化的做法（运算符）\nUPDATE drink_info SET cost = cost+1 WHERE drink_name = 'Blue Moon' OR drink_name = 'Oh My Gosh' ; 是不是原子型数据要具体地看使用场景，对于外卖来说分割日期和时间/分割街道和门牌号码将会是灾难的。因为不需要单独查询门牌号码 1.你的表在表述什么事物？ 2.以何种方式表述事物？=》便于查询 3.列是否包含原子型数据=》可以让查询简单又直逼要害 特点：一列中不会有多个类型/不会有多个列表示一个类型的数据\n主键（primary key）：每行中独一无二的识别项（虚构的如ID，或者真实的如车牌号，身份证号等） 1.主键不可以为NULL 2.插入新记录必须指定主键值，否则主键值有可能为NULL 3.主键必须简洁且不可修改\nCREAT TABLE doughnut_list # \"表名 doughnut甜甜圈\"\" （ contact_id INT NOT NULL AUTO_INCREMENT, #AUTO_INCREMENT表示自动为该列填入整数 doughnut_nameVARCHAR(10) default NULL, doughnut_typeVARCHAR(6) default NULL， PRIMARY KEY (contact_id) #设定主键 ); 高效添加主键ALTER TABLE\nUSE gregs_list ALTER TABLE my_contacts ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT ADD PRIMARY KEY(contact_id) FIRST/LAST/SECOND; #remove primary key ALTER TABLE my_contacts DROP PRIMARY KEY; 修改表ALTER TABLE，以列的方式，加上where就可以改行\n修改列名\nALTER TABLE projekts #old name RENAME TO project_list; #new name 修改列名和类型， ALTER CHANGE—-可改变列的类型\nALTER TABLE project_list CHANGE COLUMN number proj_id INT NOT NULL AUTO_INCREMENT CHANGE COLUMN contractoronjob con_name VARCHAR(30) #\"contractoronjob 是旧名称， con_name是新名称\"\" ADD PRIMARY KEY (proj_id ) 修改列类型，列名不变 ALTER MODIFY\nALTER TABLE project_list MODIFY COLUMN proj_desc VARCHAR(120) 删除列表\nALTER TABLE project_list DROP COLUMN start_date -\"start_date为要从中移除的列\"\" 案例练习：\nhooptie\ncolor year make mo howmuch siliver 1998 Porsche Boxter 17992.540 NULL 2000 Jaguar XJ 15995 red 2002 Cadilac Escalade 40215.9 car_table\ncar_id VIN make model color year price 1 RANKLK66N33G213481 Porsche Boxter siliver 1998 17992.54 2 SAEDA44B175B04113 Jaguar XJ NULL 2000 15995.00 3 3GYEK63NT2G280668 Cadilac Escalade red 2002 40215.90 代码：\nALTER TABLE hooptie # \"修改hooptie列表\" RENAME TO car_table, # \"表名改为car_table \" ADD COLUMN car_id INT NOT NULL AUTO_INCREMENT FIRST, # \"添加ID列，该列必须为整数且无NULL \" ADD PRIMARY KEY(car_id), # \"将ID列设为主键\" ADD COLUMN VIN VARCHAR(16) AFTER car_id, # \"添加vin列\" CHANGE COLUMN mo model VARCHAR(20), MODIFY COLUMN color AFTER model, MODIFY COLUMN year SIXTH, CHANGE COLUMN how much price DECIMAL(7.2); 字符串函数：\nUPDATE my_table SET new_column = CASE WHEN column1 = value1 # \"当column1列的值等于value1时，将其值设定为newvalue1\" THEN newvalue1 WHEN column2 = value2 THEN newvalue2 ELSE newvalue3 # \"ELSE：任何不符合上述条件的记录都会被改为new value3\" END; 排序ORDER BY —–DESC/ASC (one column ,more column)\nSUM/AVG/MIN/MAX SELECT SUM(sales) FROM cookie_sales WHERE first_name = ‘Nicole’ ;\nLIMIT/OFFSET LIMIT19, 10 意思是查询第20-29名\nCOUNT,计算天数 DISTINCT \u0026 COUNT\n分组求和 /求平均AVG/MIN/MAX\nSELECT SUM(sales) FROM cookie_sales GROUP BY first_name ORDER BY SUM(sales) DESC; SELECT COUNT(DISTICNT sale_date) FROM cookie_sales ; 进阶查询：兴趣标签字符串\nSELECT * FROM my_contacts WHERE gender = 'F' AND status = 'single' AND state = 'MA' AND seeking LIKE '%single M%' AND birthday \u003e '1950-08-28' AND birthday \u003c '1960-08-28' AND SUBSTRING_INDEX(interests,',',1) 跳出一张表： 遇事不决，多表联结 ———— 沃茨基·硕德\nUPDATE my_counts SET interests = SUBSTR(interests, LENGTH(interest1)+2); 一个表变成两个表第一范式1NF\n移除不具有原子性的列，并储存至新表 添加识别新表中每个观测的列（外键foreign key），外键的值可以为空值，外键约束（父表，子表） 第二范式2NF：已经符合1NF的表只要其所有列都是主键的一部分，也就符合2NF\n先符合1NF 没有部分函数依赖性 第三范式：如果你的表有人工主键且没有组合主键，则符合2NF\n符合2NF 没有传递函数依赖性 CREAT TABLE interests( int_id INT NOT NULL_INCREMENT PRIMARY KEY, # \"加入主键\" interest VARCHAR(50) NOT NULL, contact_id INT NOT NULL, # \"创建外键索引\" CONSTRAINT my_contacts_contact_id_ # \"称为CONSTRAINT，告知键的来源（my_contacts），键的名称（contact_id）\" FOREIGN KEY(contact_id) # \"设定外键\"\" REFERENCES my_contacts(contact_id) ); 表间的关系： 一对一（用得少）\n一对多（A表的某条记录对应B多条，B的每一条记录对应A每一条记录）\n多对多（女士们和鞋的例子） 把多对多转化为一对多\n多对多：用JUNCTION TABLE储存原始表的主键 组合键是有多个数据列构成的主键，组合各列后形成的具有唯一性的主键\n",
+  "wordCount" : "834",
+  "inLanguage": "en",
+  "datePublished": "2021-10-06T11:18:15+08:00",
+  "dateModified": "2021-10-06T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      SQL数据库学习总结
+    </h1>
+    <div class="post-meta"><span title='2021-10-06 11:18:15 +0800 CST'>October 6, 2021</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%84%8f%e4%b9%89" aria-label="意义：">意义：</a></li>
+                <li>
+                    <a href="#%e4%b8%80%e5%88%9b%e5%bb%ba%e5%87%bd%e6%95%b0" aria-label="一、创建函数">一、创建函数</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e6%8c%89%e8%a1%8c%e8%be%93%e5%85%a5%e6%95%b0%e6%8d%ae-insert-into" aria-label="二、按行输入数据( INSERT INTO)">二、按行输入数据( INSERT INTO)</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e6%9f%a5%e8%af%a2-select" aria-label="三、查询 SELECT">三、查询 SELECT</a></li>
+                <li>
+                    <a href="#%e5%9b%9bdelete-and-update" aria-label="四、DELETE AND UPDATE">四、DELETE AND UPDATE</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="意义">意义：<a hidden class="anchor" aria-hidden="true" href="#意义">#</a></h2>
+<p>1.创建数据库的好处，控制多位用户同时访问的行为
+2.数据库名称不能有空格
+3.命令结束用分号，好的代码习惯</p>
+<h2 id="一创建函数">一、创建函数<a hidden class="anchor" aria-hidden="true" href="#一创建函数">#</a></h2>
+<p>1.创建数据库 create database   #关系型数据库 / RDBMS /Relational Database Management System</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">DATABASE</span> gregs_list
+</span></span></code></pre></div><p>创建表 creat table 和R的mutate函数很像</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">第一列</th>
+          <th style="text-align: center">第二列</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">doughnut_name</td>
+          <td style="text-align: center">doughnut_type</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">blooberry#覆盆子</td>
+          <td style="text-align: center">filled</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">rockstar#摇滚明星</td>
+          <td style="text-align: center">cruller#油条</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> doughnut_list              
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>   doughnut_nameVARCHAR(<span style="color:#ae81ff">10</span>),           <span style="color:#f92672">#</span>VARCHAR <span style="color:#f92672">==</span> <span style="color:#66d9ef">variable</span> character 
+</span></span><span style="display:flex;"><span>   doughnut_typeVARCHAR(<span style="color:#ae81ff">6</span>)             
+</span></span><span style="display:flex;"><span>);     
+</span></span></code></pre></div><p>数据类型：</p>
+<table>
+  <thead>
+      <tr>
+          <th>数据类型</th>
+          <th>解释</th>
+          <th>用法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CHARACTER/CHAR</td>
+          <td>必须加上数据的长度</td>
+          <td>CHAR&ndash;邮编/单个字符F或 M  CHAR(1)</td>
+      </tr>
+      <tr>
+          <td>DECJMAL/DEC</td>
+          <td>十进制</td>
+          <td>表示小数、百分比DEC(6,2)#6表示6位数，2表示两位小数，如5678.39</td>
+      </tr>
+      <tr>
+          <td>INTEGER/INT</td>
+          <td>整数</td>
+          <td>库存</td>
+      </tr>
+      <tr>
+          <td>BLOB</td>
+          <td>文本数据</td>
+          <td>一段文字</td>
+      </tr>
+      <tr>
+          <td>DATE/TIME/DATETIME</td>
+          <td>日期和时间</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>1.查看创建的表 DESC</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DESC</span> my_contacts;     <span style="color:#f92672">#</span> <span style="color:#66d9ef">DESC</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">describe</span>
+</span></span></code></pre></div><p>2.使用数据库 use database</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE gregs_list
+</span></span></code></pre></div><p>3.删除表及表中数据drop table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> my_contacts
+</span></span></code></pre></div><p>eg:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">DATABASE</span> gregs_list;
+</span></span><span style="display:flex;"><span>USE gregs_list;
+</span></span><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> my_contacts
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>last_nameVACHAR(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>first_nameVARCHR(<span style="color:#ae81ff">30</span>),       <span style="color:#f92672">#</span><span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> don<span style="color:#e6db74">&#39;t accept  null    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">email VARCHR(50) NOTNULL,    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">birthday DATE,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gender CHAR(1),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">profession VARCHAR(50),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">location VACHAR(50),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">status_VARCHAR(20),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">interests VARCHAR(20),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">seeking VARCHAR(100),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cost DEC(4,2) NOTNULL DEFAULT 1.00    # 没有的值用1.00填充
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">);
+</span></span></span></code></pre></div><h2 id="二按行输入数据-insert-into">二、按行输入数据( INSERT INTO)<a hidden class="anchor" aria-hidden="true" href="#二按行输入数据-insert-into">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> INTIO your_table
+</span></span><span style="display:flex;"><span>(column_name1, column_name2, ...)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;values1&#39;</span>, <span style="color:#e6db74">&#39;value2&#39;</span>, ...);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eg:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> INTIO doughnut_purchases
+</span></span><span style="display:flex;"><span>(donut_type, dozens, 
+</span></span><span style="display:flex;"><span>topping, <span style="color:#66d9ef">location</span>, price)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;jelly&#39;</span>, <span style="color:#ae81ff">3</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;sprinkles&#39;</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Grover\&#39;</span> Mill<span style="color:#e6db74">&#39; 3.50);  # \表示后面的是前面的一部分 \ = &#39;&#39;
+</span></span></span></code></pre></div><p>注释：INSERT语句加单引号&mdash;CHAR/VARCHAR/DATE/BLOB
+INSERT语句不加单引号&mdash;DEC/INT</p>
+<ol>
+<li>改变列表顺序：列名和数据值一起调整即可</li>
+<li>省略列名：列名可以省略不写，数据值必须全部填入</li>
+<li>省略部分列：对应的列名和数据值即可</li>
+<li>没有值的列：只填写知道的列名和数据值</li>
+</ol>
+<h2 id="三查询-select">三、查询 SELECT<a hidden class="anchor" aria-hidden="true" href="#三查询-select">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>单引号( 字符和日期)</th>
+          <th>不用引号（数字）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CHAR</td>
+          <td>DEC</td>
+      </tr>
+      <tr>
+          <td>VARCHAR</td>
+          <td>INT</td>
+      </tr>
+      <tr>
+          <td>DATE</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>DATETIME/TME/ TIMESTAMP</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>BLOB</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>通配符 NOT必须接在WHERE之后，但是和IN搭配例外</p>
+<table>
+  <thead>
+      <tr>
+          <th>符号</th>
+          <th>含义</th>
+          <th>eg</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>&lt;&gt;</td>
+          <td>表示不等于</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>BETWEEN/ NOT BETWEEN</td>
+          <td>相当于&lt;=&amp;&gt;=</td>
+          <td>SELECT drink_name FROM  drink_info WHERE drink_name BETWEEN &lsquo;G&rsquo;  AND &lsquo;P&rsquo;</td>
+      </tr>
+      <tr>
+          <td>LIKE/NOT LIKE</td>
+          <td></td>
+          <td>SELECT drink_name FROM  drink_info WHERE NOT carbs BETWEEN 3 AND 5</td>
+      </tr>
+      <tr>
+          <td>%abc   abc%</td>
+          <td>以abc结尾/以abc开头</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>AND /  OR,用NOT搭配</td>
+          <td>且/或</td>
+          <td>SELECT * FROM  　easy_drinks WHERE NOT main = &lsquo;soda&rsquo; AND NOT main = &lsquo;iced tea&rsquo; ;</td>
+      </tr>
+      <tr>
+          <td>IN/ NOT IN</td>
+          <td>IN前面的字符在后面的集合中</td>
+          <td>SELECT date_time FROM  black_book WHERE rating IN ( &lsquo;innovative&rsquo;, &lsquo;fabulous&rsquo;, &lsquo;delightful&rsquo;);</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>        
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> my_contacts
+</span></span></code></pre></div><p>条件查询</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>                     <span style="color:#f92672">#</span> <span style="color:#f92672">*</span> means <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">column</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> my_contacts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> first_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Anne&#39;</span>;   <span style="color:#f92672">#</span> <span style="color:#f92672">=</span> means <span style="color:#66d9ef">is</span>
+</span></span></code></pre></div><p>结合查询</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">location</span>                   
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> doughnut_ratings
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;plain glazed&#39;</span>   
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span>                         
+</span></span><span style="display:flex;"><span>rating <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">location</span>                   
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> doughnut_ratings
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%plain&#39;</span>   <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;通配符%在前表示以plain结尾&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span>                         <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;AND结合两个where子句&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">rating = 10;
+</span></span></span></code></pre></div><p>用IS NULL选择NULL</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> drink_name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> drink_info
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
+</span></span><span style="display:flex;"><span>calories <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NULL</span>
+</span></span></code></pre></div><h2 id="四delete-and-update">四、DELETE AND UPDATE<a hidden class="anchor" aria-hidden="true" href="#四delete-and-update">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> clown_info
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
+</span></span><span style="display:flex;"><span>activities <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dancing&#39;</span>;
+</span></span></code></pre></div><p>注释：1.不能删除列以及列中的值
+2.可以删除一行或多行或所有行</p>
+<p>更改变量中的值 #INSERT INTO 和DELETE同时执行 ，与R差异大,这里的思路是先增加新行，然后删除旧的行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;把表中所有yellow值改为gold&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> drink_info  <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Blackthorn&#39;</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">33</span>),
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;Greyhound&#39;</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">14</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">50</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> drink_info <span style="color:#66d9ef">WHERE</span> color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;yellow&#39;</span>;
+</span></span></code></pre></div><p>防止删错，用select确定真正想改变的记录（这样的方式并不高效）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">1</span>. <span style="color:#e6db74">&#34;选择要删除颜色为为黄色的行&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> drink_info
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
+</span></span><span style="display:flex;"><span>color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;yellow&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">2</span>. <span style="color:#e6db74">&#34;用insert插入新纪录&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> drink_info  <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Blackthorn&#39;</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">33</span>),
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;Greyhound&#39;</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">14</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">50</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">3</span>.<span style="color:#e6db74">&#34;用delete删除旧记录&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DELETE FROM drink_info WHERE color = &#39;yellow&#39;;
+</span></span></span></code></pre></div><p>更高效的方式UPDATE SET #update不删除任何内容，只是替换旧记录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> your_table
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> first_column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;glazed&#39;</span>   
+</span></span><span style="display:flex;"><span>second_column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;plain glazed&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> my_contacts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">RIGHT</span> (<span style="color:#66d9ef">location</span>, <span style="color:#ae81ff">2</span>)   <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;提取州字符串，并存储为state列&#34;&#34;
+</span></span></span></code></pre></div><p>注释：1.UPDATE改变的是一列或者所有列，
+2.可以更新一行或者多行，用where控制</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> doughnut_ratings
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;glazed&#39;</span>       <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;指定的新值&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">WHERE type = &#39;plain glazed&#39;;
+</span></span></span></code></pre></div><p>优化的做法（运算符）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> drink_info
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> cost <span style="color:#f92672">=</span> cost<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> 
+</span></span><span style="display:flex;"><span>drink_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Blue Moon&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">OR</span>
+</span></span><span style="display:flex;"><span>drink_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Oh My Gosh&#39;</span>
+</span></span><span style="display:flex;"><span>;
+</span></span></code></pre></div><p>是不是原子型数据要具体地看使用场景，对于外卖来说分割日期和时间/分割街道和门牌号码将会是灾难的。因为不需要单独查询门牌号码
+1.你的表在表述什么事物？
+2.以何种方式表述事物？=》便于查询
+3.列是否包含原子型数据=》可以让查询简单又直逼要害
+特点：一列中不会有多个类型/不会有多个列表示一个类型的数据</p>
+<p>主键（primary key）：每行中独一无二的识别项（虚构的如ID，或者真实的如车牌号，身份证号等）
+1.主键不可以为NULL
+2.插入新记录必须指定主键值，否则主键值有可能为NULL
+3.主键必须简洁且不可修改</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> doughnut_list   <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;表名  doughnut甜甜圈&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">（
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> contact_id INT NOT NULL AUTO_INCREMENT,  #AUTO_INCREMENT表示自动为该列填入整数
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> doughnut_nameVARCHAR(10) default NULL, 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> doughnut_typeVARCHAR(6) default NULL，
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> PRIMARY KEY (contact_id)  #设定主键 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">);
+</span></span></span></code></pre></div><p>高效添加主键ALTER TABLE</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE gregs_list
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> my_contacts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> contact_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>(contact_id) <span style="color:#66d9ef">FIRST</span><span style="color:#f92672">/</span><span style="color:#66d9ef">LAST</span><span style="color:#f92672">/</span><span style="color:#66d9ef">SECOND</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>remove <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> my_contacts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>;
+</span></span></code></pre></div><p>修改表ALTER TABLE，以列的方式，加上where就可以改行</p>
+<p>修改列名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  projekts     <span style="color:#f92672">#</span><span style="color:#66d9ef">old</span> name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RENAME</span> <span style="color:#66d9ef">TO</span> project_list;    <span style="color:#f92672">#</span><span style="color:#66d9ef">new</span> name 
+</span></span></code></pre></div><p>修改列名和类型， ALTER CHANGE&mdash;-可改变列的类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  project_list
+</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> number proj_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT
+</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> contractoronjob con_name VARCHAR(<span style="color:#ae81ff">30</span>)  <span style="color:#f92672">#</span><span style="color:#e6db74">&#34;contractoronjob 是旧名称， con_name是新名称&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ADD PRIMARY KEY (proj_id )
+</span></span></span></code></pre></div><p>修改列类型，列名不变  ALTER MODIFY</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  project_list
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> proj_desc VARCHAR(<span style="color:#ae81ff">120</span>)
+</span></span></code></pre></div><p>删除列表</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  project_list
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">COLUMN</span>  start_date   <span style="color:#f92672">-</span><span style="color:#e6db74">&#34;start_date为要从中移除的列&#34;&#34;
+</span></span></span></code></pre></div><p>案例练习：</p>
+<p><strong>hooptie</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>color</th>
+          <th>year</th>
+          <th>make</th>
+          <th>mo</th>
+          <th>howmuch</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>siliver</td>
+          <td>1998</td>
+          <td>Porsche</td>
+          <td>Boxter</td>
+          <td>17992.540</td>
+      </tr>
+      <tr>
+          <td>NULL</td>
+          <td>2000</td>
+          <td>Jaguar</td>
+          <td>XJ</td>
+          <td>15995</td>
+      </tr>
+      <tr>
+          <td>red</td>
+          <td>2002</td>
+          <td>Cadilac</td>
+          <td>Escalade</td>
+          <td>40215.9</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>car_table</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>car_id</th>
+          <th>VIN</th>
+          <th>make</th>
+          <th>model</th>
+          <th>color</th>
+          <th>year</th>
+          <th>price</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>RANKLK66N33G213481</td>
+          <td>Porsche</td>
+          <td>Boxter</td>
+          <td>siliver</td>
+          <td>1998</td>
+          <td>17992.54</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>SAEDA44B175B04113</td>
+          <td>Jaguar</td>
+          <td>XJ</td>
+          <td>NULL</td>
+          <td>2000</td>
+          <td>15995.00</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>3GYEK63NT2G280668</td>
+          <td>Cadilac</td>
+          <td>Escalade</td>
+          <td>red</td>
+          <td>2002</td>
+          <td>40215.90</td>
+      </tr>
+  </tbody>
+</table>
+<p>代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> hooptie                                     <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;修改hooptie列表&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RENAME</span> <span style="color:#66d9ef">TO</span> car_table,                                    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;表名改为car_table &#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> car_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT <span style="color:#66d9ef">FIRST</span>,    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;添加ID列，该列必须为整数且无NULL &#34;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>(car_id),                                <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;将ID列设为主键&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> VIN VARCHAR(<span style="color:#ae81ff">16</span>) <span style="color:#66d9ef">AFTER</span> car_id,                <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;添加vin列&#34;</span>
+</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> mo model VARCHAR(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> color <span style="color:#66d9ef">AFTER</span> model,
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#66d9ef">year</span> SIXTH,
+</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> how much price DECIMAL(<span style="color:#ae81ff">7</span>.<span style="color:#ae81ff">2</span>);
+</span></span></code></pre></div><p>字符串函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> my_table
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> new_column <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CASE</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">WHEN</span> column1 <span style="color:#f92672">=</span> value1    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;当column1列的值等于value1时，将其值设定为newvalue1&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">THEN</span> newvalue1
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHEN</span> column2 <span style="color:#f92672">=</span> value2
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">THEN</span> newvalue2
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">ELSE</span> newvalue3            <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;ELSE：任何不符合上述条件的记录都会被改为new value3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>;
+</span></span></code></pre></div><p>排序ORDER BY &mdash;&ndash;DESC/ASC  (one column ,more column)</p>
+<p>SUM/AVG/MIN/MAX   SELECT SUM(sales) FROM cookie_sales WHERE first_name = &lsquo;Nicole&rsquo; ;</p>
+<p>LIMIT/OFFSET LIMIT19, 10 意思是查询第20-29名</p>
+<p>COUNT,计算天数 DISTINCT &amp; COUNT</p>
+<p>分组求和 /求平均AVG/MIN/MAX</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(sales) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cookie_sales 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> first_name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">SUM</span>(sales) <span style="color:#66d9ef">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(DISTICNT sale_date) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cookie_sales ;
+</span></span></code></pre></div><p>进阶查询：兴趣标签字符串</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> my_contacts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;F&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> status <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;single&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;MA&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> seeking <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%single M%&#39;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> birthday <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;1950-08-28&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> birthday <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;1960-08-28&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> SUBSTRING_INDEX(interests,<span style="color:#e6db74">&#39;,&#39;</span>,<span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><p>跳出一张表： 遇事不决，多表联结 ———— 沃茨基·硕德</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> my_counts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> interests <span style="color:#f92672">=</span> SUBSTR(interests, <span style="color:#66d9ef">LENGTH</span>(interest1)<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+</span></span></code></pre></div><p>一个表变成两个表第一范式1NF</p>
+<ol>
+<li>移除不具有原子性的列，并储存至新表</li>
+<li>添加识别新表中每个观测的列（外键foreign key），外键的值可以为空值，外键约束（父表，子表）</li>
+</ol>
+<p>第二范式2NF：已经符合1NF的表只要其所有列都是主键的一部分，也就符合2NF</p>
+<ol>
+<li>先符合1NF</li>
+<li>没有部分函数依赖性</li>
+</ol>
+<p>第三范式：如果你的表有人工主键且没有组合主键，则符合2NF</p>
+<ol>
+<li>符合2NF</li>
+<li>没有传递函数依赖性</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> interests(
+</span></span><span style="display:flex;"><span>int_id INT <span style="color:#66d9ef">NOT</span> NULL_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,  <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;加入主键&#34;</span>
+</span></span><span style="display:flex;"><span>interest VARCHAR(<span style="color:#ae81ff">50</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>contact_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,                    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;创建外键索引&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CONSTRAINT</span> my_contacts_contact_id_          <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;称为CONSTRAINT，告知键的来源（my_contacts），键的名称（contact_id）&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span>(contact_id)                     <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;设定外键&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">REFERENCES my_contacts(contact_id)          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">);                                         
+</span></span></span></code></pre></div><p>表间的关系：
+一对一（用得少）</p>
+<p>一对多（A表的某条记录对应B多条，B的每一条记录对应A每一条记录）</p>
+<p>多对多（女士们和鞋的例子）
+把多对多转化为一对多</p>
+<p>多对多：用JUNCTION TABLE储存原始表的主键
+组合键是有多个数据列构成的主键，组合各列后形成的具有唯一性的主键</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/sql/">SQL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>机器学习_scikit_learn</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/markdown%E8%AF%AD%E6%B3%95/">
+    <span class="title">Next »</span>
+    <br>
+    <span>markdown语法</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

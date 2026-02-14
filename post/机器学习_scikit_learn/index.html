@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>机器学习_scikit_learn | Robert&#39;s Blog</title>
+<meta name="keywords" content="Machine Learning">
+<meta name="description" content="机器学习_scikit_learn演示。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="机器学习_scikit_learn">
+  <meta property="og:description" content="机器学习_scikit_learn演示。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-10-20T11:18:15+08:00">
+    <meta property="article:modified_time" content="2021-10-20T11:18:15+08:00">
+    <meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习_scikit_learn">
+<meta name="twitter:description" content="机器学习_scikit_learn演示。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "机器学习_scikit_learn",
+      "item": "https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "机器学习_scikit_learn",
+  "name": "机器学习_scikit_learn",
+  "description": "机器学习_scikit_learn演示。\n",
+  "keywords": [
+    "Machine Learning"
+  ],
+  "articleBody": "机器学习_scikit_learn演示。\n1.机器学习的分类 1.1有监督学习 ：特征(A)和标签(vector_b)之间建模 分类：预测离散标签 特征 1、特征 2……特征 n → 垃圾邮件关键词与短语出现的频次归一化向量(“Viagra” “Nigerian prince”等)。\n标签 →“垃圾邮件”或“普通邮件”。\n高斯朴素贝叶斯分类 支持向量机 随机森林分类 回归：预测连续标签 特征 1、特征 2……特征 n → 具有若干波长或颜色的星系的亮度。\n标签 → 星系的距离或红移(redshift)。\n1.2无监督学习:不带任何标签 聚类:为无标签数据添加标签 ——数据被聚类算法自动分成若干离散的组别。 k-means ：簇中的每个 点到该中心的总距离最短 高斯混合模型 谱聚类 降维:推断无标签数据的结构 主成分分析 Isomap 算法 局部线性嵌入算法 步骤：\n样本数量少于50个，继续获取更多数据 多于50个样本数据后，若预测变量属于标签类数据进入有监督学习；若无标签进入无监督学习 有监督学习，若预测变量是离散型，分类问题；若预测变量是连续型，回归问题 无监督学习：不带任何标签。为无标签数据添加标签，聚类；推断无标签数据的结构，降维 2.Scikit-Learn回归模型演示 从 Scikit-Learn 中导入评估器类。 from sklearn.linear_model import LinearRegression 模型超参数(hyperparameter)。 model = LinearRegression(fit_intercept=True) model 获取特征矩阵和目标数组。 import matplotlib.pyplot as plt import numpy as np rng = np.random.RandomState(42) x = 10 * rng.rand(50) y = 2 * x - 1 + rng.randn(50) plt.scatter(x, y); X = x[:, np.newaxis] X.shape 调用模型实例的 fit() 方法对数据进行拟合。 model.fit(X, y) model.coef_ model.intercept_ 对新数据应用模型: # 将这些x值转换成[n_samples, n_features]的特征矩阵 xfit = np.linspace(-1, 11) Xfit = xfit[:, np.newaxis] yfit = model.predict(Xfit) # 把原始数据和拟合结果可视化出来 plt.scatter(x, y) plt.plot(xfit, yfit) 6.监督学习模型，predict() 预测新数据的标签; 无监督学习模型，使用 transform() 或 predict() 转换或推断数据的性质。\n",
+  "wordCount" : "127",
+  "inLanguage": "en",
+  "datePublished": "2021-10-20T11:18:15+08:00",
+  "dateModified": "2021-10-20T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      机器学习_scikit_learn
+    </h1>
+    <div class="post-meta"><span title='2021-10-20 11:18:15 +0800 CST'>October 20, 2021</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0%e7%9a%84%e5%88%86%e7%b1%bb" aria-label="1.机器学习的分类">1.机器学习的分类</a><ul>
+                        
+                <li>
+                    <a href="#11%e6%9c%89%e7%9b%91%e7%9d%a3%e5%ad%a6%e4%b9%a0-%e7%89%b9%e5%be%81a%e5%92%8c%e6%a0%87%e7%ad%bevector_b%e4%b9%8b%e9%97%b4%e5%bb%ba%e6%a8%a1" aria-label="1.1有监督学习 ：特征(A)和标签(vector_b)之间建模">1.1有监督学习 ：特征(A)和标签(vector_b)之间建模</a><ul>
+                        
+                <li>
+                    <a href="#%e5%88%86%e7%b1%bb%e9%a2%84%e6%b5%8b%e7%a6%bb%e6%95%a3%e6%a0%87%e7%ad%be" aria-label="分类：预测离散标签">分类：预测离散标签</a></li>
+                <li>
+                    <a href="#%e5%9b%9e%e5%bd%92%e9%a2%84%e6%b5%8b%e8%bf%9e%e7%bb%ad%e6%a0%87%e7%ad%be" aria-label="回归：预测连续标签">回归：预测连续标签</a></li></ul>
+                </li>
+                <li>
+                    <a href="#12%e6%97%a0%e7%9b%91%e7%9d%a3%e5%ad%a6%e4%b9%a0%e4%b8%8d%e5%b8%a6%e4%bb%bb%e4%bd%95%e6%a0%87%e7%ad%be" aria-label="1.2无监督学习:不带任何标签">1.2无监督学习:不带任何标签</a><ul>
+                        
+                <li>
+                    <a href="#%e8%81%9a%e7%b1%bb%e4%b8%ba%e6%97%a0%e6%a0%87%e7%ad%be%e6%95%b0%e6%8d%ae%e6%b7%bb%e5%8a%a0%e6%a0%87%e7%ad%be-%e6%95%b0%e6%8d%ae%e8%a2%ab%e8%81%9a%e7%b1%bb%e7%ae%97%e6%b3%95%e8%87%aa%e5%8a%a8%e5%88%86%e6%88%90%e8%8b%a5%e5%b9%b2%e7%a6%bb%e6%95%a3%e7%9a%84%e7%bb%84%e5%88%ab" aria-label="聚类:为无标签数据添加标签 ——数据被聚类算法自动分成若干离散的组别。">聚类:为无标签数据添加标签 ——数据被聚类算法自动分成若干离散的组别。</a></li>
+                <li>
+                    <a href="#%e9%99%8d%e7%bb%b4%e6%8e%a8%e6%96%ad%e6%97%a0%e6%a0%87%e7%ad%be%e6%95%b0%e6%8d%ae%e7%9a%84%e7%bb%93%e6%9e%84" aria-label="降维:推断无标签数据的结构">降维:推断无标签数据的结构</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#2scikit-learn%e5%9b%9e%e5%bd%92%e6%a8%a1%e5%9e%8b%e6%bc%94%e7%a4%ba" aria-label="2.Scikit-Learn回归模型演示">2.Scikit-Learn回归模型演示</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>机器学习_scikit_learn演示。</p>
+<h1 id="1机器学习的分类">1.机器学习的分类<a hidden class="anchor" aria-hidden="true" href="#1机器学习的分类">#</a></h1>
+<h2 id="11有监督学习-特征a和标签vector_b之间建模">1.1有监督学习 ：特征(A)和标签(vector_b)之间建模<a hidden class="anchor" aria-hidden="true" href="#11有监督学习-特征a和标签vector_b之间建模">#</a></h2>
+<h3 id="分类预测离散标签">分类：预测离散标签<a hidden class="anchor" aria-hidden="true" href="#分类预测离散标签">#</a></h3>
+<blockquote>
+<p>特征 1、特征 2&hellip;&hellip;特征 n → 垃圾邮件关键词与短语出现的频次归一化向量(“Viagra” “Nigerian prince”等)。<br>
+标签 →“垃圾邮件”或“普通邮件”。</p>
+</blockquote>
+<ul>
+<li>高斯朴素贝叶斯分类</li>
+<li>支持向量机</li>
+<li>随机森林分类</li>
+</ul>
+<h3 id="回归预测连续标签">回归：预测连续标签<a hidden class="anchor" aria-hidden="true" href="#回归预测连续标签">#</a></h3>
+<blockquote>
+<p>特征 1、特征 2&hellip;&hellip;特征 n → 具有若干波长或颜色的星系的亮度。<br>
+标签 → 星系的距离或红移(redshift)。</p>
+</blockquote>
+<h2 id="12无监督学习不带任何标签">1.2无监督学习:不带任何标签<a hidden class="anchor" aria-hidden="true" href="#12无监督学习不带任何标签">#</a></h2>
+<h3 id="聚类为无标签数据添加标签-数据被聚类算法自动分成若干离散的组别">聚类:为无标签数据添加标签 ——数据被聚类算法自动分成若干离散的组别。<a hidden class="anchor" aria-hidden="true" href="#聚类为无标签数据添加标签-数据被聚类算法自动分成若干离散的组别">#</a></h3>
+<ul>
+<li>k-means ：簇中的每个 点到该中心的总距离最短</li>
+<li>高斯混合模型</li>
+<li>谱聚类</li>
+</ul>
+<h3 id="降维推断无标签数据的结构">降维:推断无标签数据的结构<a hidden class="anchor" aria-hidden="true" href="#降维推断无标签数据的结构">#</a></h3>
+<ul>
+<li>主成分分析</li>
+<li>Isomap 算法</li>
+<li>局部线性嵌入算法</li>
+</ul>
+<p><img alt="machine_learning" loading="lazy" src="/images/ml_map.png"></p>
+<p>步骤：</p>
+<ol>
+<li>样本数量少于50个，继续获取更多数据</li>
+<li>多于50个样本数据后，若预测变量属于标签类数据进入有监督学习；若无标签进入无监督学习</li>
+<li>有监督学习，若预测变量是离散型，分类问题；若预测变量是连续型，回归问题</li>
+<li>无监督学习：不带任何标签。为无标签数据添加标签，聚类；推断无标签数据的结构，降维</li>
+</ol>
+<h1 id="2scikit-learn回归模型演示">2.Scikit-Learn回归模型演示<a hidden class="anchor" aria-hidden="true" href="#2scikit-learn回归模型演示">#</a></h1>
+<ol>
+<li>从 Scikit-Learn 中导入评估器类。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LinearRegression
+</span></span></code></pre></div><ol start="2">
+<li>模型超参数(hyperparameter)。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> LinearRegression(fit_intercept<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>model
+</span></span></code></pre></div><ol start="3">
+<li>获取特征矩阵和目标数组。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rng <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>RandomState(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> rng<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> rng<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(x, y);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> x[:, np<span style="color:#f92672">.</span>newaxis]
+</span></span><span style="display:flex;"><span>X<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><p><img alt="散点图" loading="lazy" src="/images/scatter.png"></p>
+<ol start="4">
+<li>调用模型实例的 fit() 方法对数据进行拟合。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>coef_
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>intercept_
+</span></span></code></pre></div><ol start="5">
+<li>对新数据应用模型:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 将这些x值转换成[n_samples, n_features]的特征矩阵</span>
+</span></span><span style="display:flex;"><span>xfit <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">11</span>)
+</span></span><span style="display:flex;"><span>Xfit <span style="color:#f92672">=</span> xfit[:, np<span style="color:#f92672">.</span>newaxis]
+</span></span><span style="display:flex;"><span>yfit <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(Xfit)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 把原始数据和拟合结果可视化出来</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(x, y)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(xfit, yfit)
+</span></span></code></pre></div><p><img alt="模型拟合" loading="lazy" src="/images/scatter_re.png"></p>
+<p>6.监督学习模型，predict() 预测新数据的标签; 无监督学习模型，使用 transform() 或 predict() 转换或推断数据的性质。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/machine-learning/">Machine Learning</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>卡方检验</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/sql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+    <span class="title">Next »</span>
+    <br>
+    <span>SQL数据库学习总结</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

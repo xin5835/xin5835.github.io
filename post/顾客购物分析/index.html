@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>顾客购物分析 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Python">
+<meta name="description" content="顾客购物数据清洗、可视化和聚类分析.
+可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="顾客购物分析">
+  <meta property="og:description" content="顾客购物数据清洗、可视化和聚类分析.
+可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-12-28T11:18:15+08:00">
+    <meta property="article:modified_time" content="2022-12-28T11:18:15+08:00">
+    <meta property="article:tag" content="Python">
+    <meta property="og:image" content="https://xin5835.github.io/images/RepeatCustomer.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xin5835.github.io/images/RepeatCustomer.jpeg">
+<meta name="twitter:title" content="顾客购物分析">
+<meta name="twitter:description" content="顾客购物数据清洗、可视化和聚类分析.
+可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "顾客购物分析",
+      "item": "https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "顾客购物分析",
+  "name": "顾客购物分析",
+  "description": "顾客购物数据清洗、可视化和聚类分析.\n可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)\n",
+  "keywords": [
+    "Python"
+  ],
+  "articleBody": "顾客购物数据清洗、可视化和聚类分析.\n可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)\n导入库\nimport numpy as np import pandas as pd import datetime from matplotlib import pyplot as plt import seaborn as sns plt.style.use(['fivethirtyeight']) from sklearn.preprocessing import LabelEncoder from sklearn.preprocessing import StandardScaler from sklearn import metrics from sklearn.decomposition import PCA from sklearn.cluster import KMeans from sklearn.cluster import AgglomerativeClustering from yellowbrick.cluster import KElbowVisualizer import warnings warnings.filterwarnings('ignore') 加载数据 data = pd.read_csv('/Users/robert/python/marketing_campaign.csv', sep= '\\t') data.info() data.head().T 数据准备 数据维度说明 分类 列名 说明 用户属性 ID 用户的唯一标识符 用户属性 Year_Birth 用户的出生年份 用户属性 Education 教育水平 用户属性 Marital_Status 婚姻状况 用户属性 Income 年家庭收入 用户属性 Kidhome 儿童数量 用户属性 Teenhome 青少年人数 用户健康度 Dt_Customer 顾客注册的日期 用户健康度 Recency 自用户上次购买以来的天数 用户健康度 NumWebVisitsMonth 上个月访问公司网站的次数 用户健康度 Complain 如果用户在过去 2 年内投诉，则为 1，否则为 0 交易信息 MntWines 过去两年在葡萄酒上的消费金额 交易信息 MntFruits 过去两年在水果上的花费 交易信息 MntMeatProducts 过去2年肉类消费量 交易信息 MntFishProducts 过去2年在鱼上花费的金额 交易信息 MntSweetProducts 过去2年在糖果上花费的金额 交易信息 MntGoldProds 过去2年在黄金上花费的金额 交易来源 NumWebPurchases 通过公司网站进行的购买数量 交易来源 NumCatalogPurchases 使用目录进行的购买数量 交易来源 NumStorePurchases 直接在商店购买的数量 运营转化信息 NumDealsPurchases 打折的购买次数 运营转化信息 AcceptedCmp1 如果用户在第一个活动中接受了报价，则为 1，否则为 0 运营转化信息 AcceptedCmp2 如果用户在第二个活动中接受了报价，则为 1，否则为 0 运营转化信息 AcceptedCmp3 如果用户在第三个活动中接受了报价，则为 1，否则为 0 运营转化信息 AcceptedCmp4 如果用户在第 4 个活动中接受了报价，则为 1，否则为 0 运营转化信息 AcceptedCmp5 如果用户在第 5 个活动中接受了报价，则为 1，否则为 0 运营转化信息 Response 如果用户在上次活动中接受了报价，则为 1，否则为 0 Z_CostContact Z_成本联系方式 Z_Revenue Z_收入 ## 检查缺失值 print(\"缺失值:\\n\", data.isnull().sum()) ## 收入数据有缺失值，缺失了24条数据 ## 检查是否有重复数据 data.duplicated().sum() 分析思路： 目标：挖掘数据的价值，助力业务成长和用户增长 用户信息—-做用户画像 用户健康度—-做用户价值评级 交易信息–做推荐算法 交易来源—-做增长分析 运营转化—-评估运营活动的效果 数据清洗 收入数据有24条缺失值，使用均值对其进行填充 顾客注册时间需要转换为日期格式 教育水平和婚姻状态两个变量需要对其进行重新编码 ## 采用均值对收入列的24条缺失数据进行填充 data = data.fillna(data['Income'].mean()) ## 将注册日期数据格式调整为日期格式 data['Dt_Customer'] = pd.to_datetime(data['Dt_Customer']) data['Dt_Customer'].apply(['min', 'max']) print(\"婚姻状况:\\n\", data['Marital_Status'].value_counts(), '\\n') print(\"教育情况:\\n\", data['Education'].value_counts()) ## 不同婚姻状态的顾客所占比例 plt.figure(figsize=(9, 9)) x = data['Marital_Status'].value_counts().sort_values() plt.pie(x=x, labels=['YoLo', 'Absurd','Alone', 'Window', 'Divorced', 'Single', 'Together','Married'], autopct = '%1.1f%%', ) plt.axis('equal') plt.title('Propotion of Marital_Status') ## 不同受教育水平的顾客所占比例 x = data['Education'].value_counts().sort_values() plt.figure(figsize=(9,9)) plt.pie(x=x, labels=['2n Cycle', 'Basic', 'Master', 'PhD', 'Graduation'], autopct = '%1.1f%%') plt.title('Propotion of Education') 数据预处理 创建新的数据特征:\n利用出生日期创建Age（年龄）列 创建Spent（总消费）列 创建Children（小孩）列 创建TotalAcceptedCmp（接受报价次数合计）列 创建NumTotalPurchases（总购买数量）列 data['Age'] = data.apply(lambda data: 2015- data['Year_Birth'], axis=1) data['Spent'] = data.apply(lambda data: data['MntFishProducts'] + data['MntFruits'] + data['MntGoldProds'] + data['MntMeatProducts'] + data['MntSweetProducts'] + data['MntWines'], axis=1) data['Children'] = data.apply(lambda data: data['Kidhome'] + data['Teenhome'], axis=1) data['TotalAcceptedCmp'] = data.apply(lambda data: data['AcceptedCmp1'] + data['AcceptedCmp2'] + data['AcceptedCmp3'] + data['AcceptedCmp4'] + data['AcceptedCmp5'], axis=1) data['NumTotalPurchases'] = data.apply(lambda data: data['NumWebPurchases'] + data['NumCatalogPurchases'] + data['NumStorePurchases'] + data['NumDealsPurchases'], axis=1) ## 删除'Year_Birth', 'Z_CostContact', 'Z_Revenue', 'Kidhome', 'Teenhome'列 data = data.drop(['Year_Birth', 'Z_CostContact', 'Z_Revenue', 'Kidhome', 'Teenhome'], axis=1) ## 删除数据中收入和年龄的异常值部分 data = data.drop(data.loc[data['Income'] \u003e 600000].index) data = data.drop(data.loc[data['Age'] \u003e 100].index) 数据可视化 ## 创建新的特征”Have_Children“，有小孩值为1，没有小孩值为0 data['Have_Children'] = np.where(data.Children \u003e 0, 1, 0) data.head() ## 以是否有小孩为分组对数据进行分组绘制散点图矩阵 pairplot = data.loc[:, ['Income', 'Age', 'Spent', 'Recency', 'Have_Children']] sns.pairplot(pairplot, hue='Have_Children', palette='Set1') ## 对连续型变量Age进行面元划分 bins = [0, 20, 40, 60, 80,100] aged = pd.cut(data['Age'], bins=bins) print('number of age_cut:\\n', aged.value_counts()) ## 不同年龄段顾客分类汇总 plt.figure(figsize=(12,6)) sns.countplot(y=aged, palette='Set2') plt.title('countplot of Age') ## 不同年龄区间在购物花费上的区别 plt.figure(figsize=(12,6)) sns.boxplot(x=aged, y=data['Spent'], palette='Set2') ## 受教育水平和购物花费间的关系 ## 不同婚姻状态下顾客的花费比较 to_boxplot = ['Education', 'Marital_Status'] fig, axes = plt.subplots(2, 1, figsize=(12, 12)) axes = axes.flatten() for col, ax in zip(to_boxplot, axes): ax = sns.boxplot(data=data, x=col, y='Spent', ax=ax, palette='Set2') ax.set_title(f'boxplot of spent by {col}') ## 以教育水平的不同对不同婚姻状态的顾客进行分组，并对比其在收入和购物花费上的差异对比 fig, axes = plt.subplots(2, 1, figsize=(14,10)) sns.barplot(x= 'Marital_Status',y='Income',hue='Education',data=data, ci=0,palette='Set2', ax=axes[0]) sns.barplot(x= 'Marital_Status',y='Spent',hue='Education',data=data, ci=0, palette='Set2', ax=axes[1]) ## 收入和支出呈线性增长关系 fig, axes = plt.subplots(1, 2, figsize=(14,6)) sns.scatterplot(y=data['Spent'], x=data['Income'], ax=axes[0]) sns.regplot(y='Spent', x='Income', data=data, ax=axes[1]) ## 网站顾客整体花费直方图 plt.figure(figsize=(12,6)) sns.histplot(data['Spent'], bins=50, kde=True) plt.title('histogram of Spent') ## 自用户上次购买以来的天数的频数分布 plt.figure(figsize=(12,6)) sns.histplot(data['Recency'], bins=60) ## 网站用户月度活跃频数统计 plt.figure(figsize=(12,6)) sns.histplot(data['NumWebVisitsMonth'], bins=50, kde=True) plt.title('Monthly activities (5-7)/month') ## 网站投诉情况 x = data['Complain'].value_counts().sort_values() plt.figure(figsize=(8,8)) plt.pie(x=x, labels=['YES', 'NO'], autopct = '%1.1f%%') plt.title('Complain of customer') ## 酒、鱼、水果、黄金、肉、糖果各自销量频数统计 to_histplot = ['MntWines', 'MntFishProducts', 'MntFruits', 'MntGoldProds', 'MntMeatProducts', 'MntSweetProducts'] fig, axes = plt.subplots(3, 2, sharex=True, sharey=True, figsize=(14, 10)) axes = axes.flatten() for col, ax in zip(to_histplot, axes): ax = sns.histplot(data=data, x=col, ax=ax) ax.set_title(f'histogram of {col}') ## 通过目录、商店和网站三个渠道购买的频数统计 to_histplot = ['NumCatalogPurchases', 'NumStorePurchases', 'NumWebPurchases'] fig, axes = plt.subplots(1, 3, sharey=True, figsize=(14, 9)) axes = axes.flatten() for col, ax in zip(to_histplot, axes): ax = sns.histplot(data=data, x=col, ax=ax) plt.subplots_adjust(hspace = 0.5, wspace = 0.3) ## 创建总活动接受报价次数指标 acceptedConcat = data[['AcceptedCmp1', 'AcceptedCmp2', 'AcceptedCmp3', 'AcceptedCmp4', 'AcceptedCmp5']] acceptedConcat = acceptedConcat.apply(pd.DataFrame.sum) print('acceptedConcat:\\n', acceptedConcat) ## 每次接受活动报价的用户的频数统计 plt.figure(figsize=(12,6)) plt.title('accepted the campaings in every attempt') sns.barplot(x=acceptedConcat.index, y=acceptedConcat, palette='Set2') ## 用户上次购买以来的天数和在上次活动是否接受报价间的关系 plt.figure(figsize=(12,6)) plt.title('Recency Vs Acceptance of an offer') sns.lineplot(x='Recency', y='Response', data=data) ## 网站每月活跃用户折线图 groupedDate = data.set_index('Dt_Customer') groupedDate = groupedDate.resample('M').count() plt.figure(figsize=(14,4)) plt.title('Customer NumWebVisitsMonth by mounths') groupedDate.NumWebVisitsMonth.plot(kind='line') ## 每月总体消费金额折线图 groupedDate = data.set_index('Dt_Customer') groupedDate = groupedDate.resample('M').count() plt.figure(figsize=(14,4)) plt.title('Customer Spent by mounths') groupedDate.Spent.plot(kind='line') ## 每月通过网站购买的用户折线图 groupedDate = data.set_index('Dt_Customer') groupedDate = groupedDate.resample('M').count() plt.figure(figsize=(14,4)) plt.title('Customer NumWebPurchases by mounths') groupedDate.NumWebPurchases.plot() ## 每月通过目录购买的用户折线图 groupedDate = data.set_index('Dt_Customer') groupedDate = groupedDate.resample('M').count() plt.figure(figsize=(14,4)) plt.title('Customer NumCatalogPurchases by mounths') groupedDate.NumCatalogPurchases.plot(kind='line') ##每月通过商店购买的用户折现图 groupedDate = data.set_index('Dt_Customer') groupedDate = groupedDate.resample('M').count() plt.figure(figsize=(14,4)) plt.title('Customer NumStorePurchases by mounths') groupedDate.NumStorePurchases.plot(kind='line') 自2014年6月份以来网站的网站访问次数和交易总量出现了大幅的下滑。通过网站、目录、商店直接购买的三个渠道都出现了相同轨迹的下滑。\n数据预处理 s = (data.dtypes == 'object') object_cols = list(s[s].index) print(\"Categorical variables in the dataset:\", object_cols) LE=LabelEncoder() for i in object_cols: data[i]=data[[i]].apply(LE.fit_transform) ## 相关性热力图 plt.figure( figsize = (14, 14)) data1 = data.iloc[:, 1:-1] sns.heatmap(data1.corr(), annot=True, cmap='Set2') ds = data.copy() cols_del = ['ID', 'AcceptedCmp3', 'AcceptedCmp4', 'AcceptedCmp5', 'AcceptedCmp1','AcceptedCmp2', 'Complain', 'Response', 'Have_Children', 'Dt_Customer', 'Children'] ds = ds.drop(cols_del, axis=1) ## 数据标准化 scaler = StandardScaler() scaler.fit(ds) scaled_ds = pd.DataFrame(scaler.transform(ds),columns= ds.columns ) PCA降维 pca = PCA(n_components=3) pca.fit(scaled_ds) PCA_ds = pd.DataFrame(pca.transform(scaled_ds), columns=([\"col1\",\"col2\", \"col3\"])) PCA_ds.describe().T x =PCA_ds[\"col1\"] y =PCA_ds[\"col2\"] z =PCA_ds[\"col3\"] ## 降维后数据可视化 fig = plt.figure(figsize=(10,8)) ax = fig.add_subplot(111, projection=\"3d\") ax.scatter(x,y,z, marker=\"o\" ) ax.set_title(\"Data Visualization In The Reduced Dimension\") plt.show() 聚类 Elbow_M = KElbowVisualizer(KMeans(), k=10) Elbow_M.fit(PCA_ds) Elbow_M.show() AC = AgglomerativeClustering(n_clusters=4) ## 拟合模型并预测聚类 yhat_AC = AC.fit_predict(PCA_ds) PCA_ds[\"Clusters\"] = yhat_AC ## 将聚类特征添加到原始数据 data[\"Clusters\"]= yhat_AC ## 聚类结果可视化 fig = plt.figure(figsize=(10,8)) ax = plt.subplot(111, projection='3d', label=\"bla\") ax.scatter(x, y, z, s=50, c=PCA_ds[\"Clusters\"], marker='o', cmap = 'Set2' ) ax.set_title(\"The Plot Of The Clusters\") plt.show() 评估模型 ## 聚类结果分布图 plt.figure(figsize=(12, 6)) pl = sns.countplot(x=data[\"Clusters\"], palette= 'Set2') pl.set_title(\"Distribution Of The Clusters\") plt.show() ## 按照收入和支出对聚类结果进行可视化 plt.figure(figsize=(12, 6)) pl = sns.scatterplot(data = data,x=data[\"Spent\"], y=data[\"Income\"],hue=data[\"Clusters\"], palette= 'Set2') pl.set_title(\"Cluster's Profile Based On Income And Spent\") plt.legend() plt.show() 收入与支出图显示集群模式\n第 0 组：高支出和平均收入 第 1 组：高消费和高收入 第 2 组：低支出和低收入 第 3 组：高支出和低收入 plt.figure(figsize=(12,6)) sns.swarmplot(x=data[\"Clusters\"], y=data[\"Spent\"], alpha=0.9, palette= 'Set2' ) ## 按照聚类结果对活动总接受情况进行可视化 plt.figure(figsize=(12,6)) pl = sns.countplot(x=data[\"TotalAcceptedCmp\"],hue=data[\"Clusters\"], palette= 'Set2') pl.set_title(\"Count Of Promotion Accepted\") pl.set_xlabel(\"Number Of Total Accepted Promotions\") plt.show() ",
+  "wordCount" : "906",
+  "inLanguage": "en",
+  "image":"https://xin5835.github.io/images/RepeatCustomer.jpeg","datePublished": "2022-12-28T11:18:15+08:00",
+  "dateModified": "2022-12-28T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      顾客购物分析
+    </h1>
+    <div class="post-meta"><span title='2022-12-28 11:18:15 +0800 CST'>December 28, 2022</span>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="https://xin5835.github.io/images/RepeatCustomer.jpeg" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%8a%a0%e8%bd%bd%e6%95%b0%e6%8d%ae" aria-label="加载数据">加载数据</a></li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87" aria-label="数据准备">数据准备</a></li>
+                <li>
+                    <a href="#%e5%88%86%e6%9e%90%e6%80%9d%e8%b7%af" aria-label="分析思路：">分析思路：</a></li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e6%b8%85%e6%b4%97" aria-label="数据清洗">数据清洗</a></li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e9%a2%84%e5%a4%84%e7%90%86" aria-label="数据预处理">数据预处理</a><ul>
+                        
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e5%8f%af%e8%a7%86%e5%8c%96" aria-label="数据可视化">数据可视化</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e9%a2%84%e5%a4%84%e7%90%86-1" aria-label="数据预处理">数据预处理</a></li>
+                <li>
+                    <a href="#pca%e9%99%8d%e7%bb%b4" aria-label="PCA降维">PCA降维</a></li>
+                <li>
+                    <a href="#%e8%81%9a%e7%b1%bb" aria-label="聚类">聚类</a></li>
+                <li>
+                    <a href="#%e8%af%84%e4%bc%b0%e6%a8%a1%e5%9e%8b" aria-label="评估模型">评估模型</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>顾客购物数据清洗、可视化和聚类分析.</p>
+<p>可视化图片和ipyb文件，详见! [Github] (<a href="https://github.com/xin5835/customer_shopping_analysis">https://github.com/xin5835/customer_shopping_analysis</a>)</p>
+<p>导入库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> datetime
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> pyplot <span style="color:#66d9ef">as</span> plt 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>style<span style="color:#f92672">.</span>use([<span style="color:#e6db74">&#39;fivethirtyeight&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> LabelEncoder
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> metrics
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> PCA
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> AgglomerativeClustering
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> yellowbrick.cluster <span style="color:#f92672">import</span> KElbowVisualizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> warnings
+</span></span><span style="display:flex;"><span>warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#39;ignore&#39;</span>)
+</span></span></code></pre></div><h2 id="加载数据">加载数据<a hidden class="anchor" aria-hidden="true" href="#加载数据">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;/Users/robert/python/marketing_campaign.csv&#39;</span>, sep<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>info() 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data<span style="color:#f92672">.</span>head()<span style="color:#f92672">.</span>T
+</span></span></code></pre></div><h2 id="数据准备">数据准备<a hidden class="anchor" aria-hidden="true" href="#数据准备">#</a></h2>
+<ul>
+<li>数据维度说明</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>分类</th>
+          <th>列名</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>用户属性</td>
+          <td>ID</td>
+          <td>用户的唯一标识符</td>
+      </tr>
+      <tr>
+          <td>用户属性</td>
+          <td>Year_Birth</td>
+          <td>用户的出生年份</td>
+      </tr>
+      <tr>
+          <td>用户属性</td>
+          <td>Education</td>
+          <td>教育水平</td>
+      </tr>
+      <tr>
+          <td>用户属性</td>
+          <td>Marital_Status</td>
+          <td>婚姻状况</td>
+      </tr>
+      <tr>
+          <td>用户属性</td>
+          <td>Income</td>
+          <td>年家庭收入</td>
+      </tr>
+      <tr>
+          <td>用户属性</td>
+          <td>Kidhome</td>
+          <td>儿童数量</td>
+      </tr>
+      <tr>
+          <td>用户属性</td>
+          <td>Teenhome</td>
+          <td>青少年人数</td>
+      </tr>
+      <tr>
+          <td>用户健康度</td>
+          <td>Dt_Customer</td>
+          <td>顾客注册的日期</td>
+      </tr>
+      <tr>
+          <td>用户健康度</td>
+          <td>Recency</td>
+          <td>自用户上次购买以来的天数</td>
+      </tr>
+      <tr>
+          <td>用户健康度</td>
+          <td>NumWebVisitsMonth</td>
+          <td>上个月访问公司网站的次数</td>
+      </tr>
+      <tr>
+          <td>用户健康度</td>
+          <td>Complain</td>
+          <td>如果用户在过去 2 年内投诉，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td>交易信息</td>
+          <td>MntWines</td>
+          <td>过去两年在葡萄酒上的消费金额</td>
+      </tr>
+      <tr>
+          <td>交易信息</td>
+          <td>MntFruits</td>
+          <td>过去两年在水果上的花费</td>
+      </tr>
+      <tr>
+          <td>交易信息</td>
+          <td>MntMeatProducts</td>
+          <td>过去2年肉类消费量</td>
+      </tr>
+      <tr>
+          <td>交易信息</td>
+          <td>MntFishProducts</td>
+          <td>过去2年在鱼上花费的金额</td>
+      </tr>
+      <tr>
+          <td>交易信息</td>
+          <td>MntSweetProducts</td>
+          <td>过去2年在糖果上花费的金额</td>
+      </tr>
+      <tr>
+          <td>交易信息</td>
+          <td>MntGoldProds</td>
+          <td>过去2年在黄金上花费的金额</td>
+      </tr>
+      <tr>
+          <td>交易来源</td>
+          <td>NumWebPurchases</td>
+          <td>通过公司网站进行的购买数量</td>
+      </tr>
+      <tr>
+          <td>交易来源</td>
+          <td>NumCatalogPurchases</td>
+          <td>使用目录进行的购买数量</td>
+      </tr>
+      <tr>
+          <td>交易来源</td>
+          <td>NumStorePurchases</td>
+          <td>直接在商店购买的数量</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>NumDealsPurchases</td>
+          <td>打折的购买次数</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>AcceptedCmp1</td>
+          <td>如果用户在第一个活动中接受了报价，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>AcceptedCmp2</td>
+          <td>如果用户在第二个活动中接受了报价，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>AcceptedCmp3</td>
+          <td>如果用户在第三个活动中接受了报价，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>AcceptedCmp4</td>
+          <td>如果用户在第 4 个活动中接受了报价，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>AcceptedCmp5</td>
+          <td>如果用户在第 5 个活动中接受了报价，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td>运营转化信息</td>
+          <td>Response</td>
+          <td>如果用户在上次活动中接受了报价，则为 1，否则为 0</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>Z_CostContact</td>
+          <td>Z_成本联系方式</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>Z_Revenue</td>
+          <td>Z_收入</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 检查缺失值</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;缺失值:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">.</span>isnull()<span style="color:#f92672">.</span>sum())    <span style="color:#75715e">## 收入数据有缺失值，缺失了24条数据</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 检查是否有重复数据</span>
+</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>duplicated()<span style="color:#f92672">.</span>sum()
+</span></span></code></pre></div><h2 id="分析思路">分析思路：<a hidden class="anchor" aria-hidden="true" href="#分析思路">#</a></h2>
+<ul>
+<li>目标：挖掘数据的价值，助力业务成长和用户增长</li>
+<li>用户信息&mdash;-做用户画像</li>
+<li>用户健康度&mdash;-做用户价值评级</li>
+<li>交易信息&ndash;做推荐算法</li>
+<li>交易来源&mdash;-做增长分析</li>
+<li>运营转化&mdash;-评估运营活动的效果</li>
+</ul>
+<h2 id="数据清洗">数据清洗<a hidden class="anchor" aria-hidden="true" href="#数据清洗">#</a></h2>
+<ul>
+<li>收入数据有24条缺失值，使用均值对其进行填充</li>
+<li>顾客注册时间需要转换为日期格式</li>
+<li>教育水平和婚姻状态两个变量需要对其进行重新编码</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 采用均值对收入列的24条缺失数据进行填充</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>fillna(data[<span style="color:#e6db74">&#39;Income&#39;</span>]<span style="color:#f92672">.</span>mean())
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 将注册日期数据格式调整为日期格式</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_datetime(data[<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>])
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>]<span style="color:#f92672">.</span>apply([<span style="color:#e6db74">&#39;min&#39;</span>, <span style="color:#e6db74">&#39;max&#39;</span>])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;婚姻状况:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, data[<span style="color:#e6db74">&#39;Marital_Status&#39;</span>]<span style="color:#f92672">.</span>value_counts(), <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;教育情况:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, data[<span style="color:#e6db74">&#39;Education&#39;</span>]<span style="color:#f92672">.</span>value_counts())
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 不同婚姻状态的顾客所占比例</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Marital_Status&#39;</span>]<span style="color:#f92672">.</span>value_counts()<span style="color:#f92672">.</span>sort_values()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x<span style="color:#f92672">=</span>x, labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;YoLo&#39;</span>, <span style="color:#e6db74">&#39;Absurd&#39;</span>,<span style="color:#e6db74">&#39;Alone&#39;</span>, <span style="color:#e6db74">&#39;Window&#39;</span>, <span style="color:#e6db74">&#39;Divorced&#39;</span>, <span style="color:#e6db74">&#39;Single&#39;</span>, <span style="color:#e6db74">&#39;Together&#39;</span>,<span style="color:#e6db74">&#39;Married&#39;</span>],
+</span></span><span style="display:flex;"><span>        autopct <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1.1f%%</span><span style="color:#e6db74">&#39;</span>, )
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;equal&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Propotion of Marital_Status&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 不同受教育水平的顾客所占比例</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Education&#39;</span>]<span style="color:#f92672">.</span>value_counts()<span style="color:#f92672">.</span>sort_values()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x<span style="color:#f92672">=</span>x, labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;2n Cycle&#39;</span>, <span style="color:#e6db74">&#39;Basic&#39;</span>, <span style="color:#e6db74">&#39;Master&#39;</span>, <span style="color:#e6db74">&#39;PhD&#39;</span>, <span style="color:#e6db74">&#39;Graduation&#39;</span>], autopct <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1.1f%%</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Propotion of Education&#39;</span>)
+</span></span></code></pre></div><h2 id="数据预处理">数据预处理<a hidden class="anchor" aria-hidden="true" href="#数据预处理">#</a></h2>
+<p><strong>创建新的数据特征:</strong></p>
+<ul>
+<li>利用出生日期创建Age（年龄）列</li>
+<li>创建Spent（总消费）列</li>
+<li>创建Children（小孩）列</li>
+<li>创建TotalAcceptedCmp（接受报价次数合计）列</li>
+<li>创建NumTotalPurchases（总购买数量）列</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Age&#39;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> data:  <span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span> data[<span style="color:#e6db74">&#39;Year_Birth&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Spent&#39;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> data: data[<span style="color:#e6db74">&#39;MntFishProducts&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;MntFruits&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;MntGoldProds&#39;</span>] <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>                data[<span style="color:#e6db74">&#39;MntMeatProducts&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;MntSweetProducts&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;MntWines&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Children&#39;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> data: data[<span style="color:#e6db74">&#39;Kidhome&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;Teenhome&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;TotalAcceptedCmp&#39;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> data: data[<span style="color:#e6db74">&#39;AcceptedCmp1&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;AcceptedCmp2&#39;</span>] <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>                                      data[<span style="color:#e6db74">&#39;AcceptedCmp3&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;AcceptedCmp4&#39;</span>] <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>                                      data[<span style="color:#e6db74">&#39;AcceptedCmp5&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;NumTotalPurchases&#39;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> data: data[<span style="color:#e6db74">&#39;NumWebPurchases&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;NumCatalogPurchases&#39;</span>] <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>                            data[<span style="color:#e6db74">&#39;NumStorePurchases&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;NumDealsPurchases&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 删除&#39;Year_Birth&#39;, &#39;Z_CostContact&#39;, &#39;Z_Revenue&#39;, &#39;Kidhome&#39;, &#39;Teenhome&#39;列</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#39;Year_Birth&#39;</span>, <span style="color:#e6db74">&#39;Z_CostContact&#39;</span>, <span style="color:#e6db74">&#39;Z_Revenue&#39;</span>, <span style="color:#e6db74">&#39;Kidhome&#39;</span>, <span style="color:#e6db74">&#39;Teenhome&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 删除数据中收入和年龄的异常值部分</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>drop(data<span style="color:#f92672">.</span>loc[data[<span style="color:#e6db74">&#39;Income&#39;</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">600000</span>]<span style="color:#f92672">.</span>index)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>drop(data<span style="color:#f92672">.</span>loc[data[<span style="color:#e6db74">&#39;Age&#39;</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>]<span style="color:#f92672">.</span>index)
+</span></span></code></pre></div><h3 id="数据可视化">数据可视化<a hidden class="anchor" aria-hidden="true" href="#数据可视化">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 创建新的特征”Have_Children“，有小孩值为1，没有小孩值为0</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Have_Children&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>where(data<span style="color:#f92672">.</span>Children <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>head()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 以是否有小孩为分组对数据进行分组绘制散点图矩阵</span>
+</span></span><span style="display:flex;"><span>pairplot <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>loc[:, [<span style="color:#e6db74">&#39;Income&#39;</span>, <span style="color:#e6db74">&#39;Age&#39;</span>, <span style="color:#e6db74">&#39;Spent&#39;</span>, <span style="color:#e6db74">&#39;Recency&#39;</span>, <span style="color:#e6db74">&#39;Have_Children&#39;</span>]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>pairplot(pairplot, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Have_Children&#39;</span>, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set1&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 对连续型变量Age进行面元划分</span>
+</span></span><span style="display:flex;"><span>bins <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">100</span>]
+</span></span><span style="display:flex;"><span>aged <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>cut(data[<span style="color:#e6db74">&#39;Age&#39;</span>], bins<span style="color:#f92672">=</span>bins)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;number of age_cut:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, aged<span style="color:#f92672">.</span>value_counts())
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 不同年龄段顾客分类汇总</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>countplot(y<span style="color:#f92672">=</span>aged, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;countplot of Age&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 不同年龄区间在购物花费上的区别</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span>aged, y<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;Spent&#39;</span>], palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 受教育水平和购物花费间的关系</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 不同婚姻状态下顾客的花费比较</span>
+</span></span><span style="display:flex;"><span>to_boxplot <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Education&#39;</span>, <span style="color:#e6db74">&#39;Marital_Status&#39;</span>]
+</span></span><span style="display:flex;"><span>fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">12</span>))
+</span></span><span style="display:flex;"><span>axes <span style="color:#f92672">=</span> axes<span style="color:#f92672">.</span>flatten()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> col, ax <span style="color:#f92672">in</span> zip(to_boxplot, axes):
+</span></span><span style="display:flex;"><span>    ax <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>boxplot(data<span style="color:#f92672">=</span>data, x<span style="color:#f92672">=</span>col, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spent&#39;</span>, ax<span style="color:#f92672">=</span>ax, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;boxplot of spent by </span><span style="color:#e6db74">{</span>col<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 以教育水平的不同对不同婚姻状态的顾客进行分组，并对比其在收入和购物花费上的差异对比</span>
+</span></span><span style="display:flex;"><span>fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Marital_Status&#39;</span>,y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Income&#39;</span>,hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Education&#39;</span>,data<span style="color:#f92672">=</span>data, ci<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>, ax<span style="color:#f92672">=</span>axes[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Marital_Status&#39;</span>,y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spent&#39;</span>,hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Education&#39;</span>,data<span style="color:#f92672">=</span>data, ci<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>, ax<span style="color:#f92672">=</span>axes[<span style="color:#ae81ff">1</span>])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 收入和支出呈线性增长关系</span>
+</span></span><span style="display:flex;"><span>fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>scatterplot(y<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;Spent&#39;</span>], x<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;Income&#39;</span>], ax<span style="color:#f92672">=</span>axes[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>regplot(y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spent&#39;</span>, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Income&#39;</span>, data<span style="color:#f92672">=</span>data, ax<span style="color:#f92672">=</span>axes[<span style="color:#ae81ff">1</span>])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 网站顾客整体花费直方图</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>histplot(data[<span style="color:#e6db74">&#39;Spent&#39;</span>], bins<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, kde<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;histogram of Spent&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 自用户上次购买以来的天数的频数分布</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>histplot(data[<span style="color:#e6db74">&#39;Recency&#39;</span>], bins<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 网站用户月度活跃频数统计</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>histplot(data[<span style="color:#e6db74">&#39;NumWebVisitsMonth&#39;</span>], bins<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, kde<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Monthly activities (5-7)/month&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 网站投诉情况</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Complain&#39;</span>]<span style="color:#f92672">.</span>value_counts()<span style="color:#f92672">.</span>sort_values()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x<span style="color:#f92672">=</span>x, labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;YES&#39;</span>, <span style="color:#e6db74">&#39;NO&#39;</span>], autopct <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1.1f%%</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Complain of customer&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 酒、鱼、水果、黄金、肉、糖果各自销量频数统计</span>
+</span></span><span style="display:flex;"><span>to_histplot <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;MntWines&#39;</span>, <span style="color:#e6db74">&#39;MntFishProducts&#39;</span>, <span style="color:#e6db74">&#39;MntFruits&#39;</span>, <span style="color:#e6db74">&#39;MntGoldProds&#39;</span>, 
+</span></span><span style="display:flex;"><span>               <span style="color:#e6db74">&#39;MntMeatProducts&#39;</span>, <span style="color:#e6db74">&#39;MntSweetProducts&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, sharex<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, sharey<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>axes <span style="color:#f92672">=</span> axes<span style="color:#f92672">.</span>flatten()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> col, ax <span style="color:#f92672">in</span> zip(to_histplot, axes):
+</span></span><span style="display:flex;"><span>    ax <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>histplot(data<span style="color:#f92672">=</span>data, x<span style="color:#f92672">=</span>col, ax<span style="color:#f92672">=</span>ax)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;histogram of </span><span style="color:#e6db74">{</span>col<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 通过目录、商店和网站三个渠道购买的频数统计</span>
+</span></span><span style="display:flex;"><span>to_histplot <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;NumCatalogPurchases&#39;</span>, <span style="color:#e6db74">&#39;NumStorePurchases&#39;</span>, <span style="color:#e6db74">&#39;NumWebPurchases&#39;</span>]
+</span></span><span style="display:flex;"><span>fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, sharey<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>axes <span style="color:#f92672">=</span> axes<span style="color:#f92672">.</span>flatten()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> col, ax <span style="color:#f92672">in</span> zip(to_histplot, axes):
+</span></span><span style="display:flex;"><span>    ax <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>histplot(data<span style="color:#f92672">=</span>data, x<span style="color:#f92672">=</span>col, ax<span style="color:#f92672">=</span>ax)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>subplots_adjust(hspace <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, wspace <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 创建总活动接受报价次数指标</span>
+</span></span><span style="display:flex;"><span>acceptedConcat <span style="color:#f92672">=</span> data[[<span style="color:#e6db74">&#39;AcceptedCmp1&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp2&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp3&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp4&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp5&#39;</span>]]
+</span></span><span style="display:flex;"><span>acceptedConcat <span style="color:#f92672">=</span> acceptedConcat<span style="color:#f92672">.</span>apply(pd<span style="color:#f92672">.</span>DataFrame<span style="color:#f92672">.</span>sum)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;acceptedConcat:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, acceptedConcat)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 每次接受活动报价的用户的频数统计</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;accepted the campaings in every attempt&#39;</span>)
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span>acceptedConcat<span style="color:#f92672">.</span>index, y<span style="color:#f92672">=</span>acceptedConcat, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 用户上次购买以来的天数和在上次活动是否接受报价间的关系</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Recency Vs Acceptance of an offer&#39;</span>)
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>lineplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Recency&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Response&#39;</span>, data<span style="color:#f92672">=</span>data)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 网站每月活跃用户折线图</span>
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> groupedDate<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Customer NumWebVisitsMonth by mounths&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate<span style="color:#f92672">.</span>NumWebVisitsMonth<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;line&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 每月总体消费金额折线图</span>
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> groupedDate<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Customer Spent by mounths&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate<span style="color:#f92672">.</span>Spent<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;line&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 每月通过网站购买的用户折线图</span>
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> groupedDate<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Customer NumWebPurchases by mounths&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate<span style="color:#f92672">.</span>NumWebPurchases<span style="color:#f92672">.</span>plot()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 每月通过目录购买的用户折线图</span>
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> groupedDate<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Customer NumCatalogPurchases by mounths&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate<span style="color:#f92672">.</span>NumCatalogPurchases<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;line&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">##每月通过商店购买的用户折现图</span>
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Dt_Customer&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>groupedDate <span style="color:#f92672">=</span> groupedDate<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Customer NumStorePurchases by mounths&#39;</span>)
+</span></span><span style="display:flex;"><span>groupedDate<span style="color:#f92672">.</span>NumStorePurchases<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;line&#39;</span>)
+</span></span></code></pre></div><p>自2014年6月份以来网站的网站访问次数和交易总量出现了大幅的下滑。通过网站、目录、商店直接购买的三个渠道都出现了相同轨迹的下滑。</p>
+<h2 id="数据预处理-1">数据预处理<a hidden class="anchor" aria-hidden="true" href="#数据预处理-1">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>s <span style="color:#f92672">=</span> (data<span style="color:#f92672">.</span>dtypes <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;object&#39;</span>)
+</span></span><span style="display:flex;"><span>object_cols <span style="color:#f92672">=</span> list(s[s]<span style="color:#f92672">.</span>index)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Categorical variables in the dataset:&#34;</span>, object_cols)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>LE<span style="color:#f92672">=</span>LabelEncoder()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> object_cols:
+</span></span><span style="display:flex;"><span>    data[i]<span style="color:#f92672">=</span>data[[i]]<span style="color:#f92672">.</span>apply(LE<span style="color:#f92672">.</span>fit_transform)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 相关性热力图</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure( figsize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">14</span>))
+</span></span><span style="display:flex;"><span>data1 <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>heatmap(data1<span style="color:#f92672">.</span>corr(), annot<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ds <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cols_del <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;ID&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp3&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp4&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp5&#39;</span>, <span style="color:#e6db74">&#39;AcceptedCmp1&#39;</span>,<span style="color:#e6db74">&#39;AcceptedCmp2&#39;</span>, 
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Complain&#39;</span>, <span style="color:#e6db74">&#39;Response&#39;</span>, <span style="color:#e6db74">&#39;Have_Children&#39;</span>, <span style="color:#e6db74">&#39;Dt_Customer&#39;</span>,  <span style="color:#e6db74">&#39;Children&#39;</span>]
+</span></span><span style="display:flex;"><span>ds <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>drop(cols_del, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 数据标准化</span>
+</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> StandardScaler()
+</span></span><span style="display:flex;"><span>scaler<span style="color:#f92672">.</span>fit(ds)
+</span></span><span style="display:flex;"><span>scaled_ds <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(scaler<span style="color:#f92672">.</span>transform(ds),columns<span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>columns )
+</span></span></code></pre></div><h2 id="pca降维">PCA降维<a hidden class="anchor" aria-hidden="true" href="#pca降维">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pca <span style="color:#f92672">=</span> PCA(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>pca<span style="color:#f92672">.</span>fit(scaled_ds)
+</span></span><span style="display:flex;"><span>PCA_ds <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(pca<span style="color:#f92672">.</span>transform(scaled_ds), columns<span style="color:#f92672">=</span>([<span style="color:#e6db74">&#34;col1&#34;</span>,<span style="color:#e6db74">&#34;col2&#34;</span>, <span style="color:#e6db74">&#34;col3&#34;</span>]))
+</span></span><span style="display:flex;"><span>PCA_ds<span style="color:#f92672">.</span>describe()<span style="color:#f92672">.</span>T
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span>PCA_ds[<span style="color:#e6db74">&#34;col1&#34;</span>]
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span>PCA_ds[<span style="color:#e6db74">&#34;col2&#34;</span>]
+</span></span><span style="display:flex;"><span>z <span style="color:#f92672">=</span>PCA_ds[<span style="color:#e6db74">&#34;col3&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 降维后数据可视化</span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3d&#34;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>scatter(x,y,z, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;o&#34;</span> )
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Data Visualization In The Reduced Dimension&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h2 id="聚类">聚类<a hidden class="anchor" aria-hidden="true" href="#聚类">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Elbow_M <span style="color:#f92672">=</span> KElbowVisualizer(KMeans(), k<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>Elbow_M<span style="color:#f92672">.</span>fit(PCA_ds)
+</span></span><span style="display:flex;"><span>Elbow_M<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>AC <span style="color:#f92672">=</span> AgglomerativeClustering(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 拟合模型并预测聚类</span>
+</span></span><span style="display:flex;"><span>yhat_AC <span style="color:#f92672">=</span> AC<span style="color:#f92672">.</span>fit_predict(PCA_ds)
+</span></span><span style="display:flex;"><span>PCA_ds[<span style="color:#e6db74">&#34;Clusters&#34;</span>] <span style="color:#f92672">=</span> yhat_AC
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 将聚类特征添加到原始数据</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#34;Clusters&#34;</span>]<span style="color:#f92672">=</span> yhat_AC
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 聚类结果可视化</span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bla&#34;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>scatter(x, y, z, s<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, c<span style="color:#f92672">=</span>PCA_ds[<span style="color:#e6db74">&#34;Clusters&#34;</span>], marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;o&#39;</span>, cmap <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Set2&#39;</span> )
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;The Plot Of The Clusters&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h2 id="评估模型">评估模型<a hidden class="anchor" aria-hidden="true" href="#评估模型">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 聚类结果分布图</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>pl <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>countplot(x<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Clusters&#34;</span>], palette<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span><span style="display:flex;"><span>pl<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Distribution Of The Clusters&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 按照收入和支出对聚类结果进行可视化</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>pl <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>scatterplot(data <span style="color:#f92672">=</span> data,x<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Spent&#34;</span>], y<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Income&#34;</span>],hue<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Clusters&#34;</span>], palette<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span><span style="display:flex;"><span>pl<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Cluster&#39;s Profile Based On Income And Spent&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><strong>收入与支出图显示集群模式</strong></p>
+<ul>
+<li>第 0 组：高支出和平均收入</li>
+<li>第 1 组：高消费和高收入</li>
+<li>第 2 组：低支出和低收入</li>
+<li>第 3 组：高支出和低收入</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>swarmplot(x<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Clusters&#34;</span>], y<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Spent&#34;</span>], alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span>, palette<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Set2&#39;</span> )
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 按照聚类结果对活动总接受情况进行可视化</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>pl <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>countplot(x<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;TotalAcceptedCmp&#34;</span>],hue<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Clusters&#34;</span>], palette<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Set2&#39;</span>)
+</span></span><span style="display:flex;"><span>pl<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Count Of Promotion Accepted&#34;</span>)
+</span></span><span style="display:flex;"><span>pl<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#34;Number Of Total Accepted Promotions&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E9%BB%91%E5%8C%96190%E5%8F%A5/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>互联网大厂黑化190句</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">
+    <span class="title">Next »</span>
+    <br>
+    <span>前世今生</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

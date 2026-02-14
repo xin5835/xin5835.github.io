@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title> 分类问题中的查准率和召回率 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Machine Learning">
+<meta name="description" content="在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content=" 分类问题中的查准率和召回率">
+  <meta property="og:description" content="在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-02-24T11:18:15+08:00">
+    <meta property="article:modified_time" content="2022-02-24T11:18:15+08:00">
+    <meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 分类问题中的查准率和召回率">
+<meta name="twitter:description" content="在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": " 分类问题中的查准率和召回率",
+      "item": "https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": " 分类问题中的查准率和召回率",
+  "name": " 分类问题中的查准率和召回率",
+  "description": "在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。\n",
+  "keywords": [
+    "Machine Learning"
+  ],
+  "articleBody": "在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。\n假设处理一个二元分类问题：预测变量为y=1（得了癌症），y=0（没有得癌症）。在样本数据中y=0得数据非常少。假设我们通过逻辑回归得到一个分类，模型有95%的精度。是不是说这个模型很好呢？\n未必。现在我们设想总是预测y=0，这不是一个机器学习算法，但是我们会得到比上面逻辑回归更高的精确度。\nactual(1) actual(0) predicted_positive(1) True Positive(TP) False Positive(FP) predicted_negative(0) False Negative(FN) True Negative(TN) 上面的表格中，提到了四个概念。\nTP(真阳性) 预测为真实际为真的数量。 FP(假阳性) 预测为真实际为假的数量。 FN(假阴性) 预测为假实际为真的数量。 TN(真阴性) 预测为假实际为假的数量。 查准率：Precision = TP/(TP + FP) 召回率：Recall = TP/(TP + FN) 查准率的分母表示的意义是：所有预测得癌症的样本数，即all predicted_positive(1)；召回率的分母表示的意义是：事实上所有得了癌症的样本数，即 all actual_positive(1)。\n一般来说模型的查准率高了，召回率就会降低，查准率降低了，召回率就会升高。\n应用在是否得癌症这个问题来说：\nactual(1) actual(0) predicted_positive(1) 真有癌症 假有癌，事实没病 predicted_negative(0) 假没病，事实得了癌症 真没有癌症 将临界值设置为0.7有较高的查准率，有较高的可能性他们真的得了癌症；与之相反这个回归模型有较低的召回率，因为我们做预测的时候只给一小部分病人预测y = 1。\n临界值设置为0.9查准率更高，召回率更低。\n将临界值设置为0.3，没有得癌症的人也会被预测得了癌症，准确率下降了，召回率增高了，这样没有得癌症的人可以进行有效的检查和治疗，因为确实患有癌症的人有很大一部分被我们标识出来了。\n那么如何在查准率和召回率中做取舍呢？可以计算$ F_1 SCORE $\n$$ F_1 SCORE = \\frac {2(P * R)}{(P + R)} $$\nprecision(p) recall(R) F score algorithm 1 0.5 0.4 0.444 algorithm 2 0.7 0.1 0.175 algorithm 3 0.02 1 0.0392 如在上述表格中，模型1拥有较高的$ F_1 SCORE $，故最优。\n",
+  "wordCount" : "91",
+  "inLanguage": "en",
+  "datePublished": "2022-02-24T11:18:15+08:00",
+  "dateModified": "2022-02-24T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+       分类问题中的查准率和召回率
+    </h1>
+    <div class="post-meta"><span title='2022-02-24 11:18:15 +0800 CST'>February 24, 2022</span>
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。</p>
+<p>假设处理一个二元分类问题：预测变量为y=1（得了癌症），y=0（没有得癌症）。在样本数据中y=0得数据非常少。假设我们通过逻辑回归得到一个分类，模型有95%的精度。是不是说这个模型很好呢？</p>
+<p>未必。现在我们设想总是预测y=0，这不是一个机器学习算法，但是我们会得到比上面逻辑回归更高的精确度。</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>actual(1)</th>
+          <th>actual(0)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>predicted_positive(1)</td>
+          <td>True Positive(TP)</td>
+          <td>False Positive(FP)</td>
+      </tr>
+      <tr>
+          <td>predicted_negative(0)</td>
+          <td>False Negative(FN)</td>
+          <td>True Negative(TN)</td>
+      </tr>
+  </tbody>
+</table>
+<p>上面的表格中，提到了四个概念。</p>
+<ul>
+<li>TP(真阳性) 预测为真实际为真的数量。</li>
+<li>FP(假阳性) 预测为真实际为假的数量。</li>
+<li>FN(假阴性) 预测为假实际为真的数量。</li>
+<li>TN(真阴性) 预测为假实际为假的数量。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>查准率：Precision = TP/(TP + FP)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>召回率：Recall = TP/(TP + FN)
+</span></span></code></pre></div><p>查准率的分母表示的意义是：所有预测得癌症的样本数，即all predicted_positive(1)；召回率的分母表示的意义是：事实上所有得了癌症的样本数，即 all actual_positive(1)。</p>
+<p>一般来说模型的查准率高了，召回率就会降低，查准率降低了，召回率就会升高。</p>
+<p>应用在是否得癌症这个问题来说：</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>actual(1)</th>
+          <th>actual(0)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>predicted_positive(1)</td>
+          <td>真有癌症</td>
+          <td>假有癌，事实没病</td>
+      </tr>
+      <tr>
+          <td>predicted_negative(0)</td>
+          <td>假没病，事实得了癌症</td>
+          <td>真没有癌症</td>
+      </tr>
+  </tbody>
+</table>
+<p>将临界值设置为0.7有较高的查准率，有较高的可能性他们真的得了癌症；与之相反这个回归模型有较低的召回率，因为我们做预测的时候只给一小部分病人预测y = 1。</p>
+<p>临界值设置为0.9查准率更高，召回率更低。</p>
+<p>将临界值设置为0.3，没有得癌症的人也会被预测得了癌症，准确率下降了，召回率增高了，这样没有得癌症的人可以进行有效的检查和治疗，因为确实患有癌症的人有很大一部分被我们标识出来了。</p>
+<p>那么如何在查准率和召回率中做取舍呢？可以计算$ F_1 SCORE $</p>
+<p>$$
+F_1 SCORE = \frac {2(P * R)}{(P + R)}
+$$</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>precision(p)</th>
+          <th>recall(R)</th>
+          <th>F score</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>algorithm 1</td>
+          <td>0.5</td>
+          <td>0.4</td>
+          <td>0.444</td>
+      </tr>
+      <tr>
+          <td>algorithm 2</td>
+          <td>0.7</td>
+          <td>0.1</td>
+          <td>0.175</td>
+      </tr>
+      <tr>
+          <td>algorithm 3</td>
+          <td>0.02</td>
+          <td>1</td>
+          <td>0.0392</td>
+      </tr>
+  </tbody>
+</table>
+<p>如在上述表格中，模型1拥有较高的$ F_1 SCORE $，故最优。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/machine-learning/">Machine Learning</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>如何处理过拟合和欠拟合</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E4%BB%80%E4%B9%88%E6%98%AF%E5%A5%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
+    <span class="title">Next »</span>
+    <br>
+    <span>什么是好的数据可视化</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

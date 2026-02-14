@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Python on Robert&#39;s Blog</title>
+    <link>https://xin5835.github.io/categories/python/</link>
+    <description>Recent content in Python on Robert&#39;s Blog</description>
+    <generator>Hugo -- 0.155.3</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 Dec 2023 11:18:15 +0800</lastBuildDate>
+    <atom:link href="https://xin5835.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>堆砌条形图</title>
+      <link>https://xin5835.github.io/post/%E5%A0%86%E7%A0%8C%E6%9D%A1%E5%BD%A2%E5%9B%BE/</link>
+      <pubDate>Sat, 09 Dec 2023 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E5%A0%86%E7%A0%8C%E6%9D%A1%E5%BD%A2%E5%9B%BE/</guid>
+      <description>&lt;p&gt;条形图和堆砌条形图。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>python读取mysql</title>
+      <link>https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/</link>
+      <pubDate>Mon, 13 Nov 2023 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/</guid>
+      <description>&lt;p&gt;Python读取Mysql数据库&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>机器学习_scikit_learn</title>
+      <link>https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/</link>
+      <pubDate>Wed, 20 Oct 2021 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_scikit_learn/</guid>
+      <description>&lt;p&gt;机器学习_scikit_learn演示。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>numpy基础</title>
+      <link>https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sat, 14 Aug 2021 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/</guid>
+      <description>&lt;p&gt;numpy基础&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>缺失值填充</title>
+      <link>https://xin5835.github.io/post/%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A1%AB%E5%85%85/</link>
+      <pubDate>Sat, 26 Sep 2020 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A1%AB%E5%85%85/</guid>
+      <description>&lt;p&gt;Python缺失值填充理解。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

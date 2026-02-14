@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Statistics on Robert&#39;s Blog</title>
+    <link>https://xin5835.github.io/categories/statistics/</link>
+    <description>Recent content in Statistics on Robert&#39;s Blog</description>
+    <generator>Hugo -- 0.155.3</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Apr 2022 11:18:15 +0800</lastBuildDate>
+    <atom:link href="https://xin5835.github.io/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>方差分析</title>
+      <link>https://xin5835.github.io/post/%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 25 Apr 2022 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;p&gt;方差分析案例讲解及计算过程。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>卡方检验</title>
+      <link>https://xin5835.github.io/post/%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C/</link>
+      <pubDate>Sun, 13 Feb 2022 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C/</guid>
+      <description>&lt;p&gt;卡方检验中的拟合度检验和独立性检验。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>李伯坚统计学</title>
+      <link>https://xin5835.github.io/post/statistics_bojian-li/</link>
+      <pubDate>Thu, 10 Dec 2020 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/statistics_bojian-li/</guid>
+      <description>&lt;p&gt;李伯坚统计学数学公式和知识点整理。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>掷一枚硬币得到正面的概率是1/2吗</title>
+      <link>https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/</link>
+      <pubDate>Mon, 09 Dec 2019 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/</guid>
+      <description>&lt;p&gt;从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

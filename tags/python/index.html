@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Python | Robert&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/tags/python/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://xin5835.github.io/tags/python/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/tags/python/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/tags/python/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="Python">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python">
+<meta name="twitter:description" content="">
+
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    Python
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">堆砌条形图
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>条形图和堆砌条形图。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-12-09 11:18:15 +0800 CST'>December 9, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 堆砌条形图" href="https://xin5835.github.io/post/%E5%A0%86%E7%A0%8C%E6%9D%A1%E5%BD%A2%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">python读取mysql
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Python读取Mysql数据库
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-11-13 11:18:15 +0800 CST'>November 13, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to python读取mysql" href="https://xin5835.github.io/post/python%E8%AF%BB%E5%8F%96mysql/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">解决seaborn无法加载数据集错误
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>解决seaborn无法加载数据集错误，使用sis_load_dataset()函数时会报错，实验了无数次，终于找到了解决办法。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-10-11 11:18:15 +0800 CST'>October 11, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 解决seaborn无法加载数据集错误" href="https://xin5835.github.io/post/%E8%A7%A3%E5%86%B3seaborn%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86%E9%94%99%E8%AF%AF/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">jupyter notebook自动补全
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>jupyter notebook自动补全
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-10-06 11:18:15 +0800 CST'>October 6, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to jupyter notebook自动补全" href="https://xin5835.github.io/post/jupyter-notebook%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">English adress split with python
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>If you have a DataFrame containing addresses, and you want to split the addresses using Python, here is one way to do it:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-04-19 11:18:15 +0800 CST'>April 19, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to English adress split with python" href="https://xin5835.github.io/post/city-split/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">SVM分类算法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>SVM分类算法详解。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-04-10 11:18:15 +0800 CST'>April 10, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to SVM分类算法" href="https://xin5835.github.io/post/svm%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">mac饼图和环形图
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>mac饼图和环形图，并开启中文字体支持。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-24 11:18:15 +0800 CST'>February 24, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to mac饼图和环形图" href="https://xin5835.github.io/post/mac%E9%A5%BC%E5%9B%BE%E5%92%8C%E7%8E%AF%E5%BD%A2%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+        <img loading="lazy" src="https://xin5835.github.io/images/RepeatCustomer.jpeg" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">顾客购物分析
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>顾客购物数据清洗、可视化和聚类分析.
+可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-12-28 11:18:15 +0800 CST'>December 28, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 顾客购物分析" href="https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Pandas_DataFrame索引列中括号个数
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Pandas_DataFrame索引列时，一个中括号和两个中括号有什么区别？
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-06-01 11:18:15 +0800 CST'>June 1, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to Pandas_DataFrame索引列中括号个数" href="https://xin5835.github.io/post/pandas_dataframe%E7%B4%A2%E5%BC%95%E5%88%97%E4%B8%AD%E6%8B%AC%E5%8F%B7%E4%B8%AA%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">numpy基础
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>numpy基础
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-14 11:18:15 +0800 CST'>August 14, 2021</span></footer>
+  <a class="entry-link" aria-label="post link to numpy基础" href="https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://xin5835.github.io/tags/python/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

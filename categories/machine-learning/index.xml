@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Machine Learning on Robert&#39;s Blog</title>
+    <link>https://xin5835.github.io/categories/machine-learning/</link>
+    <description>Recent content in Machine Learning on Robert&#39;s Blog</description>
+    <generator>Hugo -- 0.155.3</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Apr 2023 11:18:15 +0800</lastBuildDate>
+    <atom:link href="https://xin5835.github.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SVM分类算法</title>
+      <link>https://xin5835.github.io/post/svm%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 10 Apr 2023 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/svm%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/</guid>
+      <description>&lt;p&gt;SVM分类算法详解。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>正则化修正过拟合问题的直观理解</title>
+      <link>https://xin5835.github.io/post/%E6%AD%A3%E5%88%99%E5%8C%96%E4%BF%AE%E6%AD%A3%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Mon, 28 Feb 2022 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E6%AD%A3%E5%88%99%E5%8C%96%E4%BF%AE%E6%AD%A3%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3/</guid>
+      <description>&lt;p&gt;在拟合模型时如果出现了过拟合的情况，一种处理方式：减少模型的特征数量；另一种方式：加入正则项。那么如何理解加入正则项可以修正过拟合问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>如何处理过拟合和欠拟合</title>
+      <link>https://xin5835.github.io/post/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88/</link>
+      <pubDate>Sat, 26 Feb 2022 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88/</guid>
+      <description>&lt;p&gt;在拟合模型时，若模型出现了过拟合或者欠拟合的情况，应该从哪些方面着手处理？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title> 分类问题中的查准率和召回率</title>
+      <link>https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/</link>
+      <pubDate>Thu, 24 Feb 2022 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E6%9F%A5%E5%87%86%E7%8E%87%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87/</guid>
+      <description>&lt;p&gt;在处理分类问题时，如果分类中数据出现严重的偏斜状况。模型的精确度将无法作为评价模型好坏的标准。这时需要通过查准率和召回率来处理这一问题。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

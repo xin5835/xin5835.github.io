@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>用户画像元数据 | Robert&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="用户画像相关元数据整理，来自《用户画像》&ndash;赵宏田 。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%85%83%E6%95%B0%E6%8D%AE/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%85%83%E6%95%B0%E6%8D%AE/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%85%83%E6%95%B0%E6%8D%AE/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="用户画像元数据">
+  <meta property="og:description" content="用户画像相关元数据整理，来自《用户画像》–赵宏田 。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-01-20T11:18:15+08:00">
+    <meta property="article:modified_time" content="2023-01-20T11:18:15+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用户画像元数据">
+<meta name="twitter:description" content="用户画像相关元数据整理，来自《用户画像》&ndash;赵宏田 。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "用户画像元数据",
+      "item": "https://xin5835.github.io/post/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%85%83%E6%95%B0%E6%8D%AE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "用户画像元数据",
+  "name": "用户画像元数据",
+  "description": "用户画像相关元数据整理，来自《用户画像》\u0026ndash;赵宏田 。\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "用户画像相关元数据整理，来自《用户画像》–赵宏田 。\n相关元数据\n用户信息表\n表1-2 用户信息表(dim.user_basic_info)\n字段 字段类型 字段定义 备注 user_id character varying(50) 用户编码 user_name character varying(50) 用户姓名 user_status_id integer 用户状态 0:未注册；1:已注册；2:已注销 mail_id character varying(40) 邮箱编码 birthday character varying(40) 用户生日 gender_id smallint 性别 0:男；1:女；2:其他 call_phone_id character varying(64) 电话号码 is_has_photo smallint 是否有头像 gmt_created timestamp 创建时间 gmt_created_date date 注册日期 province_name character varying(20) 归属省 用户填写\u003e手机号归属地\u003e身份证归属地 city_name character varying(20) 归属市 同上 user_address character varying(320) 详细地址 商品订单表\n表1-3 商品订单表(dw.order_info_fact)\n字段 字段类型 字段定义 备注 id bigint 自增主键 source_id bigint 订单来源标识 0:App; 1:Web; 2:H5; 3: 其他 user_id character varying(50) 用户编码 user_name character varying(50) 用户姓名 order_id integer 订单号 std_book_id bigint 图书编码 std_book_name character varying(80) 图书名称 creat_time timestamp 订单生成时间 creat_date date 订单日期 order_remark character varying(80) 订单备注 status_id bigint 订单状态 1:待支付; 2:已完成; 3:已取消; 4:已退款；5:支付失败 status_time timestamp 订单状态时间 order_amount double precision 订单金额 pay_account character varying(50) 付款账户 pay_type_id character varying(30) 付款方式 埋点日志表\n表1-4 埋点日志表(ods.page_event_log)\n字段 字段类型 字段定义 备注 login_id character varying(50) 设备登陆名 设备记录的用户登陆名 user_id character varying(50) 用户id session_id character varying(50) 设备id visit_time timestamp 访问时间 本次访问操作在日志表中的生成时间 report_time timestamp 设备时间 终端记录用户点击按钮时间 province character varying(50) 用户所在省份 通过IP地址解析获取用户所在省份 city character varying(50) 用户所在城市 通过IP地址解析获取用户所在城市 referer_url character varying(50) 上一个页面url 上一个访问页面地址 url character varying(50) 当前页面url 当前访问页面的链接地址 client character varying(50) 操作系统 mac/windows date_id date 登陆日期 YYYY-MM-DD lon character varying(50) 经度 用户设备登陆时所在经度 lat character varying(50) 纬度 用户设备登陆时所在维度 访问日志表\n表1-5 访问日志表(ods.page_view_log)\n字段 字段类型 字段定义 备注 login_id character varying(50) 设备登陆名 设备记录的用户登陆名 user_id character varying(50) 用户id session_id character varying(50) 设备id date_id date 登陆日期 YYYY-MM-DD visit_time timestamp 访问时间 本次访问操作在日志表中的生成时间 report_time timestamp 设备时间 终端记录用户点击按钮时间 province character varying(50) 用户所在省份 通过IP地址解析获取用户所在省份 city character varying(50) 用户所在城市 通过IP地址解析获取用户所在城市 referer_url character varying(50) 上一个页面url 上一个访问页面地址 url character varying(50) 当前页面url 当前访问页面的链接地址 client character varying(50) 操作系统 android/ios/win lon character varying(50) 经度 用户设备登陆时所在经度 lat character varying(50) 纬度 用户设备登陆时所在维度 商品评论表\n表1-6 商品评论表(dw.book_comment)\n字段 字段类型 字段定义 备注 user_id character varying(15) 用户id user_name character varying(15) 用户姓名 user_content character varying(64) 评论内容 user_images character varying(15) 评论图片 status_id bigint 评论状态 1:待审核；2:已审核； 3:已屏蔽 order_code integer 订单id，订单对应编号 creat_time character varying(15) 创建时间 creat_date date 创建日期 content_ip character varying(15) 评论用户ip modify_time timestamp 更新时间 搜索日志表\n表1-7 搜索日志表(dw.app_search_log)\n字段 字段类型 字段定义 备注 login_id character varying(15) 设备登陆名 设备记录的用户登陆名 user_id character varying(15) 用户id session_id character varying(15) 设备id search_rad character varying(15) 搜索id date_id date 搜索日期 visit_time timestamp 搜索时间 search_q character varying(15) 用户搜索关键词 tag_name character varying(15) 标签内容 搜索关键词切词后与标签库模糊匹配 random_id character varying(15) 每个访问 的随机数 用户收藏表\n表1-8 用户收藏表(dw.book_collection_df)\n字段 字段类型 字段定义 备注 user_id character varying(15) 用户id creat_date date 收藏日期 creat_time timestamp 收藏时间 book_id bigint 图书id book_name character varying(50) 图书名称 status_id bigint 收藏状态 1:收藏；2:取消收藏 modify_date date 修改日期 modify_time timestamp 修改时间 购物车信息表\n表1-9 购物车信息表(dw.shopping_cart_df)\n字段 字段类型 字段定义 备注 user_id character varying(15) 用户id book_id bigint 图书id book_name character varying(50) 图书名称 quantity bigint 图书数量 creat_date date 创建日期 creat_time timestamp 创建时间 status_id bigint 图书状态 1:加购；2:移除购物车 modify_date date 修改日期 modify_time timestamp 修改时间 ",
+  "wordCount" : "423",
+  "inLanguage": "en",
+  "datePublished": "2023-01-20T11:18:15+08:00",
+  "dateModified": "2023-01-20T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%85%83%E6%95%B0%E6%8D%AE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      用户画像元数据
+    </h1>
+    <div class="post-meta"><span title='2023-01-20 11:18:15 +0800 CST'>January 20, 2023</span>
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>用户画像相关元数据整理，来自《用户画像》&ndash;赵宏田 。</p>
+<p>相关元数据</p>
+<ol>
+<li>
+<p>用户信息表</p>
+<p>表1-2 用户信息表(dim.user_basic_info)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(50)</td>
+          <td>用户编码</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>user_name</td>
+          <td>character varying(50)</td>
+          <td>用户姓名</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>user_status_id</td>
+          <td>integer</td>
+          <td>用户状态</td>
+          <td>0:未注册；1:已注册；2:已注销</td>
+      </tr>
+      <tr>
+          <td>mail_id</td>
+          <td>character varying(40)</td>
+          <td>邮箱编码</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>birthday</td>
+          <td>character varying(40)</td>
+          <td>用户生日</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>gender_id</td>
+          <td>smallint</td>
+          <td>性别</td>
+          <td>0:男；1:女；2:其他</td>
+      </tr>
+      <tr>
+          <td>call_phone_id</td>
+          <td>character varying(64)</td>
+          <td>电话号码</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>is_has_photo</td>
+          <td>smallint</td>
+          <td>是否有头像</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>gmt_created</td>
+          <td>timestamp</td>
+          <td>创建时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>gmt_created_date</td>
+          <td>date</td>
+          <td>注册日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>province_name</td>
+          <td>character varying(20)</td>
+          <td>归属省</td>
+          <td>用户填写&gt;手机号归属地&gt;身份证归属地</td>
+      </tr>
+      <tr>
+          <td>city_name</td>
+          <td>character varying(20)</td>
+          <td>归属市</td>
+          <td>同上</td>
+      </tr>
+      <tr>
+          <td>user_address</td>
+          <td>character varying(320)</td>
+          <td>详细地址</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>商品订单表</p>
+<p>表1-3 商品订单表(dw.order_info_fact)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>id</td>
+          <td>bigint</td>
+          <td>自增主键</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>source_id</td>
+          <td>bigint</td>
+          <td>订单来源标识</td>
+          <td>0:App; 1:Web; 2:H5; 3: 其他</td>
+      </tr>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(50)</td>
+          <td>用户编码</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>user_name</td>
+          <td>character varying(50)</td>
+          <td>用户姓名</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>order_id</td>
+          <td>integer</td>
+          <td>订单号</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>std_book_id</td>
+          <td>bigint</td>
+          <td>图书编码</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>std_book_name</td>
+          <td>character varying(80)</td>
+          <td>图书名称</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_time</td>
+          <td>timestamp</td>
+          <td>订单生成时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_date</td>
+          <td>date</td>
+          <td>订单日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>order_remark</td>
+          <td>character varying(80)</td>
+          <td>订单备注</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>status_id</td>
+          <td>bigint</td>
+          <td>订单状态</td>
+          <td>1:待支付; 2:已完成; 3:已取消; 4:已退款；5:支付失败</td>
+      </tr>
+      <tr>
+          <td>status_time</td>
+          <td>timestamp</td>
+          <td>订单状态时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>order_amount</td>
+          <td>double precision</td>
+          <td>订单金额</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>pay_account</td>
+          <td>character varying(50)</td>
+          <td>付款账户</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>pay_type_id</td>
+          <td>character varying(30)</td>
+          <td>付款方式</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>埋点日志表</p>
+<p>表1-4 埋点日志表(ods.page_event_log)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>login_id</td>
+          <td>character varying(50)</td>
+          <td>设备登陆名</td>
+          <td>设备记录的用户登陆名</td>
+      </tr>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(50)</td>
+          <td>用户id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>session_id</td>
+          <td>character varying(50)</td>
+          <td>设备id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>visit_time</td>
+          <td>timestamp</td>
+          <td>访问时间</td>
+          <td>本次访问操作在日志表中的生成时间</td>
+      </tr>
+      <tr>
+          <td>report_time</td>
+          <td>timestamp</td>
+          <td>设备时间</td>
+          <td>终端记录用户点击按钮时间</td>
+      </tr>
+      <tr>
+          <td>province</td>
+          <td>character varying(50)</td>
+          <td>用户所在省份</td>
+          <td>通过IP地址解析获取用户所在省份</td>
+      </tr>
+      <tr>
+          <td>city</td>
+          <td>character varying(50)</td>
+          <td>用户所在城市</td>
+          <td>通过IP地址解析获取用户所在城市</td>
+      </tr>
+      <tr>
+          <td>referer_url</td>
+          <td>character varying(50)</td>
+          <td>上一个页面url</td>
+          <td>上一个访问页面地址</td>
+      </tr>
+      <tr>
+          <td>url</td>
+          <td>character varying(50)</td>
+          <td>当前页面url</td>
+          <td>当前访问页面的链接地址</td>
+      </tr>
+      <tr>
+          <td>client</td>
+          <td>character varying(50)</td>
+          <td>操作系统</td>
+          <td>mac/windows</td>
+      </tr>
+      <tr>
+          <td>date_id</td>
+          <td>date</td>
+          <td>登陆日期</td>
+          <td>YYYY-MM-DD</td>
+      </tr>
+      <tr>
+          <td>lon</td>
+          <td>character varying(50)</td>
+          <td>经度</td>
+          <td>用户设备登陆时所在经度</td>
+      </tr>
+      <tr>
+          <td>lat</td>
+          <td>character varying(50)</td>
+          <td>纬度</td>
+          <td>用户设备登陆时所在维度</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>访问日志表</p>
+<p>表1-5 访问日志表(ods.page_view_log)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>login_id</td>
+          <td>character varying(50)</td>
+          <td>设备登陆名</td>
+          <td>设备记录的用户登陆名</td>
+      </tr>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(50)</td>
+          <td>用户id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>session_id</td>
+          <td>character varying(50)</td>
+          <td>设备id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>date_id</td>
+          <td>date</td>
+          <td>登陆日期</td>
+          <td>YYYY-MM-DD</td>
+      </tr>
+      <tr>
+          <td>visit_time</td>
+          <td>timestamp</td>
+          <td>访问时间</td>
+          <td>本次访问操作在日志表中的生成时间</td>
+      </tr>
+      <tr>
+          <td>report_time</td>
+          <td>timestamp</td>
+          <td>设备时间</td>
+          <td>终端记录用户点击按钮时间</td>
+      </tr>
+      <tr>
+          <td>province</td>
+          <td>character varying(50)</td>
+          <td>用户所在省份</td>
+          <td>通过IP地址解析获取用户所在省份</td>
+      </tr>
+      <tr>
+          <td>city</td>
+          <td>character varying(50)</td>
+          <td>用户所在城市</td>
+          <td>通过IP地址解析获取用户所在城市</td>
+      </tr>
+      <tr>
+          <td>referer_url</td>
+          <td>character varying(50)</td>
+          <td>上一个页面url</td>
+          <td>上一个访问页面地址</td>
+      </tr>
+      <tr>
+          <td>url</td>
+          <td>character varying(50)</td>
+          <td>当前页面url</td>
+          <td>当前访问页面的链接地址</td>
+      </tr>
+      <tr>
+          <td>client</td>
+          <td>character varying(50)</td>
+          <td>操作系统</td>
+          <td>android/ios/win</td>
+      </tr>
+      <tr>
+          <td>lon</td>
+          <td>character varying(50)</td>
+          <td>经度</td>
+          <td>用户设备登陆时所在经度</td>
+      </tr>
+      <tr>
+          <td>lat</td>
+          <td>character varying(50)</td>
+          <td>纬度</td>
+          <td>用户设备登陆时所在维度</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>商品评论表</p>
+<p>表1-6 商品评论表(dw.book_comment)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(15)</td>
+          <td>用户id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>user_name</td>
+          <td>character varying(15)</td>
+          <td>用户姓名</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>user_content</td>
+          <td>character varying(64)</td>
+          <td>评论内容</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>user_images</td>
+          <td>character varying(15)</td>
+          <td>评论图片</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>status_id</td>
+          <td>bigint</td>
+          <td>评论状态</td>
+          <td>1:待审核；2:已审核； 3:已屏蔽</td>
+      </tr>
+      <tr>
+          <td>order_code</td>
+          <td>integer</td>
+          <td>订单id，订单对应编号</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_time</td>
+          <td>character varying(15)</td>
+          <td>创建时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_date</td>
+          <td>date</td>
+          <td>创建日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>content_ip</td>
+          <td>character varying(15)</td>
+          <td>评论用户ip</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>modify_time</td>
+          <td>timestamp</td>
+          <td>更新时间</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>搜索日志表</p>
+<p>表1-7 搜索日志表(dw.app_search_log)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>login_id</td>
+          <td>character varying(15)</td>
+          <td>设备登陆名</td>
+          <td>设备记录的用户登陆名</td>
+      </tr>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(15)</td>
+          <td>用户id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>session_id</td>
+          <td>character varying(15)</td>
+          <td>设备id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>search_rad</td>
+          <td>character varying(15)</td>
+          <td>搜索id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>date_id</td>
+          <td>date</td>
+          <td>搜索日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>visit_time</td>
+          <td>timestamp</td>
+          <td>搜索时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>search_q</td>
+          <td>character varying(15)</td>
+          <td>用户搜索关键词</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>tag_name</td>
+          <td>character varying(15)</td>
+          <td>标签内容</td>
+          <td>搜索关键词切词后与标签库模糊匹配</td>
+      </tr>
+      <tr>
+          <td>random_id</td>
+          <td>character varying(15)</td>
+          <td>每个访问 的随机数</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>用户收藏表</p>
+<p>表1-8 用户收藏表(dw.book_collection_df)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(15)</td>
+          <td>用户id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_date</td>
+          <td>date</td>
+          <td>收藏日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_time</td>
+          <td>timestamp</td>
+          <td>收藏时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>book_id</td>
+          <td>bigint</td>
+          <td>图书id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>book_name</td>
+          <td>character varying(50)</td>
+          <td>图书名称</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>status_id</td>
+          <td>bigint</td>
+          <td>收藏状态</td>
+          <td>1:收藏；2:取消收藏</td>
+      </tr>
+      <tr>
+          <td>modify_date</td>
+          <td>date</td>
+          <td>修改日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>modify_time</td>
+          <td>timestamp</td>
+          <td>修改时间</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>购物车信息表</p>
+<p>表1-9 购物车信息表(dw.shopping_cart_df)</p>
+<table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>字段类型</th>
+          <th>字段定义</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>user_id</td>
+          <td>character varying(15)</td>
+          <td>用户id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>book_id</td>
+          <td>bigint</td>
+          <td>图书id</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>book_name</td>
+          <td>character varying(50)</td>
+          <td>图书名称</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>quantity</td>
+          <td>bigint</td>
+          <td>图书数量</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_date</td>
+          <td>date</td>
+          <td>创建日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>creat_time</td>
+          <td>timestamp</td>
+          <td>创建时间</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>status_id</td>
+          <td>bigint</td>
+          <td>图书状态</td>
+          <td>1:加购；2:移除购物车</td>
+      </tr>
+      <tr>
+          <td>modify_date</td>
+          <td>date</td>
+          <td>修改日期</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>modify_time</td>
+          <td>timestamp</td>
+          <td>修改时间</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/openai%E5%BA%94%E7%94%A8/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>OpenAI应用</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E9%BB%91%E5%8C%96190%E5%8F%A5/">
+    <span class="title">Next »</span>
+    <br>
+    <span>互联网大厂黑化190句</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

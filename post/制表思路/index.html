@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title> 制表思路 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Data Analysis">
+<meta name="description" content="搭建制表思路5个步骤。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E5%88%B6%E8%A1%A8%E6%80%9D%E8%B7%AF/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E5%88%B6%E8%A1%A8%E6%80%9D%E8%B7%AF/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E5%88%B6%E8%A1%A8%E6%80%9D%E8%B7%AF/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content=" 制表思路">
+  <meta property="og:description" content="搭建制表思路5个步骤。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-25T11:18:15+08:00">
+    <meta property="article:modified_time" content="2019-12-25T11:18:15+08:00">
+    <meta property="article:tag" content="Data Analysis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 制表思路">
+<meta name="twitter:description" content="搭建制表思路5个步骤。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": " 制表思路",
+      "item": "https://xin5835.github.io/post/%E5%88%B6%E8%A1%A8%E6%80%9D%E8%B7%AF/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": " 制表思路",
+  "name": " 制表思路",
+  "description": "搭建制表思路5个步骤。\n",
+  "keywords": [
+    "Data Analysis"
+  ],
+  "articleBody": "搭建制表思路5个步骤。\n你的问题是什么\n先搞清楚问题是什么\n如要用采购单做一个做一个采购分析 一般采购单和采购分析都是展示表，不是数据表，需要将采购单整理为参数表+数据表，进而进行采购分析 你要什么\n2.1 将模糊的问题进行刻画，找到具体的关注指标\n如：要采购阿根廷红虾，想知道最近半年的采购均价是多少，曾经跟那些供应商买过，历史价格是多少，向供应商的付过的款占几成\n2.2 问题拆解\n序号 问题 要素 谁能提供 行动计划 1 某件商品在某段时期的采购均价？ 商品、日期、单价 采购单 将采购单整理为采购清单 2 向谁买过？历史价格？ 供应商、商品、日期、单价 采购单 将采购单整理为采购清单 3 向供应商付过几成款？ 供应商、采购单、总金额、已付款 财务部 到财务部下载付款清单 如何确定数据表\n采购清单示例:\n采购单号 购买日期 供应商代码 供应商简称 商品编码 品类 品名 品牌 规格 单位 数量 单价 金额 PO2018301-125 2018/3/1 k0001 小味道 S001 生鲜 阿根廷红虾 蓝雪 2000g 包 401 116.84 46,852.84 PO2018301-125 2018/3/1 k0001 小味道 S002 生鲜 三文鱼 汤普生 500g 包 471 124.08 58,441.68 PO2018301-125 2018/3/1 k0001 小味道 S003 生鲜 牛排 Greenlea 300g 包 392 28.16 11,038.72 财务清单示例：\n采购单号 购买日期 采购员 供应商代码 供应商简称 金额 已付款 未付款 付款条款 PO2018301-125 2018/3/1 老王 k001 小味道 116,333.24 46,698 69,635 按协议 如何美化数据\n同类数据在表头用色块区分 单元格架边框作为分界，营造视觉上的分割效果 单元格做好对齐，字体一致 制作展示表\n数据透视表 + 数据透视图\n",
+  "wordCount" : "112",
+  "inLanguage": "en",
+  "datePublished": "2019-12-25T11:18:15+08:00",
+  "dateModified": "2019-12-25T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E5%88%B6%E8%A1%A8%E6%80%9D%E8%B7%AF/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+       制表思路
+    </h1>
+    <div class="post-meta"><span title='2019-12-25 11:18:15 +0800 CST'>December 25, 2019</span>
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>搭建制表思路5个步骤。</p>
+<ol>
+<li>
+<p>你的问题是什么</p>
+<p>先搞清楚问题是什么</p>
+<ul>
+<li>如要用采购单做一个做一个采购分析</li>
+<li>一般采购单和采购分析都是展示表，不是数据表，需要将采购单整理为参数表+数据表，进而进行采购分析</li>
+</ul>
+</li>
+<li>
+<p>你要什么</p>
+<p>2.1 将模糊的问题进行刻画，找到具体的关注指标</p>
+<p>如：要采购阿根廷红虾，想知道最近半年的采购均价是多少，曾经跟那些供应商买过，历史价格是多少，向供应商的付过的款占几成</p>
+<p>2.2 问题拆解</p>
+<table>
+  <thead>
+      <tr>
+          <th>序号</th>
+          <th>问题</th>
+          <th>要素</th>
+          <th>谁能提供</th>
+          <th>行动计划</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>某件商品在某段时期的采购均价？</td>
+          <td>商品、日期、单价</td>
+          <td>采购单</td>
+          <td>将采购单整理为采购清单</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>向谁买过？历史价格？</td>
+          <td>供应商、商品、日期、单价</td>
+          <td>采购单</td>
+          <td>将采购单整理为采购清单</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>向供应商付过几成款？</td>
+          <td>供应商、采购单、总金额、已付款</td>
+          <td>财务部</td>
+          <td>到财务部下载付款清单</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>如何确定数据表</p>
+<p>采购清单示例:</p>
+<table>
+  <thead>
+      <tr>
+          <th>采购单号</th>
+          <th>购买日期</th>
+          <th>供应商代码</th>
+          <th>供应商简称</th>
+          <th>商品编码</th>
+          <th>品类</th>
+          <th>品名</th>
+          <th>品牌</th>
+          <th>规格</th>
+          <th>单位</th>
+          <th>数量</th>
+          <th>单价</th>
+          <th>金额</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>PO2018301-125</td>
+          <td>2018/3/1</td>
+          <td>k0001</td>
+          <td>小味道</td>
+          <td>S001</td>
+          <td>生鲜</td>
+          <td>阿根廷红虾</td>
+          <td>蓝雪</td>
+          <td>2000g</td>
+          <td>包</td>
+          <td>401</td>
+          <td>116.84</td>
+          <td>46,852.84</td>
+      </tr>
+      <tr>
+          <td>PO2018301-125</td>
+          <td>2018/3/1</td>
+          <td>k0001</td>
+          <td>小味道</td>
+          <td>S002</td>
+          <td>生鲜</td>
+          <td>三文鱼</td>
+          <td>汤普生</td>
+          <td>500g</td>
+          <td>包</td>
+          <td>471</td>
+          <td>124.08</td>
+          <td>58,441.68</td>
+      </tr>
+      <tr>
+          <td>PO2018301-125</td>
+          <td>2018/3/1</td>
+          <td>k0001</td>
+          <td>小味道</td>
+          <td>S003</td>
+          <td>生鲜</td>
+          <td>牛排</td>
+          <td>Greenlea</td>
+          <td>300g</td>
+          <td>包</td>
+          <td>392</td>
+          <td>28.16</td>
+          <td>11,038.72</td>
+      </tr>
+  </tbody>
+</table>
+<p>财务清单示例：</p>
+<table>
+  <thead>
+      <tr>
+          <th>采购单号</th>
+          <th>购买日期</th>
+          <th>采购员</th>
+          <th>供应商代码</th>
+          <th>供应商简称</th>
+          <th>金额</th>
+          <th>已付款</th>
+          <th>未付款</th>
+          <th>付款条款</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>PO2018301-125</td>
+          <td>2018/3/1</td>
+          <td>老王</td>
+          <td>k001</td>
+          <td>小味道</td>
+          <td>116,333.24</td>
+          <td>46,698</td>
+          <td>69,635</td>
+          <td>按协议</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>如何美化数据</p>
+<ul>
+<li>同类数据在表头用色块区分</li>
+<li>单元格架边框作为分界，营造视觉上的分割效果</li>
+<li>单元格做好对齐，字体一致</li>
+</ul>
+</li>
+<li>
+<p>制作展示表</p>
+<p>数据透视表 + 数据透视图</p>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/data-analysis/">Data Analysis</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E5%AF%B9%E6%AF%94%E5%A4%A7%E8%84%91%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%9D%E7%BB%B4%E4%B8%8E%E8%AE%B0%E5%BF%86/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>对比大脑和计算机的思维与记忆</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E4%BA%8B%E7%89%A9%E7%9A%84%E6%9C%AC%E8%B4%A8/">
+    <span class="title">Next »</span>
+    <br>
+    <span>事物的本质</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

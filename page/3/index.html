@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.155.3"><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Robert&#39;s Blog</title>
+
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://xin5835.github.io/index.xml" title="rss">
+<link rel="alternate" type="application/json" href="https://xin5835.github.io/index.json" title="json">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="Robert&#39;s Blog">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Robert&#39;s Blog">
+<meta name="twitter:description" content="">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Robert's Blog",
+  "url": "https://xin5835.github.io/",
+  "description": "",
+  "logo": "https://xin5835.github.io/favicon.ico",
+  "sameAs": [
+      "https://github.com/xin5835"
+  ]
+}
+</script>
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span class="active">🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">本经阴符七术 
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>本经阴符七术
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-12-18 11:18:15 +0800 CST'>December 18, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 本经阴符七术 " href="https://xin5835.github.io/post/%E6%9C%AC%E7%BB%8F%E9%98%B4%E7%AC%A6%E4%B8%83%E6%9C%AF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">德道经楚简
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>德道经—楚简版
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-11-18 11:18:15 +0800 CST'>November 18, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 德道经楚简" href="https://xin5835.github.io/post/%E9%81%93%E5%BE%B7%E7%BB%8F%E6%A5%9A%E7%AE%80/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">阴符经
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>阴符经
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-15 11:18:15 +0800 CST'>October 15, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 阴符经" href="https://xin5835.github.io/post/%E9%98%B4%E7%AC%A6%E7%BB%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">网址收藏
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>一些不错的网址。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-08-20 11:18:15 +0800 CST'>August 20, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 网址收藏" href="https://xin5835.github.io/post/%E7%BD%91%E5%9D%80%E6%94%B6%E8%97%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Pandas_DataFrame索引列中括号个数
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Pandas_DataFrame索引列时，一个中括号和两个中括号有什么区别？
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-06-01 11:18:15 +0800 CST'>June 1, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to Pandas_DataFrame索引列中括号个数" href="https://xin5835.github.io/post/pandas_dataframe%E7%B4%A2%E5%BC%95%E5%88%97%E4%B8%AD%E6%8B%AC%E5%8F%B7%E4%B8%AA%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">方差分析
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>方差分析案例讲解及计算过程。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-25 11:18:15 +0800 CST'>April 25, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 方差分析" href="https://xin5835.github.io/post/%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">如何在mac系统创建txt、csv、md文件
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>如何在mac系统创建txt、csv、md文件。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-08 11:18:15 +0800 CST'>April 8, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 如何在mac系统创建txt、csv、md文件" href="https://xin5835.github.io/post/%E5%A6%82%E4%BD%95%E5%9C%A8mac%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAtxtcsvmd%E6%96%87%E4%BB%B6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">hexo博客迁移到hugo
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>一直以来都是在hexo上写博客。迁移博客比较耗时，这次下定决心迁移博客主要有这么几个原因。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-03-20 22:26:10 +0800 CST'>March 20, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to hexo博客迁移到hugo" href="https://xin5835.github.io/post/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%88%B0hugo/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">正则化修正过拟合问题的直观理解
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>在拟合模型时如果出现了过拟合的情况，一种处理方式：减少模型的特征数量；另一种方式：加入正则项。那么如何理解加入正则项可以修正过拟合问题。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-02-28 11:18:15 +0800 CST'>February 28, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 正则化修正过拟合问题的直观理解" href="https://xin5835.github.io/post/%E6%AD%A3%E5%88%99%E5%8C%96%E4%BF%AE%E6%AD%A3%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">如何处理过拟合和欠拟合
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>在拟合模型时，若模型出现了过拟合或者欠拟合的情况，应该从哪些方面着手处理？
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-02-26 11:18:15 +0800 CST'>February 26, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to 如何处理过拟合和欠拟合" href="https://xin5835.github.io/post/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://xin5835.github.io/page/2/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="https://xin5835.github.io/page/4/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

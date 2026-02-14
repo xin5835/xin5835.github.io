@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>掷一枚硬币得到正面的概率是1/2吗 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Statistics">
+<meta name="description" content="从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a718f3a08e69940498c8a657f91a101972af848a63199212d8fbb8f448628a5.css" integrity="sha256-enGPOgjmmUBJjIplf5GhAZcq&#43;EimMZkhLY&#43;7j0SGKKU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="掷一枚硬币得到正面的概率是1/2吗">
+  <meta property="og:description" content="从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-09T11:18:15+08:00">
+    <meta property="article:modified_time" content="2019-12-09T11:18:15+08:00">
+    <meta property="article:tag" content="Statistics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="掷一枚硬币得到正面的概率是1/2吗">
+<meta name="twitter:description" content="从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "掷一枚硬币得到正面的概率是1/2吗",
+      "item": "https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "掷一枚硬币得到正面的概率是1/2吗",
+  "name": "掷一枚硬币得到正面的概率是1\/2吗",
+  "description": "从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。\n",
+  "keywords": [
+    "Statistics"
+  ],
+  "articleBody": "从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。\n1.先从实验谈起\n之前的很多统计学家做过抛硬币的实验，如：皮尔逊等人。比如，做一个抛硬币的实验，当试验次数n趋向于+∞时，观测者观测到出现正面的比例（概率）逼近1/2。\n这样的掷硬币实验，要想得到正面向上的概率，有两个关键点。一、样本空间和事件（E），这是概率的定义；二，要想知道实验的结果如何，依赖于观测者的观测行为，倘若不去观测，那么实验结果将无从得知。无论从样本空间还是观测行为来看，掷一枚硬币得到正面的概率都不是1/2.\n2.1样本空间\n掷一枚硬币的样本空间为（正面、反面、既不是正面也不是反面（直立非平躺的状态））。先来说第三种情况是否真实存在？首先从硬币是有厚度的，而且厚度不趋向于0，对于一个有厚度的圆柱体（三维）来说，硬币的棱直立在平面上是能够实现的，想象一下轮胎，一个半径和厚度同时放大的硬币，直立对于一个轮胎来说是他的常态，我想没有人会否认这一点。其次，退而求其次，站在概率的角度上来看，硬币直立这种情况不是没有可能出现这一情况。即得到既不是正面也不是反面这一事件的概率不为0。\n样本空间从2变成了3，那么得到掷一枚硬币得到正面的概率将不再是1/2了，但也不会是1/3，因为，硬币的厚度与硬币的直径长度比相差太大，换言之，公平的硬币不再是公平的硬币了。\n2.2观测行为\n只有观测才使掷硬币实验才有了现实的统计意义。但本身观测这一行为是有问题的。我将试着从量子力学和维度的角度来阐释这一问题。\n2.21量子力学\n量子力学中有两个经典实验，一个是薛定谔的猫，一个事电子双缝实验。这两个实验和掷硬币实验从统计的角度看惊人的相似。\n掷一枚硬币后，观测者观测到硬币是正面，对于这一结果，量子力学角度的解释是一枚掷出的硬币同时具有波的属性和粒子的属性（即波粒二象性），由于观测者的观测导致了波函数的坍缩，只看到了正面。举一个例子，对于一枚直立的硬币，观测者站在直立硬币的水平切线上去观测这枚硬币，观测者将只能看见这个硬币的棱，而无法观测到硬币的正面或反面。\n2.22观测行为\n人作为一种三维的生物，可以完全观测到一维的点和线，二维的面，三维空间下的超平面（超平面还是二位），但却无法完整的观测到一个三维的物体，在不变换观测视角或者变化观测物体的位置时。也就是说三维物体的人只能观测到一维和二维的全部形状，三维物体的部分形状，即观测行为发生了降维。\n硬币是一个三维的圆柱体，对于一枚平躺的正面向上的硬币，我们仅仅能观测到一个面（二维），棱观测不到。即观测行为导致了一枚投掷硬币在落下时波函数的坍缩。\n3.一种假设\n假设一种四维生物或者人带上一种眼镜，可以具有四维视角，能够观测到一个三维物体（硬币）的形状，那么在观测者的观测行为中，维度从四维降到三维，波函数坍缩一维度，能够同时观测到硬币的正面、反面以及棱的这一面。换言之，从观测的结果来看样本空间的这三个事件都被同时观测到了，这三个事件同时被观测者观测到，这三个事件都必然的发生了，三个事件的概率均为1。\n4.推论\n如果抛开观测来看，硬币出于一种三面同时向上的叠加态，同时具有波的属性和粒子的属性，由于，人的观测发生了降维，波函数坍缩，三维的硬币，投影到观测者的观测行为中就只具有了二维的面的特征，正面、反面或棱面。\n",
+  "wordCount" : "19",
+  "inLanguage": "en",
+  "datePublished": "2019-12-09T11:18:15+08:00",
+  "dateModified": "2019-12-09T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/%E6%8E%B7%E4%B8%80%E6%9E%9A%E7%A1%AC%E5%B8%81%E7%9A%84%E6%A6%82%E7%8E%87%E6%98%AF12%E5%90%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      掷一枚硬币得到正面的概率是1/2吗
+    </h1>
+    <div class="post-meta"><span title='2019-12-09 11:18:15 +0800 CST'>December 9, 2019</span>
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>从掷一枚硬币谈谈主观概率和客观概率。参考微积分、线性代数和量子力学的一些观点，对自己的学习进行一些总结和思考。</p>
+<p><strong>1.先从实验谈起</strong></p>
+<p>之前的很多统计学家做过抛硬币的实验，如：皮尔逊等人。比如，做一个抛硬币的实验，当试验次数n趋向于+∞时，观测者观测到出现正面的比例（概率）逼近1/2。</p>
+<p>这样的掷硬币实验，要想得到正面向上的概率，有两个关键点。一、样本空间和事件（E），这是概率的定义；二，要想知道实验的结果如何，依赖于观测者的观测行为，倘若不去观测，那么实验结果将无从得知。无论从样本空间还是观测行为来看，掷一枚硬币得到正面的概率都不是1/2.</p>
+<p><strong>2.1样本空间</strong></p>
+<p>掷一枚硬币的样本空间为（正面、反面、既不是正面也不是反面（直立非平躺的状态））。先来说第三种情况是否真实存在？首先从硬币是有厚度的，而且厚度不趋向于0，对于一个有厚度的圆柱体（三维）来说，硬币的棱直立在平面上是能够实现的，想象一下轮胎，一个半径和厚度同时放大的硬币，直立对于一个轮胎来说是他的常态，我想没有人会否认这一点。其次，退而求其次，站在概率的角度上来看，硬币直立这种情况不是没有可能出现这一情况。即得到既不是正面也不是反面这一事件的概率不为0。</p>
+<p>样本空间从2变成了3，那么得到掷一枚硬币得到正面的概率将不再是1/2了，但也不会是1/3，因为，硬币的厚度与硬币的直径长度比相差太大，换言之，公平的硬币不再是公平的硬币了。</p>
+<p><strong>2.2观测行为</strong></p>
+<p>只有观测才使掷硬币实验才有了现实的统计意义。但本身观测这一行为是有问题的。我将试着从量子力学和维度的角度来阐释这一问题。</p>
+<p><strong>2.21量子力学</strong></p>
+<p>量子力学中有两个经典实验，一个是薛定谔的猫，一个事电子双缝实验。这两个实验和掷硬币实验从统计的角度看惊人的相似。</p>
+<p>掷一枚硬币后，观测者观测到硬币是正面，对于这一结果，量子力学角度的解释是一枚掷出的硬币同时具有波的属性和粒子的属性（即波粒二象性），由于观测者的观测导致了波函数的坍缩，只看到了正面。举一个例子，对于一枚直立的硬币，观测者站在直立硬币的水平切线上去观测这枚硬币，观测者将只能看见这个硬币的棱，而无法观测到硬币的正面或反面。</p>
+<p><strong>2.22观测行为</strong></p>
+<p>人作为一种三维的生物，可以完全观测到一维的点和线，二维的面，三维空间下的超平面（超平面还是二位），但却无法完整的观测到一个三维的物体，在不变换观测视角或者变化观测物体的位置时。也就是说三维物体的人只能观测到一维和二维的全部形状，三维物体的部分形状，即观测行为发生了降维。</p>
+<p>硬币是一个三维的圆柱体，对于一枚平躺的正面向上的硬币，我们仅仅能观测到一个面（二维），棱观测不到。即观测行为导致了一枚投掷硬币在落下时波函数的坍缩。</p>
+<p><strong>3.一种假设</strong></p>
+<p>假设一种四维生物或者人带上一种眼镜，可以具有四维视角，能够观测到一个三维物体（硬币）的形状，那么在观测者的观测行为中，维度从四维降到三维，波函数坍缩一维度，能够同时观测到硬币的正面、反面以及棱的这一面。换言之，从观测的结果来看样本空间的这三个事件都被同时观测到了，这三个事件同时被观测者观测到，这三个事件都必然的发生了，三个事件的概率均为1。</p>
+<p><strong>4.推论</strong></p>
+<p>如果抛开观测来看，硬币出于一种三面同时向上的叠加态，同时具有波的属性和粒子的属性，由于，人的观测发生了降维，波函数坍缩，三维的硬币，投影到观测者的观测行为中就只具有了二维的面的特征，正面、反面或棱面。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/statistics/">Statistics</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E9%94%99%E8%A7%89/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>错觉</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

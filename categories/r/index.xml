@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>R on Robert&#39;s Blog</title>
+    <link>https://xin5835.github.io/categories/r/</link>
+    <description>Recent content in R on Robert&#39;s Blog</description>
+    <generator>Hugo -- 0.155.3</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Sep 2020 11:18:15 +0800</lastBuildDate>
+    <atom:link href="https://xin5835.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ggplot2之主题、标度、图例设置</title>
+      <link>https://xin5835.github.io/post/ggplot2%E4%B9%8B%E4%B8%BB%E9%A2%98%E6%A0%87%E5%BA%A6%E5%9B%BE%E4%BE%8B%E8%AE%BE%E7%BD%AE/</link>
+      <pubDate>Thu, 24 Sep 2020 11:18:15 +0800</pubDate>
+      <guid>https://xin5835.github.io/post/ggplot2%E4%B9%8B%E4%B8%BB%E9%A2%98%E6%A0%87%E5%BA%A6%E5%9B%BE%E4%BE%8B%E8%AE%BE%E7%BD%AE/</guid>
+      <description>&lt;p&gt;系统总结下ggplot2的主题、标度、图例设置，方便查询。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
