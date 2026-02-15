@@ -11,7 +11,7 @@
 可视化图片和ipyb文件，详见! [Github] (https://github.com/xin5835/customer_shopping_analysis)">
 <meta name="author" content="">
 <link rel="canonical" href="https://xin5835.github.io/post/%E9%A1%BE%E5%AE%A2%E8%B4%AD%E7%89%A9%E5%88%86%E6%9E%90/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.9d4ae320f369fb3d9080028170995128a56b893318ee102de7fd970c86bd7be2.css" integrity="sha256-nUrjIPNp&#43;z2QgAKBcJlRKKVriTMY7hAt5/2XDIa9e&#43;I=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.0fda545bc7f33010c565fb31ec9554c9a3cb5d4d156363278c01c45e00735081.css" integrity="sha256-D9pUW8fzMBDFZfsx7JVUyaPLXU0VY2MnjAHEXgBzUIE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://xin5835.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
@@ -233,49 +233,139 @@
 <figure class="entry-cover">
         <img loading="eager" src="https://xin5835.github.io/images/RepeatCustomer.jpeg" alt="">
         
-</figure><div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
+</figure><aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details >
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e5%8a%a0%e8%bd%bd%e6%95%b0%e6%8d%ae" aria-label="加载数据">加载数据</a></li>
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87" aria-label="数据准备">数据准备</a></li>
-                <li>
-                    <a href="#%e5%88%86%e6%9e%90%e6%80%9d%e8%b7%af" aria-label="分析思路：">分析思路：</a></li>
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e6%b8%85%e6%b4%97" aria-label="数据清洗">数据清洗</a></li>
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e9%a2%84%e5%a4%84%e7%90%86" aria-label="数据预处理">数据预处理</a><ul>
-                        
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e5%8f%af%e8%a7%86%e5%8c%96" aria-label="数据可视化">数据可视化</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e9%a2%84%e5%a4%84%e7%90%86-1" aria-label="数据预处理">数据预处理</a></li>
-                <li>
-                    <a href="#pca%e9%99%8d%e7%bb%b4" aria-label="PCA降维">PCA降维</a></li>
-                <li>
-                    <a href="#%e8%81%9a%e7%b1%bb" aria-label="聚类">聚类</a></li>
-                <li>
-                    <a href="#%e8%af%84%e4%bc%b0%e6%a8%a1%e5%9e%8b" aria-label="评估模型">评估模型</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-
-
-
-
-
-
-
-
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e5%8a%a0%e8%bd%bd%e6%95%b0%e6%8d%ae" aria-label="加载数据">加载数据</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87" aria-label="数据准备">数据准备</a></li>
+                    <li>
+                        <a href="#%e5%88%86%e6%9e%90%e6%80%9d%e8%b7%af" aria-label="分析思路：">分析思路：</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e6%b8%85%e6%b4%97" aria-label="数据清洗">数据清洗</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e9%a2%84%e5%a4%84%e7%90%86" aria-label="数据预处理">数据预处理</a><ul>
+                            
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e5%8f%af%e8%a7%86%e5%8c%96" aria-label="数据可视化">数据可视化</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e9%a2%84%e5%a4%84%e7%90%86-1" aria-label="数据预处理">数据预处理</a></li>
+                    <li>
+                        <a href="#pca%e9%99%8d%e7%bb%b4" aria-label="PCA降维">PCA降维</a></li>
+                    <li>
+                        <a href="#%e8%81%9a%e7%b1%bb" aria-label="聚类">聚类</a></li>
+                    <li>
+                        <a href="#%e8%af%84%e4%bc%b0%e6%a8%a1%e5%9e%8b" aria-label="评估模型">评估模型</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    
+    document.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+    
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        if (elements.length > 0) {
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }
+    
+        
+        const topLink = document.getElementById('top-link');
+        if (topLink) {
+            topLink.addEventListener('click', (event) => {
+                
+                event.preventDefault();
+    
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }, false);
+    
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+    
+    window.addEventListener('scroll', () => {
+        
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+        
+        if (scrollPosition === 0) {
+            return;
+        }
+    
+        
+        if (elements && elements.length > 0) {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - scrollPosition) > 0 && 
+                    (getOffsetTop(element) - scrollPosition) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement;
+    
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                const tocLink = document.querySelector(`.inner ul li a[href="#${id}"]`);
+                if (element === activeElement){
+                    tocLink.classList.add('active');
+    
+                    
+                    const tocContainer = document.querySelector('.toc .inner');
+                    const linkOffsetTop = tocLink.offsetTop;
+                    const containerHeight = tocContainer.clientHeight;
+                    const linkHeight = tocLink.clientHeight;
+    
+                    
+                    const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+                    tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                } else {
+                    tocLink.classList.remove('active');
+                }
+            });
+        }
+    }, false);
+    
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+    
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+    
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+    
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+    
+</script>
 
   <div class="post-content"><p>顾客购物数据清洗、可视化和聚类分析.</p>
 <p>可视化图片和ipyb文件，详见! [Github] (<a href="https://github.com/xin5835/customer_shopping_analysis">https://github.com/xin5835/customer_shopping_analysis</a>)</p>

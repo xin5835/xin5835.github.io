@@ -10,7 +10,7 @@
 <meta name="description" content="SQL基础教程&ndash;MICK著。">
 <meta name="author" content="">
 <link rel="canonical" href="https://xin5835.github.io/post/sql%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.9d4ae320f369fb3d9080028170995128a56b893318ee102de7fd970c86bd7be2.css" integrity="sha256-nUrjIPNp&#43;z2QgAKBcJlRKKVriTMY7hAt5/2XDIa9e&#43;I=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.0fda545bc7f33010c565fb31ec9554c9a3cb5d4d156363278c01c45e00735081.css" integrity="sha256-D9pUW8fzMBDFZfsx7JVUyaPLXU0VY2MnjAHEXgBzUIE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://xin5835.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
@@ -224,135 +224,225 @@
     <div class="post-meta"><span title='2021-03-19 11:18:15 +0800 CST'>March 19, 2021</span>
 
 </div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details >
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
 
-        <div class="inner"><ul><ul>
-                <li>
-                    <a href="#sql%e5%9f%ba%e7%a1%80" aria-label="SQL基础">SQL基础</a><ul>
+            <div class="inner"><ul><ul>
+                    <li>
+                        <a href="#sql%e5%9f%ba%e7%a1%80" aria-label="SQL基础">SQL基础</a><ul>
+                            
+                    <li>
+                        <a href="#ddldata-definition-language%e6%95%b0%e6%8d%ae%e5%ae%9a%e4%b9%89%e8%af%ad%e8%a8%80" aria-label="DDL(Data Definition Language，数据定义语言)">DDL(Data Definition Language，数据定义语言)</a></li>
+                    <li>
+                        <a href="#dmldata-manipulation-language%e6%95%b0%e6%8d%ae%e6%93%8d%e7%ba%b5%e8%af%ad%e8%a8%80" aria-label="DML(Data Manipulation Language，数据操纵语言)">DML(Data Manipulation Language，数据操纵语言)</a></li>
+                    <li>
+                        <a href="#dcldata-control-language%e6%95%b0%e6%8d%ae%e6%8e%a7%e5%88%b6%e8%af%ad%e8%a8%80" aria-label="DCL(Data Control Language，数据控制语言)">DCL(Data Control Language，数据控制语言)</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#create-database-%e8%af%ad%e5%8f%a5" aria-label="CREATE DATABASE 语句">CREATE DATABASE 语句</a></li>
+                    <li>
+                        <a href="#create-table%e8%af%ad%e5%8f%a5" aria-label="CREATE TABLE语句">CREATE TABLE语句</a></li>
+                    <li>
+                        <a href="#%e8%a1%a8%e7%9a%84%e5%88%a0%e9%99%a4drop-table%e8%af%ad%e5%8f%a5" aria-label="表的删除(DROP TABLE语句)">表的删除(DROP TABLE语句)</a></li>
+                    <li>
+                        <a href="#%e6%b7%bb%e5%8a%a0%e5%88%97%e7%9a%84alter-table%e8%af%ad%e5%8f%a5" aria-label="添加列的ALTER TABLE语句">添加列的ALTER TABLE语句</a></li>
+                    <li>
+                        <a href="#%e5%88%a0%e9%99%a4%e5%88%97%e7%9a%84alter-table%e8%af%ad%e5%8f%a5" aria-label="删除列的ALTER TABLE语句">删除列的ALTER TABLE语句</a></li>
+                    <li>
+                        <a href="#%e5%90%91-product-%e8%a1%a8%e4%b8%ad%e6%8f%92%e5%85%a5%e6%95%b0%e6%8d%ae" aria-label="向 Product 表中插入数据">向 Product 表中插入数据</a></li>
+                    <li>
+                        <a href="#%e5%88%97%e7%9a%84%e6%9f%a5%e8%af%a2" aria-label="列的查询">列的查询</a><ul>
+                            
+                    <li>
+                        <a href="#%e4%b8%ba%e5%88%97%e8%ae%be%e5%ae%9a%e5%88%ab%e5%90%8d--%e4%bd%bf%e7%94%a8-as-%e5%85%b3%e9%94%ae%e5%ad%97%e4%b8%ba%e5%88%97%e8%ae%be%e5%ae%9a%e5%88%ab%e5%90%8d" aria-label="为列设定别名 : 使用 AS 关键字为列设定别名">为列设定别名 : 使用 AS 关键字为列设定别名</a></li>
+                    <li>
+                        <a href="#%e6%9f%a5%e8%af%a2%e5%b8%b8%e6%95%b0" aria-label="查询常数">查询常数</a></li>
+                    <li>
+                        <a href="#distinct%e5%8e%bb%e9%87%8ddistinct-%e5%85%b3%e9%94%ae%e5%ad%97%e5%8f%aa%e8%83%bd%e7%94%a8%e5%9c%a8%e7%ac%ac%e4%b8%80%e4%b8%aa%e5%88%97%e5%90%8d%e4%b9%8b%e5%89%8d" aria-label="DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前">DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前</a></li>
+                    <li>
+                        <a href="#where-%e8%af%ad%e5%8f%a5%e6%9d%a5%e9%80%89%e6%8b%a9%e8%ae%b0%e5%bd%95" aria-label="WHERE 语句来选择记录">WHERE 语句来选择记录</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e8%bf%90%e7%ae%97%e7%ac%a6" aria-label="运算符">运算符</a></li>
+                    <li>
+                        <a href="#%e8%81%9a%e5%90%88%e4%b8%8e%e6%8e%92%e5%ba%8f" aria-label="聚合与排序">聚合与排序</a></li>
+                    <li>
+                        <a href="#%e5%af%b9%e8%a1%a8%e8%bf%9b%e8%a1%8c%e5%88%86%e7%bb%84" aria-label="对表进行分组">对表进行分组</a></li>
+                    <li>
+                        <a href="#%e4%b8%ba%e8%81%9a%e5%90%88%e7%bb%93%e6%9e%9c%e6%8c%87%e5%ae%9a%e6%9d%a1%e4%bb%b6" aria-label="为聚合结果指定条件">为聚合结果指定条件</a></li>
+                    <li>
+                        <a href="#%e4%bd%bf%e7%94%a8-having-%e5%ad%90%e5%8f%a5%e6%97%b6-select-%e8%af%ad%e5%8f%a5%e7%9a%84%e9%a1%ba%e5%ba%8f" aria-label="使用 HAVING 子句时 SELECT 语句的顺序">使用 HAVING 子句时 SELECT 语句的顺序</a></li>
+                    <li>
+                        <a href="#%e5%af%b9%e6%9f%a5%e8%af%a2%e7%bb%93%e6%9e%9c%e8%bf%9b%e8%a1%8c%e6%8e%92%e5%ba%8f" aria-label="对查询结果进行排序">对查询结果进行排序</a></li>
+                    <li>
+                        <a href="#%e5%ad%90%e5%8f%a5%e7%9a%84%e4%b9%a6%e5%86%99%e9%a1%ba%e5%ba%8f" aria-label="子句的书写顺序">子句的书写顺序</a><ul>
+                            
+                    <li>
+                        <a href="#order-by%e5%ad%90%e5%8f%a5%e4%b8%ad%e5%8f%af%e4%bb%a5%e4%bd%bf%e7%94%a8%e7%9a%84%e5%88%97" aria-label="ORDER BY子句中可以使用的列">ORDER BY子句中可以使用的列</a></li></ul>
+                    </li></ul>
                         
-                <li>
-                    <a href="#ddldata-definition-language%e6%95%b0%e6%8d%ae%e5%ae%9a%e4%b9%89%e8%af%ad%e8%a8%80" aria-label="DDL(Data Definition Language，数据定义语言)">DDL(Data Definition Language，数据定义语言)</a></li>
-                <li>
-                    <a href="#dmldata-manipulation-language%e6%95%b0%e6%8d%ae%e6%93%8d%e7%ba%b5%e8%af%ad%e8%a8%80" aria-label="DML(Data Manipulation Language，数据操纵语言)">DML(Data Manipulation Language，数据操纵语言)</a></li>
-                <li>
-                    <a href="#dcldata-control-language%e6%95%b0%e6%8d%ae%e6%8e%a7%e5%88%b6%e8%af%ad%e8%a8%80" aria-label="DCL(Data Control Language，数据控制语言)">DCL(Data Control Language，数据控制语言)</a></li></ul>
+                    <li>
+                        <a href="#%e7%ac%ac-4-%e7%ab%a0-%e6%95%b0%e6%8d%ae%e6%9b%b4%e6%96%b0" aria-label="第 4 章 数据更新">第 4 章 数据更新</a><ul>
+                            
+                    <li>
+                        <a href="#insert-%e8%af%ad%e5%8f%a5" aria-label="INSERT 语句">INSERT 语句</a></li>
+                    <li>
+                        <a href="#%e4%bb%8e%e5%85%b6%e4%bb%96%e8%a1%a8%e4%b8%ad%e5%a4%8d%e5%88%b6%e6%95%b0%e6%8d%ae" aria-label="从其他表中复制数据">从其他表中复制数据</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e7%9a%84%e5%88%a0%e9%99%a4" aria-label="数据的删除">数据的删除</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e6%8d%ae%e7%9a%84%e6%9b%b4%e6%96%b0update%e8%af%ad%e5%8f%a5" aria-label="数据的更新(UPDATE语句)">数据的更新(UPDATE语句)</a></li>
+                    <li>
+                        <a href="#%e5%a4%9a%e5%88%97%e6%9b%b4%e6%96%b0" aria-label="多列更新">多列更新</a><ul>
+                            
+                    <li>
+                        <a href="#%e8%af%ad%e6%b3%95" aria-label="语法：">语法：</a></li></ul>
+                    </li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e7%ac%ac-5-%e7%ab%a0-%e5%a4%8d%e6%9d%82%e6%9f%a5%e8%af%a2--%e8%a7%86%e5%9b%be-%e5%ad%90%e6%9f%a5%e8%af%a2-%e5%85%b3%e8%81%94%e5%ad%90%e6%9f%a5%e8%af%a2" aria-label="第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询">第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询</a><ul>
+                            
+                    <li>
+                        <a href="#%e8%a7%86%e5%9b%be%e4%b8%b4%e6%97%b6%e7%9a%84%e8%a1%a8%e4%bf%9d%e5%ad%98%e7%9a%84%e6%98%af-select-%e8%af%ad%e5%8f%a5" aria-label="视图：临时的表，保存的是 SELECT 语句">视图：临时的表，保存的是 SELECT 语句</a><ul>
+                            
+                    <li>
+                        <a href="#%e8%af%ad%e6%b3%95-1" aria-label="语法：">语法：</a></li>
+                    <li>
+                        <a href="#%e8%a7%86%e5%9b%be%e7%bc%ba%e7%82%b9" aria-label="视图缺点：">视图缺点：</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e5%ad%90%e6%9f%a5%e8%af%a2%e5%b0%b1%e6%98%af%e4%b8%80%e6%ac%a1%e6%80%a7%e8%a7%86%e5%9b%beselect%e8%af%ad%e5%8f%a5" aria-label="子查询：就是一次性视图(SELECT语句)。">子查询：就是一次性视图(SELECT语句)。</a></li>
+                    <li>
+                        <a href="#%e5%85%b3%e8%81%94%e5%ad%90%e6%9f%a5%e8%af%a2-%e7%94%a8%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0%e5%88%86%e7%bb%84" aria-label="关联子查询 :用聚合函数分组">关联子查询 :用聚合函数分组</a></li>
+                    <li>
+                        <a href="#%e5%87%bd%e6%95%b0%e7%9a%84%e7%a7%8d%e7%b1%bb" aria-label="函数的种类">函数的种类</a></li>
+                    <li>
+                        <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0" aria-label="字符串函数">字符串函数</a></li>
+                    <li>
+                        <a href="#%e6%97%a5%e6%9c%9f%e5%87%bd%e6%95%b0" aria-label="日期函数">日期函数</a></li>
+                    <li>
+                        <a href="#%e8%b0%93%e8%af%8d-%e8%bf%94%e5%9b%9e%e5%80%bc%e4%b8%ba%e7%9c%9f%e5%80%bctrue-falseunknown-%e7%9a%84%e5%87%bd%e6%95%b0" aria-label="谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数">谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数</a></li>
+                    <li>
+                        <a href="#case%e8%a1%a8%e8%be%be%e5%bc%8f" aria-label="CASE表达式">CASE表达式</a></li>
+                    <li>
+                        <a href="#%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0%e5%8f%88%e7%a7%b0%e5%88%86%e6%9e%90%e5%87%bd%e6%95%b0%e7%ae%80%e7%a7%b0olap-%e6%98%af-online-analytical-processing" aria-label="窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing">窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing</a><ul>
+                            
+                    <li>
+                        <a href="#%e4%b8%93%e7%94%a8%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0%e6%8e%92%e5%ba%8f" aria-label="专用窗口函数（排序）">专用窗口函数（排序）</a></li>
+                    <li>
+                        <a href="#%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0-%e5%b0%b1%e6%98%af%e7%bb%9f%e8%ae%a1%e5%87%bd%e6%95%b0" aria-label="聚合函数&mdash;-就是统计函数">聚合函数&mdash;-就是统计函数</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e7%a7%bb%e5%8a%a8%e5%b9%b3%e5%9d%87moving-average%e6%8a%8a%e6%8f%a1%e6%9c%80%e8%bf%91%e7%8a%b6%e6%80%81rows-5-preceding%e4%b9%8b%e5%89%8d----following%e4%b9%8b%e5%90%8e" aria-label="移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后">移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后</a>
+                    </li>
+                </ul>
                 </li>
-                <li>
-                    <a href="#create-database-%e8%af%ad%e5%8f%a5" aria-label="CREATE DATABASE 语句">CREATE DATABASE 语句</a></li>
-                <li>
-                    <a href="#create-table%e8%af%ad%e5%8f%a5" aria-label="CREATE TABLE语句">CREATE TABLE语句</a></li>
-                <li>
-                    <a href="#%e8%a1%a8%e7%9a%84%e5%88%a0%e9%99%a4drop-table%e8%af%ad%e5%8f%a5" aria-label="表的删除(DROP TABLE语句)">表的删除(DROP TABLE语句)</a></li>
-                <li>
-                    <a href="#%e6%b7%bb%e5%8a%a0%e5%88%97%e7%9a%84alter-table%e8%af%ad%e5%8f%a5" aria-label="添加列的ALTER TABLE语句">添加列的ALTER TABLE语句</a></li>
-                <li>
-                    <a href="#%e5%88%a0%e9%99%a4%e5%88%97%e7%9a%84alter-table%e8%af%ad%e5%8f%a5" aria-label="删除列的ALTER TABLE语句">删除列的ALTER TABLE语句</a></li>
-                <li>
-                    <a href="#%e5%90%91-product-%e8%a1%a8%e4%b8%ad%e6%8f%92%e5%85%a5%e6%95%b0%e6%8d%ae" aria-label="向 Product 表中插入数据">向 Product 表中插入数据</a></li>
-                <li>
-                    <a href="#%e5%88%97%e7%9a%84%e6%9f%a5%e8%af%a2" aria-label="列的查询">列的查询</a><ul>
-                        
-                <li>
-                    <a href="#%e4%b8%ba%e5%88%97%e8%ae%be%e5%ae%9a%e5%88%ab%e5%90%8d--%e4%bd%bf%e7%94%a8-as-%e5%85%b3%e9%94%ae%e5%ad%97%e4%b8%ba%e5%88%97%e8%ae%be%e5%ae%9a%e5%88%ab%e5%90%8d" aria-label="为列设定别名 : 使用 AS 关键字为列设定别名">为列设定别名 : 使用 AS 关键字为列设定别名</a></li>
-                <li>
-                    <a href="#%e6%9f%a5%e8%af%a2%e5%b8%b8%e6%95%b0" aria-label="查询常数">查询常数</a></li>
-                <li>
-                    <a href="#distinct%e5%8e%bb%e9%87%8ddistinct-%e5%85%b3%e9%94%ae%e5%ad%97%e5%8f%aa%e8%83%bd%e7%94%a8%e5%9c%a8%e7%ac%ac%e4%b8%80%e4%b8%aa%e5%88%97%e5%90%8d%e4%b9%8b%e5%89%8d" aria-label="DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前">DISTINCT去重&mdash;DISTINCT 关键字只能用在第一个列名之前</a></li>
-                <li>
-                    <a href="#where-%e8%af%ad%e5%8f%a5%e6%9d%a5%e9%80%89%e6%8b%a9%e8%ae%b0%e5%bd%95" aria-label="WHERE 语句来选择记录">WHERE 语句来选择记录</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e8%bf%90%e7%ae%97%e7%ac%a6" aria-label="运算符">运算符</a></li>
-                <li>
-                    <a href="#%e8%81%9a%e5%90%88%e4%b8%8e%e6%8e%92%e5%ba%8f" aria-label="聚合与排序">聚合与排序</a></li>
-                <li>
-                    <a href="#%e5%af%b9%e8%a1%a8%e8%bf%9b%e8%a1%8c%e5%88%86%e7%bb%84" aria-label="对表进行分组">对表进行分组</a></li>
-                <li>
-                    <a href="#%e4%b8%ba%e8%81%9a%e5%90%88%e7%bb%93%e6%9e%9c%e6%8c%87%e5%ae%9a%e6%9d%a1%e4%bb%b6" aria-label="为聚合结果指定条件">为聚合结果指定条件</a></li>
-                <li>
-                    <a href="#%e4%bd%bf%e7%94%a8-having-%e5%ad%90%e5%8f%a5%e6%97%b6-select-%e8%af%ad%e5%8f%a5%e7%9a%84%e9%a1%ba%e5%ba%8f" aria-label="使用 HAVING 子句时 SELECT 语句的顺序">使用 HAVING 子句时 SELECT 语句的顺序</a></li>
-                <li>
-                    <a href="#%e5%af%b9%e6%9f%a5%e8%af%a2%e7%bb%93%e6%9e%9c%e8%bf%9b%e8%a1%8c%e6%8e%92%e5%ba%8f" aria-label="对查询结果进行排序">对查询结果进行排序</a></li>
-                <li>
-                    <a href="#%e5%ad%90%e5%8f%a5%e7%9a%84%e4%b9%a6%e5%86%99%e9%a1%ba%e5%ba%8f" aria-label="子句的书写顺序">子句的书写顺序</a><ul>
-                        
-                <li>
-                    <a href="#order-by%e5%ad%90%e5%8f%a5%e4%b8%ad%e5%8f%af%e4%bb%a5%e4%bd%bf%e7%94%a8%e7%9a%84%e5%88%97" aria-label="ORDER BY子句中可以使用的列">ORDER BY子句中可以使用的列</a></li></ul>
-                </li></ul>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    
+    document.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+    
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        if (elements.length > 0) {
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }
+    
+        
+        const topLink = document.getElementById('top-link');
+        if (topLink) {
+            topLink.addEventListener('click', (event) => {
+                
+                event.preventDefault();
+    
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }, false);
+    
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+    
+    window.addEventListener('scroll', () => {
+        
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+        
+        if (scrollPosition === 0) {
+            return;
+        }
+    
+        
+        if (elements && elements.length > 0) {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - scrollPosition) > 0 && 
+                    (getOffsetTop(element) - scrollPosition) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement;
+    
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                const tocLink = document.querySelector(`.inner ul li a[href="#${id}"]`);
+                if (element === activeElement){
+                    tocLink.classList.add('active');
+    
                     
-                <li>
-                    <a href="#%e7%ac%ac-4-%e7%ab%a0-%e6%95%b0%e6%8d%ae%e6%9b%b4%e6%96%b0" aria-label="第 4 章 数据更新">第 4 章 数据更新</a><ul>
-                        
-                <li>
-                    <a href="#insert-%e8%af%ad%e5%8f%a5" aria-label="INSERT 语句">INSERT 语句</a></li>
-                <li>
-                    <a href="#%e4%bb%8e%e5%85%b6%e4%bb%96%e8%a1%a8%e4%b8%ad%e5%a4%8d%e5%88%b6%e6%95%b0%e6%8d%ae" aria-label="从其他表中复制数据">从其他表中复制数据</a></li>
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e7%9a%84%e5%88%a0%e9%99%a4" aria-label="数据的删除">数据的删除</a></li>
-                <li>
-                    <a href="#%e6%95%b0%e6%8d%ae%e7%9a%84%e6%9b%b4%e6%96%b0update%e8%af%ad%e5%8f%a5" aria-label="数据的更新(UPDATE语句)">数据的更新(UPDATE语句)</a></li>
-                <li>
-                    <a href="#%e5%a4%9a%e5%88%97%e6%9b%b4%e6%96%b0" aria-label="多列更新">多列更新</a><ul>
-                        
-                <li>
-                    <a href="#%e8%af%ad%e6%b3%95" aria-label="语法：">语法：</a></li></ul>
-                </li></ul>
-                </li>
-                <li>
-                    <a href="#%e7%ac%ac-5-%e7%ab%a0-%e5%a4%8d%e6%9d%82%e6%9f%a5%e8%af%a2--%e8%a7%86%e5%9b%be-%e5%ad%90%e6%9f%a5%e8%af%a2-%e5%85%b3%e8%81%94%e5%ad%90%e6%9f%a5%e8%af%a2" aria-label="第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询">第 5 章 复杂查询 &mdash;-视图 子查询 关联子查询</a><ul>
-                        
-                <li>
-                    <a href="#%e8%a7%86%e5%9b%be%e4%b8%b4%e6%97%b6%e7%9a%84%e8%a1%a8%e4%bf%9d%e5%ad%98%e7%9a%84%e6%98%af-select-%e8%af%ad%e5%8f%a5" aria-label="视图：临时的表，保存的是 SELECT 语句">视图：临时的表，保存的是 SELECT 语句</a><ul>
-                        
-                <li>
-                    <a href="#%e8%af%ad%e6%b3%95-1" aria-label="语法：">语法：</a></li>
-                <li>
-                    <a href="#%e8%a7%86%e5%9b%be%e7%bc%ba%e7%82%b9" aria-label="视图缺点：">视图缺点：</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e5%ad%90%e6%9f%a5%e8%af%a2%e5%b0%b1%e6%98%af%e4%b8%80%e6%ac%a1%e6%80%a7%e8%a7%86%e5%9b%beselect%e8%af%ad%e5%8f%a5" aria-label="子查询：就是一次性视图(SELECT语句)。">子查询：就是一次性视图(SELECT语句)。</a></li>
-                <li>
-                    <a href="#%e5%85%b3%e8%81%94%e5%ad%90%e6%9f%a5%e8%af%a2-%e7%94%a8%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0%e5%88%86%e7%bb%84" aria-label="关联子查询 :用聚合函数分组">关联子查询 :用聚合函数分组</a></li>
-                <li>
-                    <a href="#%e5%87%bd%e6%95%b0%e7%9a%84%e7%a7%8d%e7%b1%bb" aria-label="函数的种类">函数的种类</a></li>
-                <li>
-                    <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0" aria-label="字符串函数">字符串函数</a></li>
-                <li>
-                    <a href="#%e6%97%a5%e6%9c%9f%e5%87%bd%e6%95%b0" aria-label="日期函数">日期函数</a></li>
-                <li>
-                    <a href="#%e8%b0%93%e8%af%8d-%e8%bf%94%e5%9b%9e%e5%80%bc%e4%b8%ba%e7%9c%9f%e5%80%bctrue-falseunknown-%e7%9a%84%e5%87%bd%e6%95%b0" aria-label="谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数">谓词 ：返回值为真值&mdash;&ndash;（TRUE/ FALSE/UNKNOWN） 的函数</a></li>
-                <li>
-                    <a href="#case%e8%a1%a8%e8%be%be%e5%bc%8f" aria-label="CASE表达式">CASE表达式</a></li>
-                <li>
-                    <a href="#%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0%e5%8f%88%e7%a7%b0%e5%88%86%e6%9e%90%e5%87%bd%e6%95%b0%e7%ae%80%e7%a7%b0olap-%e6%98%af-online-analytical-processing" aria-label="窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing">窗口函数，又称分析函数，简称OLAP 是 OnLine Analytical Processing</a><ul>
-                        
-                <li>
-                    <a href="#%e4%b8%93%e7%94%a8%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0%e6%8e%92%e5%ba%8f" aria-label="专用窗口函数（排序）">专用窗口函数（排序）</a></li>
-                <li>
-                    <a href="#%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0-%e5%b0%b1%e6%98%af%e7%bb%9f%e8%ae%a1%e5%87%bd%e6%95%b0" aria-label="聚合函数&mdash;-就是统计函数">聚合函数&mdash;-就是统计函数</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e7%a7%bb%e5%8a%a8%e5%b9%b3%e5%9d%87moving-average%e6%8a%8a%e6%8f%a1%e6%9c%80%e8%bf%91%e7%8a%b6%e6%80%81rows-5-preceding%e4%b9%8b%e5%89%8d----following%e4%b9%8b%e5%90%8e" aria-label="移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后">移动平均（moving average）把握最近状态。ROWS 5 PRECEDING之前  /  FOLLOWING之后</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-
-
-
-
-
-
-
-
+                    const tocContainer = document.querySelector('.toc .inner');
+                    const linkOffsetTop = tocLink.offsetTop;
+                    const containerHeight = tocContainer.clientHeight;
+                    const linkHeight = tocLink.clientHeight;
+    
+                    
+                    const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+                    tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                } else {
+                    tocLink.classList.remove('active');
+                }
+            });
+        }
+    }, false);
+    
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+    
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+    
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+    
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+    
+</script>
 
   <div class="post-content"><p>SQL基础教程&ndash;MICK著。</p>
 <p><strong>SELECT 语句的顺序： FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY</strong></p>

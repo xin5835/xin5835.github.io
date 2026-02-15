@@ -10,7 +10,7 @@
 <meta name="description" content="如何超过大多数人_陈皓，转自左耳朵耗子。">
 <meta name="author" content="">
 <link rel="canonical" href="https://xin5835.github.io/post/%E9%99%88%E7%9A%93_%E5%A6%82%E4%BD%95%E8%B6%85%E8%BF%87%E5%A4%A7%E5%A4%9A%E6%95%B0%E4%BA%BA/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.9d4ae320f369fb3d9080028170995128a56b893318ee102de7fd970c86bd7be2.css" integrity="sha256-nUrjIPNp&#43;z2QgAKBcJlRKKVriTMY7hAt5/2XDIa9e&#43;I=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.0fda545bc7f33010c565fb31ec9554c9a3cb5d4d156363278c01c45e00735081.css" integrity="sha256-D9pUW8fzMBDFZfsx7JVUyaPLXU0VY2MnjAHEXgBzUIE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://xin5835.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
@@ -224,40 +224,130 @@
     <div class="post-meta"><span title='2023-11-27 11:18:15 +0800 CST'>November 27, 2023</span>
 
 </div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details >
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e7%9b%b8%e5%85%b3%e5%8e%9f%e7%90%86%e5%92%8c%e6%80%9d%e7%bb%b4%e6%a8%a1%e5%9e%8b" aria-label="相关原理和思维模型">相关原理和思维模型</a><ul>
-                        
-                <li>
-                    <a href="#%e8%ae%a4%e7%9f%a5" aria-label="认知">认知</a></li>
-                <li>
-                    <a href="#%e7%9f%a5%e8%af%86" aria-label="知识">知识</a></li>
-                <li>
-                    <a href="#%e6%8a%80%e8%83%bd" aria-label="技能">技能</a></li>
-                <li>
-                    <a href="#%e9%a2%86%e5%af%bc%e5%8a%9b" aria-label="领导力">领导力</a>
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e7%9b%b8%e5%85%b3%e5%8e%9f%e7%90%86%e5%92%8c%e6%80%9d%e7%bb%b4%e6%a8%a1%e5%9e%8b" aria-label="相关原理和思维模型">相关原理和思维模型</a><ul>
+                            
+                    <li>
+                        <a href="#%e8%ae%a4%e7%9f%a5" aria-label="认知">认知</a></li>
+                    <li>
+                        <a href="#%e7%9f%a5%e8%af%86" aria-label="知识">知识</a></li>
+                    <li>
+                        <a href="#%e6%8a%80%e8%83%bd" aria-label="技能">技能</a></li>
+                    <li>
+                        <a href="#%e9%a2%86%e5%af%bc%e5%8a%9b" aria-label="领导力">领导力</a>
+                    </li>
+                </ul>
                 </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-
-
-
-
-
-
-
-
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    
+    document.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+    
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        if (elements.length > 0) {
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }
+    
+        
+        const topLink = document.getElementById('top-link');
+        if (topLink) {
+            topLink.addEventListener('click', (event) => {
+                
+                event.preventDefault();
+    
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }, false);
+    
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+    
+    window.addEventListener('scroll', () => {
+        
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+        
+        if (scrollPosition === 0) {
+            return;
+        }
+    
+        
+        if (elements && elements.length > 0) {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - scrollPosition) > 0 && 
+                    (getOffsetTop(element) - scrollPosition) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement;
+    
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                const tocLink = document.querySelector(`.inner ul li a[href="#${id}"]`);
+                if (element === activeElement){
+                    tocLink.classList.add('active');
+    
+                    
+                    const tocContainer = document.querySelector('.toc .inner');
+                    const linkOffsetTop = tocLink.offsetTop;
+                    const containerHeight = tocContainer.clientHeight;
+                    const linkHeight = tocLink.clientHeight;
+    
+                    
+                    const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+                    tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                } else {
+                    tocLink.classList.remove('active');
+                }
+            });
+        }
+    }, false);
+    
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+    
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+    
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+    
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+    
+</script>
 
   <div class="post-content"><p>如何超过大多数人_陈皓，转自左耳朵耗子。</p>
 <p>$$
