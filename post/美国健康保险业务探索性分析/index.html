@@ -226,7 +226,7 @@
 </div>
   </header> <aside id="toc-container" class="toc-container wide">
     <div class="toc">
-        <details >
+        <details  open>
             <summary accesskey="c" title="(Alt + C)">
                 <span class="details">Table of Contents</span>
             </summary>
@@ -430,17 +430,17 @@
 </code></pre>
 <h2 id="一加载包并读取数据">一、加载包并读取数据<a hidden class="anchor" aria-hidden="true" href="#一加载包并读取数据">#</a></h2>
 <h3 id="11加载包">1.1加载包<a hidden class="anchor" aria-hidden="true" href="#11加载包">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(psych)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggridges)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(broom.mixed)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(viridis)<span style="color:#75715e">#调色</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(modelr)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(patchwork)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">psych</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">ggridges</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">broom.mixed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">viridis</span><span class="p">)</span><span class="c1">#调色</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">modelr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">lme4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">patchwork</span><span class="p">)</span>
 </span></span></code></pre></div><h3 id="12读取数据">1.2读取数据<a hidden class="anchor" aria-hidden="true" href="#12读取数据">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insurance <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_csv</span>(<span style="color:#e6db74">&#34;~/workspace/insurance.csv&#34;</span>)
-</span></span><span style="display:flex;"><span>insurance
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insurance</span> <span class="o">&lt;-</span> <span class="nf">read_csv</span><span class="p">(</span><span class="s">&#34;~/workspace/insurance.csv&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">insurance</span>
 </span></span></code></pre></div><h3 id="13变量注释">1.3变量注释<a hidden class="anchor" aria-hidden="true" href="#13变量注释">#</a></h3>
 <table>
   <thead>
@@ -490,51 +490,51 @@
 </table>
 <h2 id="二数据清洗">二、数据清洗<a hidden class="anchor" aria-hidden="true" href="#二数据清洗">#</a></h2>
 <h3 id="21检查缺失值">2.1检查缺失值<a hidden class="anchor" aria-hidden="true" href="#21检查缺失值">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insurance <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">summarise_all</span>(
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">~</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">is.na</span>(.))
-</span></span><span style="display:flex;"><span>    )
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insurance</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">summarise_all</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="o">~</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.)</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span></code></pre></div><p>各个变量均没有缺失值。</p>
 <h3 id="22数据概览">2.2数据概览<a hidden class="anchor" aria-hidden="true" href="#22数据概览">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(insurance)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">insurance</span><span class="p">)</span>
 </span></span></code></pre></div><p>数据集有1338行（观测值），7个变量，3个字符型向量，4个数字型向量。</p>
 <p>该数据集主要是健康保险费用用支出收集的相关数据，自变量包括用户的年龄、性别、身体质量指数、小孩数量、是否吸烟、地区。</p>
 <h3 id="23将sex-smokerregion变量转换为因子并保留在insu_df数据框">2.3将sex 、smoker、region变量转换为因子，并保留在insu_df数据框<a hidden class="anchor" aria-hidden="true" href="#23将sex-smokerregion变量转换为因子并保留在insu_df数据框">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">&lt;-</span> insurance <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mutate</span>(sex <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(sex),
-</span></span><span style="display:flex;"><span>           smoker <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(smoker),
-</span></span><span style="display:flex;"><span>           region <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(region),
-</span></span><span style="display:flex;"><span>           children <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(children)
-</span></span><span style="display:flex;"><span>           ) 
-</span></span><span style="display:flex;"><span>insu_df
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insu_df</span> <span class="o">&lt;-</span> <span class="n">insurance</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mutate</span><span class="p">(</span><span class="n">sex</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">sex</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">           <span class="n">smoker</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">smoker</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">           <span class="n">region</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">region</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">           <span class="n">children</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">           <span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">insu_df</span>
 </span></span></code></pre></div><h2 id="三变量统计以及可视化">三、变量统计以及可视化<a hidden class="anchor" aria-hidden="true" href="#三变量统计以及可视化">#</a></h2>
 <h3 id="31-insurance分布图">3.1 insurance分布图<a hidden class="anchor" aria-hidden="true" href="#31-insurance分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insurance <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, ..density.., fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>))) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_histogram</span>(bins <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_density</span>()<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tibble</span>(low_charges <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(<span style="color:#a6e22e">filter</span>(insu_df,charges<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">15000</span> )),
-</span></span><span style="display:flex;"><span>       middle_charges <span style="color:#f92672">=</span>  <span style="color:#a6e22e">nrow</span>(<span style="color:#a6e22e">filter</span>(insu_df,charges<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">15000</span> <span style="color:#f92672">&amp;</span> charges<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">50000</span>)),
-</span></span><span style="display:flex;"><span>       high_charges <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(<span style="color:#a6e22e">filter</span>(insu_df, charges<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">50000</span>)),
-</span></span><span style="display:flex;"><span>         )
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insurance</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">..density..</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span><span class="s">&#34;#d45087&#34;</span><span class="p">)))</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">geom_histogram</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">geom_density</span><span class="p">()</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">tibble</span><span class="p">(</span><span class="n">low_charges</span> <span class="o">=</span> <span class="nf">nrow</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="n">insu_df</span><span class="p">,</span><span class="n">charges</span><span class="o">&lt;</span><span class="m">15000</span> <span class="p">)),</span>
+</span></span><span class="line"><span class="cl">       <span class="n">middle_charges</span> <span class="o">=</span>  <span class="nf">nrow</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="n">insu_df</span><span class="p">,</span><span class="n">charges</span><span class="o">&gt;=</span><span class="m">15000</span> <span class="o">&amp;</span> <span class="n">charges</span><span class="o">&lt;</span><span class="m">50000</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">       <span class="n">high_charges</span> <span class="o">=</span> <span class="nf">nrow</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="n">insu_df</span><span class="p">,</span> <span class="n">charges</span><span class="o">&gt;=</span><span class="m">50000</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">         <span class="p">)</span>
 </span></span></code></pre></div><p>健康保险支出费用集中在1.5万美元以下，占比73.3%。1.5万-5万之间占比26.2%，5万以上占比0.5%。这三个区间段的支出费用差距较大，应采取不同的运营策略。</p>
 <h3 id="32年龄分布图">3.2年龄分布图<a hidden class="anchor" aria-hidden="true" href="#32年龄分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(age, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_bar</span>()<span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(age, charges))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_point</span>(color <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>))
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(age, charges, color <span style="color:#f92672">=</span> smoker))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_point</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>p2
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span><span class="s">&#34;#d45087&#34;</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">geom_bar</span><span class="p">()</span><span class="o">+</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">charges</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">geom_point</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span><span class="s">&#34;#d45087&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">smoker</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">geom_point</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span><span class="o">+</span><span class="n">p2</span>
 </span></span></code></pre></div><p>图形表明：</p>
 <p>1.年龄条形图显示，投保费用中20岁以下的人数占比最高，20岁以上人数分布均匀。</p>
 <p>2.抽烟群体的保险支出费用比非抽烟人群的保险支出费用要高，都成线性增长趋势。</p>
@@ -543,123 +543,123 @@
 <p>5.红色和绿色重叠部分，由于数据集中没有关于抽烟支数的记录，猜测可能是偶尔吸烟和不吸烟的人群。</p>
 <p>6.医疗费用支出最高的用户可能是老烟民。</p>
 <h3 id="33性别分布图">3.3性别分布图<a hidden class="anchor" aria-hidden="true" href="#33性别分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">count</span>(sex) <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(sex, n, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_col</span>()<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, sex, fill <span style="color:#f92672">=</span> sex)) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>     ggridges<span style="color:#f92672">::</span><span style="color:#a6e22e">geom_density_ridges</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(sex, charges, fill <span style="color:#f92672">=</span> sex))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>     <span style="color:#a6e22e">geom_boxplot</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(p1<span style="color:#f92672">+</span>p2)<span style="color:#f92672">/</span>p3
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">   <span class="nf">count</span><span class="p">(</span><span class="n">sex</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">sex</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span><span class="s">&#34;#d45087&#34;</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_col</span><span class="p">()</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">sex</span><span class="p">))</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">     <span class="n">ggridges</span><span class="o">::</span><span class="nf">geom_density_ridges</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p3</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">   <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">sex</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">sex</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">     <span class="nf">geom_boxplot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">p1</span><span class="o">+</span><span class="n">p2</span><span class="p">)</span><span class="o">/</span><span class="n">p3</span>
 </span></span></code></pre></div><p>性别因素，样本中男女人数均衡，费用支出无大的差异。</p>
 <h3 id="34bmi分布图">3.4bmi分布图<a hidden class="anchor" aria-hidden="true" href="#34bmi分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bmi, y <span style="color:#f92672">=</span><span style="color:#a6e22e">stat</span>(density)))<span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_histogram</span>( <span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(“<span style="color:#75715e">#d45087”)), bins = 50)+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> “none”)<span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_density</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bmi, charges, color <span style="color:#f92672">=</span> charges))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_color_viridis</span>(option <span style="color:#f92672">=</span> “E”)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(<span style="color:#a6e22e">factor</span>(age), bmi, color <span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(“<span style="color:#75715e">#d45087”)))+             geom_point()+ </span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_jitter</span>()<span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">stat_summary</span>(fun.y<span style="color:#f92672">=</span> mean, colour <span style="color:#f92672">=</span> “blue”, geom <span style="color:#f92672">=</span> “point”, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>) 
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>(p1<span style="color:#f92672">+</span>p2)<span style="color:#f92672">/</span>p3
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bmi</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="nf">stat</span><span class="p">(</span><span class="n">density</span><span class="p">)))</span><span class="o">+</span> 
+</span></span><span class="line"><span class="cl">   <span class="nf">geom_histogram</span><span class="p">(</span> <span class="nf">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span>“<span class="c1">#d45087”)), bins = 50)+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> “<span class="n">none</span>”<span class="p">)</span><span class="o">+</span> 
+</span></span><span class="line"><span class="cl">   <span class="nf">geom_density</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bmi</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">charges</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span> <span class="nf">scale_color_viridis</span><span class="p">(</span><span class="n">option</span> <span class="o">=</span> “<span class="n">E</span>”<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p3</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="nf">factor</span><span class="p">(</span><span class="n">age</span><span class="p">),</span> <span class="n">bmi</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="nf">I</span><span class="p">(</span>“<span class="c1">#d45087”)))+             geom_point()+ </span>
+</span></span><span class="line"><span class="cl">    <span class="nf">geom_jitter</span><span class="p">()</span><span class="o">+</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">stat_summary</span><span class="p">(</span><span class="n">fun.y</span><span class="o">=</span> <span class="n">mean</span><span class="p">,</span> <span class="n">colour</span> <span class="o">=</span> “<span class="n">blue</span>”<span class="p">,</span> <span class="n">geom</span> <span class="o">=</span> “<span class="n">point</span>”<span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">p1</span><span class="o">+</span><span class="n">p2</span><span class="p">)</span><span class="o">/</span><span class="n">p3</span>
 </span></span></code></pre></div><p>bmi数据呈常态分布，用户各个年龄段的平均bmi为30，bmi范围集中（25-35），bmi与保险支出看不到明显的线性关系。不能单纯的把bmi的高低作为保险费用高低的评价标准。
 关于令人惊奇的是，bmi因素，并不像主观认定的，越肥胖的人，健康程度越差，健康费用支出越多。</p>
 <h3 id="35儿童个数分布图">3.5儿童个数分布图<a hidden class="anchor" aria-hidden="true" href="#35儿童个数分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">count</span>(children) <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(children, n))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">geom_col</span>( <span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(children, charges, fill <span style="color:#f92672">=</span> children))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_boxplot</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>p2
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">count</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl"> <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">geom_col</span><span class="p">(</span> <span class="nf">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span><span class="s">&#34;#d45087&#34;</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">children</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">geom_boxplot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span><span class="o">+</span><span class="n">p2</span>
 </span></span></code></pre></div><p>没有儿童的用户大约占比44%。儿童数量越多，保险费用出现大金额的概率越低。</p>
 <h3 id="36吸烟因素分布图">3.6吸烟因素分布图<a hidden class="anchor" aria-hidden="true" href="#36吸烟因素分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(smoker,charges, fill <span style="color:#f92672">=</span> smoker))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_boxplot</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, fill <span style="color:#f92672">=</span> smoker, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_density</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">/</span>p2
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">smoker</span><span class="p">,</span><span class="n">charges</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">smoker</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">geom_boxplot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">smoker</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">geom_density</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span><span class="o">/</span><span class="n">p2</span>
 </span></span></code></pre></div><p>费用支出在吸烟因素中的表现，区别非常大。非吸烟用户的支出费用在100-1600美元浮动；吸烟用户的波动范围为15000-55000。吸烟用户的保险支出费用最小值和非吸烟用户支出费用的最大值持平。</p>
 <p>可以清晰的看到制约健康保险费用的关键因素中，是否吸烟是其中重要因素之一。</p>
 <h3 id="37地区因素分布图">3.7地区因素分布图<a hidden class="anchor" aria-hidden="true" href="#37地区因素分布图">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">count</span>(region) <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(region, n, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.7</span>, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;#d45087&#34;</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_col</span>()<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">coord_flip</span>()<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(charges, region, fill <span style="color:#f92672">=</span> region))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      ggridges<span style="color:#f92672">::</span><span style="color:#a6e22e">geom_density_ridges</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">&lt;-</span> insu_df <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(region, charges, fill <span style="color:#f92672">=</span> region))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">geom_boxplot</span>()<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">coord_flip</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>(p2<span style="color:#f92672">/</span>p3)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">count</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="nf">I</span><span class="p">(</span><span class="s">&#34;#d45087&#34;</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">geom_col</span><span class="p">()</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">coord_flip</span><span class="p">()</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">region</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="n">ggridges</span><span class="o">::</span><span class="nf">geom_density_ridges</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p3</span> <span class="o">&lt;-</span> <span class="n">insu_df</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">region</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">geom_boxplot</span><span class="p">()</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">coord_flip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span><span class="o">+</span><span class="p">(</span><span class="n">p2</span><span class="o">/</span><span class="n">p3</span><span class="p">)</span>
 </span></span></code></pre></div><p>地区因素中，四个地区在费用支出上数据表现没有大的差异性。</p>
 <h2 id="四相关性探索">四、相关性探索<a hidden class="anchor" aria-hidden="true" href="#四相关性探索">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">within</span>(insu_df,{
-</span></span><span style="display:flex;"><span>                    smoke <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NA</span> 
-</span></span><span style="display:flex;"><span>                    smoke[smoker <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;yes&#34;</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>                    smoke[smoker <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;no&#34;</span>]  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>})
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>insu_df<span style="color:#a6e22e">[c</span>(<span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#e6db74">&#34;bmi&#34;</span>, <span style="color:#e6db74">&#34;children&#34;</span>, <span style="color:#e6db74">&#34;smoke&#34;</span>, <span style="color:#e6db74">&#34;charges&#34;</span>)] <span style="color:#f92672">%&gt;%</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">pairs.panels</span>(stars <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Insurance Scatterplot Matrix&#34;</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insu_df</span> <span class="o">&lt;-</span> <span class="nf">within</span><span class="p">(</span><span class="n">insu_df</span><span class="p">,{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">smoke</span> <span class="o">&lt;-</span> <span class="kc">NA</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">smoke[smoker</span> <span class="o">==</span> <span class="s">&#34;yes&#34;</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">smoke[smoker</span> <span class="o">==</span> <span class="s">&#34;no&#34;</span><span class="n">]</span>  <span class="o">&lt;-</span> <span class="m">0</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">insu_df</span><span class="nf">[c</span><span class="p">(</span><span class="s">&#34;age&#34;</span><span class="p">,</span> <span class="s">&#34;bmi&#34;</span><span class="p">,</span> <span class="s">&#34;children&#34;</span><span class="p">,</span> <span class="s">&#34;smoke&#34;</span><span class="p">,</span> <span class="s">&#34;charges&#34;</span><span class="p">)</span><span class="n">]</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">pairs.panels</span><span class="p">(</span><span class="n">stars</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&#34;Insurance Scatterplot Matrix&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><p>可以看到charges同smoker、age、bmi都呈现正相关，charges同smoke的相关系数达到了0.79。是否吸烟已经成了影响健康费用的决定性因素。</p>
 <h2 id="五建立模型">五、建立模型<a hidden class="anchor" aria-hidden="true" href="#五建立模型">#</a></h2>
 <h3 id="51多元线性模型">5.1多元线性模型<a hidden class="anchor" aria-hidden="true" href="#51多元线性模型">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>mod1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(charges <span style="color:#f92672">~</span> smoker<span style="color:#f92672">+</span>age<span style="color:#f92672">+</span>bmi<span style="color:#f92672">+</span>children<span style="color:#f92672">+</span>region, data <span style="color:#f92672">=</span> insu_df)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(mod1)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mod1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">charges</span> <span class="o">~</span> <span class="n">smoker</span><span class="o">+</span><span class="n">age</span><span class="o">+</span><span class="n">bmi</span><span class="o">+</span><span class="n">children</span><span class="o">+</span><span class="n">region</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">insu_df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">mod1</span><span class="p">)</span>
 </span></span></code></pre></div><p>在p值&lt;0.001水平下，截距、吸烟人群、年龄、bmi和2个儿童的回归系数都非常显著。该模型可以解释75%的变异。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mod2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(charges <span style="color:#f92672">~</span> smoker<span style="color:#f92672">+</span>age<span style="color:#f92672">+</span>bmi, data <span style="color:#f92672">=</span> insu_df)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(mod2)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">mod2</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">charges</span> <span class="o">~</span> <span class="n">smoker</span><span class="o">+</span><span class="n">age</span><span class="o">+</span><span class="n">bmi</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">insu_df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">mod2</span><span class="p">)</span>
 </span></span></code></pre></div><p>模型2的决定系数为74.8，各变量的回归系数都非常显著。</p>
 <h2 id="52多重线性模型">5.2多重线性模型<a hidden class="anchor" aria-hidden="true" href="#52多重线性模型">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mod3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(charges <span style="color:#f92672">~</span> age <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> age <span style="color:#f92672">|</span> smoker), data <span style="color:#f92672">=</span> insu_df)
-</span></span><span style="display:flex;"><span>mod3
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">mod3</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">charges</span> <span class="o">~</span> <span class="n">age</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="n">age</span> <span class="o">|</span> <span class="n">smoker</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">insu_df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mod3</span>
 </span></span></code></pre></div><p>以是否吸烟对把数据分为两组，可以看到是否吸烟对于年龄因素在保险费用支出上的变化效应。</p>
 <h3 id="521以smoker为分组对age变量的多重线性模型可视化">5.2.1以smoker为分组对age变量的多重线性模型可视化<a hidden class="anchor" aria-hidden="true" href="#521以smoker为分组对age变量的多重线性模型可视化">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_predictions</span>(mod3) <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>( age, charges, color <span style="color:#f92672">=</span> smoker)) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>() <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> age, y <span style="color:#f92672">=</span> pred)) 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insu_df</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">add_predictions</span><span class="p">(</span><span class="n">mod3</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span> <span class="n">age</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">smoker</span><span class="p">))</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">age</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pred</span><span class="p">))</span> 
 </span></span></code></pre></div><p>该模型对不抽烟的用户拟合的还是比较好的，但是对于吸烟的用户拟合直线明显感觉有些粗旷。或许与吸烟的量以及其他因素有关，导致该模型拟合的绿色直线，不够好。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mod4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(charges <span style="color:#f92672">~</span> bmi <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> bmi <span style="color:#f92672">|</span> smoker), data <span style="color:#f92672">=</span> insu_df)
-</span></span><span style="display:flex;"><span>mod4
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">mod4</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">charges</span> <span class="o">~</span> <span class="n">bmi</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="n">bmi</span> <span class="o">|</span> <span class="n">smoker</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">insu_df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mod4</span>
 </span></span></code></pre></div><p>该模型以不吸烟组作为参数对照，可以看到是否吸烟对于bmi因素在保险费用支出上的变化效应。</p>
 <h3 id="522以smoker为分组对bmi变量的多重线性模型可视化">5.2.2以smoker为分组对bmi变量的多重线性模型可视化<a hidden class="anchor" aria-hidden="true" href="#522以smoker为分组对bmi变量的多重线性模型可视化">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>insu_df <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_predictions</span>(mod4) <span style="color:#f92672">%&gt;%</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>( bmi, charges, color <span style="color:#f92672">=</span> smoker)) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>() <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bmi, y <span style="color:#f92672">=</span> pred)) 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">insu_df</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">add_predictions</span><span class="p">(</span><span class="n">mod4</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span> <span class="n">bmi</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">smoker</span><span class="p">))</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bmi</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pred</span><span class="p">))</span> 
 </span></span></code></pre></div><p>这个模型的解释能力很好，吸烟人群的随着bmi的增加，支付费用高速增加；非吸烟人群随着bmi的增加，支出增加的相对要缓慢些。</p>
 <h2 id="结论">结论<a hidden class="anchor" aria-hidden="true" href="#结论">#</a></h2>
 <p>1.美国居民医疗费用支出集中15000美元以下，占比73.3%。1.5万-5万之间占比26.2%。这两部分共占据了99.5%的医疗费用支出情况。</p>

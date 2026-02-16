@@ -293,20 +293,20 @@
       </tr>
   </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;city&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;address&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># function way</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_city</span>(address):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> address<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_state</span>(address):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> address<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;city_short&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;address&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: get_city(x)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">+</span> get_state(x))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>head()
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># function way</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_city</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="s1">&#39;city_short&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_city</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span> <span class="n">get_state</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </span></span></code></pre></div><table>
   <thead>
       <tr>

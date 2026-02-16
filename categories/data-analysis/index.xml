@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Data Analysis on Robert&#39;s Blog</title>
+    <title>Data-Analysis on Robert&#39;s Blog</title>
     <link>https://xin5835.github.io/categories/data-analysis/</link>
-    <description>Recent content in Data Analysis on Robert&#39;s Blog</description>
+    <description>Recent content in Data-Analysis on Robert&#39;s Blog</description>
     <generator>Hugo -- 0.155.3</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Nov 2023 11:18:15 +0800</lastBuildDate>

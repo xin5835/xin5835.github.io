@@ -226,7 +226,7 @@
 </div>
   </header> <aside id="toc-container" class="toc-container wide">
     <div class="toc">
-        <details >
+        <details  open>
             <summary accesskey="c" title="(Alt + C)">
                 <span class="details">Table of Contents</span>
             </summary>
@@ -360,10 +360,10 @@
   <div class="post-content"><p>numpy基础</p>
 <h2 id="python基础">python基础<a hidden class="anchor" aria-hidden="true" href="#python基础">#</a></h2>
 <p>启动shell</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ipython
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ipython
 </span></span></code></pre></div><p>启动jupyter notebook</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>jupyter notebook
-</span></span><span style="display:flex;"><span>jupyter notebook --port 9999
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">jupyter notebook
+</span></span><span class="line"><span class="cl">jupyter notebook --port 9999
 </span></span></code></pre></div><p>数据结构</p>
 <p>list = [val1,val2,val3,val4]<br>
 dict = {key1:val1,key2:val2}<br>
@@ -402,98 +402,98 @@ set = {val1,val2,val3,val4}</p>
 </ul>
 <h2 id="numpy">numpy<a hidden class="anchor" aria-hidden="true" href="#numpy">#</a></h2>
 <p>导入numpy</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </span></span></code></pre></div><h3 id="理解python中的数据类型">理解Python中的数据类型<a hidden class="anchor" aria-hidden="true" href="#理解python中的数据类型">#</a></h3>
 <p>np.array 从 Python 列表创建数组:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## 整型数组:</span>
-</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>])
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 嵌套列表构成的多维数组</span>
-</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array([range(i, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>]])
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">## 整型数组:</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 嵌套列表构成的多维数组</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
 </span></span></code></pre></div><h3 id="从头创建数组">从头创建数组<a hidden class="anchor" aria-hidden="true" href="#从头创建数组">#</a></h3>
 <pre><code>+ 创建一个长度为10的数组，数组的值都是0
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>zeros(<span style="color:#ae81ff">10</span>, dtype<span style="color:#f92672">=</span>int)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是1 
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>ones((<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>), dtype<span style="color:#f92672">=</span>float)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是3.14 
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>full((<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>), <span style="color:#ae81ff">3.14</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mf">3.14</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值是一个线性序列 ## 从0开始，到20结束，步长为2
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">2</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>+ 创建一个5个元素的数组，这5个数均匀地分配到0~1 
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×3的、在0~1均匀分布的随机数组成的数组 
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>random((<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×3的、均值为0、方差为1的 正态分布的随机数数组
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×3的、[0, 10)区间的随机整型数组 
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </span></span></code></pre></div><pre><code>+ 创建一个3×3的单位矩阵 
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>+ 创建一个由3个整型数组成的未初始化的数组,数组的值是内存空间中的任意值
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">3</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </span></span></code></pre></div><h3 id="数组的属性-">数组的属性 :<a hidden class="anchor" aria-hidden="true" href="#数组的属性-">#</a></h3>
 <p>确定数组的大小、形状、存储大小、数据类型。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">.</span>ndim
-</span></span><span style="display:flex;"><span><span style="color:#f92672">.</span>shape
-</span></span><span style="display:flex;"><span><span style="color:#f92672">.</span>size 
-</span></span><span style="display:flex;"><span><span style="color:#f92672">.</span>dtype
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">.</span><span class="n">ndim</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">shape</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">size</span> 
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">dtype</span>
 </span></span></code></pre></div><h3 id="数组的索引-">数组的索引 :<a hidden class="anchor" aria-hidden="true" href="#数组的索引-">#</a></h3>
 <p>获取和设置数组各个元素的值。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>x[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span><span style="color:#75715e">##多维索引</span>
-</span></span><span style="display:flex;"><span>x[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 修改元素的值</span>
-</span></span><span style="display:flex;"><span>x[<span style="color:#ae81ff">0</span> , <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span> 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">##多维索引</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 修改元素的值</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span> 
 </span></span></code></pre></div><h3 id="数组的切分slice-">数组的切分(slice) :<a hidden class="anchor" aria-hidden="true" href="#数组的切分slice-">#</a></h3>
 <p>获取或设置更小的子数组。 x[ start: stop: step]，返回视图</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x[:<span style="color:#ae81ff">5</span>] <span style="color:#75715e">## 前五个元素</span>
-</span></span><span style="display:flex;"><span>x[<span style="color:#ae81ff">5</span>:] <span style="color:#75715e">## 索引五之后的元素</span>
-</span></span><span style="display:flex;"><span>x[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">7</span>] <span style="color:#75715e">## 中间的子数组</span>
-</span></span><span style="display:flex;"><span>x[::<span style="color:#ae81ff">2</span>] <span style="color:#75715e">## 每隔一个元素</span>
-</span></span><span style="display:flex;"><span>x[<span style="color:#ae81ff">1</span>::<span style="color:#ae81ff">2</span>] <span style="color:#75715e">## 每隔一个元素，从索引1开始</span>
-</span></span><span style="display:flex;"><span>x[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#75715e">## 所有元素，逆序的</span>
-</span></span><span style="display:flex;"><span>x[<span style="color:#ae81ff">5</span>::<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#75715e">## 从索引5开始每隔一个元素逆序</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="c1">## 前五个元素</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span> <span class="c1">## 索引五之后的元素</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="c1">## 中间的子数组</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 每隔一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 每隔一个元素，从索引1开始</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">## 所有元素，逆序的</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">::</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 从索引5开始每隔一个元素逆序</span>
 </span></span></code></pre></div><p>多维子数组</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x2[:<span style="color:#ae81ff">2</span>, :<span style="color:#ae81ff">3</span>] <span style="color:#75715e">## 两行，三列</span>
-</span></span><span style="display:flex;"><span>x2[:<span style="color:#ae81ff">3</span>, ::<span style="color:#ae81ff">2</span>] <span style="color:#75715e">## 所有行，每隔一列</span>
-</span></span><span style="display:flex;"><span>x2[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, ::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#75715e">## 逆序</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x2</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1">## 两行，三列</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 所有行，每隔一列</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">## 逆序</span>
 </span></span></code></pre></div><p>获取数组的行和列 :索引与切片组合起来实现这个功能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(x2[:, <span style="color:#ae81ff">0</span>]) <span style="color:#75715e">## x2的第一列</span>
-</span></span><span style="display:flex;"><span>print(x2[<span style="color:#ae81ff">0</span>, :]) <span style="color:#75715e">## x2的第一行</span>
-</span></span><span style="display:flex;"><span>print(x2[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e">##等于x2[0, :]</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1">## x2的第一列</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span> <span class="c1">## x2的第一行</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">##等于x2[0, :]</span>
 </span></span></code></pre></div><p>非副本视图的子数组</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">.</span>copy()  <span style="color:#75715e">## 创建数组的副本</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1">## 创建数组的副本</span>
 </span></span></code></pre></div><h3 id="数组的变形-改变给定数组的形状">数组的变形 :改变给定数组的形状。<a hidden class="anchor" aria-hidden="true" href="#数组的变形-改变给定数组的形状">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>])
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 通过变形获得的行向量 x.reshape((1, 3))</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 通过newaxis获得的行向量 x[np.newaxis, :]</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 通过变形获得的列向量 x.reshape((3, 1))</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 通过newaxis获得的列向量 x[:, np.newaxis]</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过变形获得的行向量 x.reshape((1, 3))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过newaxis获得的行向量 x[np.newaxis, :]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过变形获得的列向量 x.reshape((3, 1))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过newaxis获得的列向量 x[:, np.newaxis]</span>
 </span></span></code></pre></div><h3 id="数组的拼接和分裂-">数组的拼接和分裂 :<a hidden class="anchor" aria-hidden="true" href="#数组的拼接和分裂-">#</a></h3>
 <p>拼接:np.concatenate、np.vstack 和 np.hstack</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>concatenate([x, y])
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 沿着第一个轴拼接 </span>
-</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>concatenate([x, y])
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 沿着第二个轴拼接(从0开始索引) </span>
-</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>concatenate([x, y], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 垂直栈数组 </span>
-</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>vstack([x, y])
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## 水平栈数组</span>
-</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>hstack([x, y])
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 沿着第一个轴拼接 </span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 沿着第二个轴拼接(从0开始索引) </span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 垂直栈数组 </span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 水平栈数组</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
 </span></span></code></pre></div><p>分裂:np.split、np.hsplit 和 np.vsplit</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x1, x2, x3 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>split(x, [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>]) <span style="color:#75715e">## [3, 5]第3个和第5个未知是分割点</span>
-</span></span><span style="display:flex;"><span>upper, lower <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>vsplit(grid, [<span style="color:#ae81ff">2</span>])
-</span></span><span style="display:flex;"><span>left, right <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>hsplit(grid, [<span style="color:#ae81ff">2</span>])
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="c1">## [3, 5]第3个和第5个未知是分割点</span>
+</span></span><span class="line"><span class="cl"><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vsplit</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </span></span></code></pre></div>
 
   </div>

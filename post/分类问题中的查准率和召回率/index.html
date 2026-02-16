@@ -257,9 +257,9 @@
 <li>FN(假阴性) 预测为假实际为真的数量。</li>
 <li>TN(真阴性) 预测为假实际为假的数量。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>查准率：Precision = TP/(TP + FP)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>召回率：Recall = TP/(TP + FN)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">查准率：Precision = TP/(TP + FP)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">召回率：Recall = TP/(TP + FN)
 </span></span></code></pre></div><p>查准率的分母表示的意义是：所有预测得癌症的样本数，即all predicted_positive(1)；召回率的分母表示的意义是：事实上所有得了癌症的样本数，即 all actual_positive(1)。</p>
 <p>一般来说模型的查准率高了，召回率就会降低，查准率降低了，召回率就会升高。</p>
 <p>应用在是否得癌症这个问题来说：</p>

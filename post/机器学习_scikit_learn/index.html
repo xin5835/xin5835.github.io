@@ -226,7 +226,7 @@
 </div>
   </header> <aside id="toc-container" class="toc-container wide">
     <div class="toc">
-        <details >
+        <details  open>
             <summary accesskey="c" title="(Alt + C)">
                 <span class="details">Table of Contents</span>
             </summary>
@@ -401,46 +401,46 @@
 <ol>
 <li>从 Scikit-Learn 中导入评估器类。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LinearRegression
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 </span></span></code></pre></div><ol start="2">
 <li>模型超参数(hyperparameter)。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> LinearRegression(fit_intercept<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>model
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span>
 </span></span></code></pre></div><ol start="3">
 <li>获取特征矩阵和目标数组。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>rng <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>RandomState(<span style="color:#ae81ff">42</span>)
-</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> rng<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">50</span>)
-</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> rng<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">50</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(x, y);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> x[:, np<span style="color:#f92672">.</span>newaxis]
-</span></span><span style="display:flex;"><span>X<span style="color:#f92672">.</span>shape
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
 </span></span></code></pre></div><p><img alt="散点图" loading="lazy" src="/images/scatter.png"></p>
 <ol start="4">
 <li>调用模型实例的 fit() 方法对数据进行拟合。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X, y)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>coef_
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>intercept_
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
 </span></span></code></pre></div><ol start="5">
 <li>对新数据应用模型:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 将这些x值转换成[n_samples, n_features]的特征矩阵</span>
-</span></span><span style="display:flex;"><span>xfit <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">11</span>)
-</span></span><span style="display:flex;"><span>Xfit <span style="color:#f92672">=</span> xfit[:, np<span style="color:#f92672">.</span>newaxis]
-</span></span><span style="display:flex;"><span>yfit <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(Xfit)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 把原始数据和拟合结果可视化出来</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(x, y)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(xfit, yfit)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 将这些x值转换成[n_samples, n_features]的特征矩阵</span>
+</span></span><span class="line"><span class="cl"><span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Xfit</span> <span class="o">=</span> <span class="n">xfit</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">yfit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xfit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 把原始数据和拟合结果可视化出来</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">)</span>
 </span></span></code></pre></div><p><img alt="模型拟合" loading="lazy" src="/images/scatter_re.png"></p>
 <p>6.监督学习模型，predict() 预测新数据的标签; 无监督学习模型，使用 transform() 或 predict() 转换或推断数据的性质。</p>
 

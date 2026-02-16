@@ -227,25 +227,25 @@
   </header> 
 
   <div class="post-content"><p>mac饼图和环形图，并开启中文字体支持。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;font.family&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Arial Unicode MS&#39;</span> <span style="color:#75715e"># 显示中文字体</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>labels <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">121</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 饼图</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x, labels<span style="color:#f92672">=</span>labels)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;饼图&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">122</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 环形图</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(x, labels<span style="color:#f92672">=</span>labels, wedgeprops<span style="color:#f92672">=</span>{ <span style="color:#e6db74">&#39;width&#39;</span>: <span style="color:#ae81ff">0.5</span>},
-</span></span><span style="display:flex;"><span>        colors<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;#ff9999&#39;</span>,<span style="color:#e6db74">&#39;#66b3ff&#39;</span>,<span style="color:#e6db74">&#39;#99ff99&#39;</span>,<span style="color:#e6db74">&#39;#ffcc99&#39;</span>],
-</span></span><span style="display:flex;"><span>        autopct<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1.2f%%</span><span style="color:#e6db74">&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;环形图&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Arial Unicode MS&#39;</span> <span class="c1"># 显示中文字体</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 饼图</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;饼图&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 环形图</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#ff9999&#39;</span><span class="p">,</span><span class="s1">&#39;#66b3ff&#39;</span><span class="p">,</span><span class="s1">&#39;#99ff99&#39;</span><span class="p">,</span><span class="s1">&#39;#ffcc99&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.2f%%</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;环形图&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></div><p><img alt="pie_picture.png" loading="lazy" src="https://s2.loli.net/2023/05/24/7geB9JGZUfhTs64.png"></p>
 
   </div>

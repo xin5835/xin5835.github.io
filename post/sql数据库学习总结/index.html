@@ -232,7 +232,7 @@
 </div>
   </header> <aside id="toc-container" class="toc-container wide">
     <div class="toc">
-        <details >
+        <details  open>
             <summary accesskey="c" title="(Alt + C)">
                 <span class="details">Table of Contents</span>
             </summary>
@@ -358,8 +358,8 @@
 3.命令结束用分号，好的代码习惯</p>
 <h2 id="一创建函数">一、创建函数<a hidden class="anchor" aria-hidden="true" href="#一创建函数">#</a></h2>
 <p>1.创建数据库 create database   #关系型数据库 / RDBMS /Relational Database Management System</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">DATABASE</span> gregs_list
-</span></span></code></pre></div><p>创建表 creat table 和R的mutate函数很像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">CREAT</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">gregs_list</span><span class="w">
+</span></span></span></code></pre></div><p>创建表 creat table 和R的mutate函数很像</p>
 <table>
   <thead>
       <tr>
@@ -382,12 +382,12 @@
       </tr>
   </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> doughnut_list              
-</span></span><span style="display:flex;"><span>(
-</span></span><span style="display:flex;"><span>   doughnut_nameVARCHAR(<span style="color:#ae81ff">10</span>),           <span style="color:#f92672">#</span>VARCHAR <span style="color:#f92672">==</span> <span style="color:#66d9ef">variable</span> character 
-</span></span><span style="display:flex;"><span>   doughnut_typeVARCHAR(<span style="color:#ae81ff">6</span>)             
-</span></span><span style="display:flex;"><span>);     
-</span></span></code></pre></div><p>数据类型：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">CREAT</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">doughnut_list</span><span class="w">              
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">doughnut_nameVARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w">           </span><span class="o">#</span><span class="nb">VARCHAR</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">variable</span><span class="w"> </span><span class="nb">character</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">doughnut_typeVARCHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w">             
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">     
+</span></span></span></code></pre></div><p>数据类型：</p>
 <table>
   <thead>
       <tr>
@@ -425,43 +425,43 @@
   </tbody>
 </table>
 <p>1.查看创建的表 DESC</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DESC</span> my_contacts;     <span style="color:#f92672">#</span> <span style="color:#66d9ef">DESC</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">describe</span>
-</span></span></code></pre></div><p>2.使用数据库 use database</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE gregs_list
-</span></span></code></pre></div><p>3.删除表及表中数据drop table</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> my_contacts
-</span></span></code></pre></div><p>eg:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">DATABASE</span> gregs_list;
-</span></span><span style="display:flex;"><span>USE gregs_list;
-</span></span><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> my_contacts
-</span></span><span style="display:flex;"><span>(
-</span></span><span style="display:flex;"><span>last_nameVACHAR(<span style="color:#ae81ff">20</span>),
-</span></span><span style="display:flex;"><span>first_nameVARCHR(<span style="color:#ae81ff">30</span>),       <span style="color:#f92672">#</span><span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> don<span style="color:#e6db74">&#39;t accept  null    
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">email VARCHR(50) NOTNULL,    
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">birthday DATE,
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gender CHAR(1),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">profession VARCHAR(50),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">location VACHAR(50),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">status_VARCHAR(20),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">interests VARCHAR(20),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">seeking VARCHAR(100),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cost DEC(4,2) NOTNULL DEFAULT 1.00    # 没有的值用1.00填充
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DESC</span><span class="w"> </span><span class="n">my_contacts</span><span class="p">;</span><span class="w">     </span><span class="o">#</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">describe</span><span class="w">
+</span></span></span></code></pre></div><p>2.使用数据库 use database</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">USE</span><span class="w"> </span><span class="n">gregs_list</span><span class="w">
+</span></span></span></code></pre></div><p>3.删除表及表中数据drop table</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span></code></pre></div><p>eg:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">CREAT</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">gregs_list</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">USE</span><span class="w"> </span><span class="n">gregs_list</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">CREAT</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">last_nameVACHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">first_nameVARCHR</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span><span class="w">       </span><span class="o">#</span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">don</span><span class="s1">&#39;t accept  null    
+</span></span></span><span class="line"><span class="cl"><span class="s1">email VARCHR(50) NOTNULL,    
+</span></span></span><span class="line"><span class="cl"><span class="s1">birthday DATE,
+</span></span></span><span class="line"><span class="cl"><span class="s1">gender CHAR(1),
+</span></span></span><span class="line"><span class="cl"><span class="s1">profession VARCHAR(50),
+</span></span></span><span class="line"><span class="cl"><span class="s1">location VACHAR(50),
+</span></span></span><span class="line"><span class="cl"><span class="s1">status_VARCHAR(20),
+</span></span></span><span class="line"><span class="cl"><span class="s1">interests VARCHAR(20),
+</span></span></span><span class="line"><span class="cl"><span class="s1">seeking VARCHAR(100),
+</span></span></span><span class="line"><span class="cl"><span class="s1">cost DEC(4,2) NOTNULL DEFAULT 1.00    # 没有的值用1.00填充
+</span></span></span><span class="line"><span class="cl"><span class="s1">);
 </span></span></span></code></pre></div><h2 id="二按行输入数据-insert-into">二、按行输入数据( INSERT INTO)<a hidden class="anchor" aria-hidden="true" href="#二按行输入数据-insert-into">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> INTIO your_table
-</span></span><span style="display:flex;"><span>(column_name1, column_name2, ...)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;values1&#39;</span>, <span style="color:#e6db74">&#39;value2&#39;</span>, ...);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>eg:
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> INTIO doughnut_purchases
-</span></span><span style="display:flex;"><span>(donut_type, dozens, 
-</span></span><span style="display:flex;"><span>topping, <span style="color:#66d9ef">location</span>, price)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;jelly&#39;</span>, <span style="color:#ae81ff">3</span>, 
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;sprinkles&#39;</span>, 
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Grover\&#39;</span> Mill<span style="color:#e6db74">&#39; 3.50);  # \表示后面的是前面的一部分 \ = &#39;&#39;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="n">INTIO</span><span class="w"> </span><span class="n">your_table</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">column_name1</span><span class="p">,</span><span class="w"> </span><span class="n">column_name2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">VALUES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;values1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;value2&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">eg</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="n">INTIO</span><span class="w"> </span><span class="n">doughnut_purchases</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">donut_type</span><span class="p">,</span><span class="w"> </span><span class="n">dozens</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="n">topping</span><span class="p">,</span><span class="w"> </span><span class="k">location</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">VALUES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;jelly&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;sprinkles&#39;</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;Grover\&#39;</span><span class="w"> </span><span class="n">Mill</span><span class="s1">&#39; 3.50);  # \表示后面的是前面的一部分 \ = &#39;&#39;
 </span></span></span></code></pre></div><p>注释：INSERT语句加单引号&mdash;CHAR/VARCHAR/DATE/BLOB
 INSERT语句不加单引号&mdash;DEC/INT</p>
 <ol>
@@ -543,78 +543,78 @@ INSERT语句不加单引号&mdash;DEC/INT</p>
       </tr>
   </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>        
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> my_contacts
-</span></span></code></pre></div><p>条件查询</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>                     <span style="color:#f92672">#</span> <span style="color:#f92672">*</span> means <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">column</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> my_contacts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> first_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Anne&#39;</span>;   <span style="color:#f92672">#</span> <span style="color:#f92672">=</span> means <span style="color:#66d9ef">is</span>
-</span></span></code></pre></div><p>结合查询</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">location</span>                   
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> doughnut_ratings
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;plain glazed&#39;</span>   
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span>                         
-</span></span><span style="display:flex;"><span>rating <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">location</span>                   
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> doughnut_ratings
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%plain&#39;</span>   <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;通配符%在前表示以plain结尾&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span>                         <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;AND结合两个where子句&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">rating = 10;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span></code></pre></div><p>条件查询</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">                     </span><span class="o">#</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">means</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">column</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">first_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Anne&#39;</span><span class="p">;</span><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">means</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span></code></pre></div><p>结合查询</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">location</span><span class="w">                   
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">doughnut_ratings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;plain glazed&#39;</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w">                         
+</span></span></span><span class="line"><span class="cl"><span class="n">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">location</span><span class="w">                   
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">doughnut_ratings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">type</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%plain&#39;</span><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;通配符%在前表示以plain结尾&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w">                         </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;AND结合两个where子句&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">rating = 10;
 </span></span></span></code></pre></div><p>用IS NULL选择NULL</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> drink_name
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> drink_info
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
-</span></span><span style="display:flex;"><span>calories <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NULL</span>
-</span></span></code></pre></div><h2 id="四delete-and-update">四、DELETE AND UPDATE<a hidden class="anchor" aria-hidden="true" href="#四delete-and-update">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> clown_info
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
-</span></span><span style="display:flex;"><span>activities <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dancing&#39;</span>;
-</span></span></code></pre></div><p>注释：1.不能删除列以及列中的值
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">drink_name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">drink_info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">calories</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
+</span></span></span></code></pre></div><h2 id="四delete-and-update">四、DELETE AND UPDATE<a hidden class="anchor" aria-hidden="true" href="#四delete-and-update">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">clown_info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">activities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dancing&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>注释：1.不能删除列以及列中的值
 2.可以删除一行或多行或所有行</p>
 <p>更改变量中的值 #INSERT INTO 和DELETE同时执行 ，与R差异大,这里的思路是先增加新行，然后删除旧的行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;把表中所有yellow值改为gold&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> drink_info  <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Blackthorn&#39;</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">33</span>),
-</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;Greyhound&#39;</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">14</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">50</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> drink_info <span style="color:#66d9ef">WHERE</span> color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;yellow&#39;</span>;
-</span></span></code></pre></div><p>防止删错，用select确定真正想改变的记录（这样的方式并不高效）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">1</span>. <span style="color:#e6db74">&#34;选择要删除颜色为为黄色的行&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> drink_info
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>
-</span></span><span style="display:flex;"><span>color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;yellow&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">2</span>. <span style="color:#e6db74">&#34;用insert插入新纪录&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> drink_info  <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Blackthorn&#39;</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">33</span>),
-</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;Greyhound&#39;</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">14</span>, <span style="color:#e6db74">&#39;gold&#39;</span>, <span style="color:#e6db74">&#39;Y&#39;</span>, <span style="color:#ae81ff">50</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">3</span>.<span style="color:#e6db74">&#34;用delete删除旧记录&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DELETE FROM drink_info WHERE color = &#39;yellow&#39;;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="s2">&#34;把表中所有yellow值改为gold&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">drink_info</span><span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Blackthorn&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;Greyhound&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">drink_info</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;yellow&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>防止删错，用select确定真正想改变的记录（这样的方式并不高效）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="s2">&#34;选择要删除颜色为为黄色的行&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">drink_info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;yellow&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">#</span><span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="s2">&#34;用insert插入新纪录&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">drink_info</span><span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Blackthorn&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;Greyhound&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">#</span><span class="mi">3</span><span class="p">.</span><span class="s2">&#34;用delete删除旧记录&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">DELETE FROM drink_info WHERE color = &#39;yellow&#39;;
 </span></span></span></code></pre></div><p>更高效的方式UPDATE SET #update不删除任何内容，只是替换旧记录</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> your_table
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> first_column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;glazed&#39;</span>   
-</span></span><span style="display:flex;"><span>second_column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;plain glazed&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> my_contacts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">RIGHT</span> (<span style="color:#66d9ef">location</span>, <span style="color:#ae81ff">2</span>)   <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;提取州字符串，并存储为state列&#34;&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">your_table</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="n">first_column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;glazed&#39;</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="n">second_column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;plain glazed&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="p">(</span><span class="k">location</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;提取州字符串，并存储为state列&#34;&#34;
 </span></span></span></code></pre></div><p>注释：1.UPDATE改变的是一列或者所有列，
 2.可以更新一行或者多行，用where控制</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> doughnut_ratings
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;glazed&#39;</span>       <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;指定的新值&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">WHERE type = &#39;plain glazed&#39;;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">doughnut_ratings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;glazed&#39;</span><span class="w">       </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;指定的新值&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">WHERE type = &#39;plain glazed&#39;;
 </span></span></span></code></pre></div><p>优化的做法（运算符）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> drink_info
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> cost <span style="color:#f92672">=</span> cost<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> 
-</span></span><span style="display:flex;"><span>drink_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Blue Moon&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">OR</span>
-</span></span><span style="display:flex;"><span>drink_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Oh My Gosh&#39;</span>
-</span></span><span style="display:flex;"><span>;
-</span></span></code></pre></div><p>是不是原子型数据要具体地看使用场景，对于外卖来说分割日期和时间/分割街道和门牌号码将会是灾难的。因为不需要单独查询门牌号码
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">drink_info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="n">cost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cost</span><span class="o">+</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="n">drink_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Blue Moon&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">OR</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">drink_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Oh My Gosh&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>是不是原子型数据要具体地看使用场景，对于外卖来说分割日期和时间/分割街道和门牌号码将会是灾难的。因为不需要单独查询门牌号码
 1.你的表在表述什么事物？
 2.以何种方式表述事物？=》便于查询
 3.列是否包含原子型数据=》可以让查询简单又直逼要害
@@ -623,36 +623,36 @@ INSERT语句不加单引号&mdash;DEC/INT</p>
 1.主键不可以为NULL
 2.插入新记录必须指定主键值，否则主键值有可能为NULL
 3.主键必须简洁且不可修改</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> doughnut_list   <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;表名  doughnut甜甜圈&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">（
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> contact_id INT NOT NULL AUTO_INCREMENT,  #AUTO_INCREMENT表示自动为该列填入整数
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> doughnut_nameVARCHAR(10) default NULL, 
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> doughnut_typeVARCHAR(6) default NULL，
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> PRIMARY KEY (contact_id)  #设定主键 
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">CREAT</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">doughnut_list</span><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;表名  doughnut甜甜圈&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">（
+</span></span></span><span class="line"><span class="cl"><span class="s2"> contact_id INT NOT NULL AUTO_INCREMENT,  #AUTO_INCREMENT表示自动为该列填入整数
+</span></span></span><span class="line"><span class="cl"><span class="s2"> doughnut_nameVARCHAR(10) default NULL, 
+</span></span></span><span class="line"><span class="cl"><span class="s2"> doughnut_typeVARCHAR(6) default NULL，
+</span></span></span><span class="line"><span class="cl"><span class="s2"> PRIMARY KEY (contact_id)  #设定主键 
+</span></span></span><span class="line"><span class="cl"><span class="s2">);
 </span></span></span></code></pre></div><p>高效添加主键ALTER TABLE</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE gregs_list
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> my_contacts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> contact_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>(contact_id) <span style="color:#66d9ef">FIRST</span><span style="color:#f92672">/</span><span style="color:#66d9ef">LAST</span><span style="color:#f92672">/</span><span style="color:#66d9ef">SECOND</span>;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span>remove <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> my_contacts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>;
-</span></span></code></pre></div><p>修改表ALTER TABLE，以列的方式，加上where就可以改行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">USE</span><span class="w"> </span><span class="n">gregs_list</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">contact_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">contact_id</span><span class="p">)</span><span class="w"> </span><span class="k">FIRST</span><span class="o">/</span><span class="k">LAST</span><span class="o">/</span><span class="k">SECOND</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">#</span><span class="n">remove</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>修改表ALTER TABLE，以列的方式，加上where就可以改行</p>
 <p>修改列名</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  projekts     <span style="color:#f92672">#</span><span style="color:#66d9ef">old</span> name
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RENAME</span> <span style="color:#66d9ef">TO</span> project_list;    <span style="color:#f92672">#</span><span style="color:#66d9ef">new</span> name 
-</span></span></code></pre></div><p>修改列名和类型， ALTER CHANGE&mdash;-可改变列的类型</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  project_list
-</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> number proj_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT
-</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> contractoronjob con_name VARCHAR(<span style="color:#ae81ff">30</span>)  <span style="color:#f92672">#</span><span style="color:#e6db74">&#34;contractoronjob 是旧名称， con_name是新名称&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ADD PRIMARY KEY (proj_id )
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w">  </span><span class="n">projekts</span><span class="w">     </span><span class="o">#</span><span class="k">old</span><span class="w"> </span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RENAME</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">project_list</span><span class="p">;</span><span class="w">    </span><span class="o">#</span><span class="k">new</span><span class="w"> </span><span class="n">name</span><span class="w"> 
+</span></span></span></code></pre></div><p>修改列名和类型， ALTER CHANGE&mdash;-可改变列的类型</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w">  </span><span class="n">project_list</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">CHANGE</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="nb">number</span><span class="w"> </span><span class="n">proj_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">CHANGE</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">contractoronjob</span><span class="w"> </span><span class="n">con_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w">  </span><span class="o">#</span><span class="s2">&#34;contractoronjob 是旧名称， con_name是新名称&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">ADD PRIMARY KEY (proj_id )
 </span></span></span></code></pre></div><p>修改列类型，列名不变  ALTER MODIFY</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  project_list
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> proj_desc VARCHAR(<span style="color:#ae81ff">120</span>)
-</span></span></code></pre></div><p>删除列表</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span>  project_list
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">COLUMN</span>  start_date   <span style="color:#f92672">-</span><span style="color:#e6db74">&#34;start_date为要从中移除的列&#34;&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w">  </span><span class="n">project_list</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">proj_desc</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>删除列表</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w">  </span><span class="n">project_list</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w">  </span><span class="n">start_date</span><span class="w">   </span><span class="o">-</span><span class="s2">&#34;start_date为要从中移除的列&#34;&#34;
 </span></span></span></code></pre></div><p>案例练习：</p>
 <p><strong>hooptie</strong></p>
 <table>
@@ -733,50 +733,50 @@ INSERT语句不加单引号&mdash;DEC/INT</p>
   </tbody>
 </table>
 <p>代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> hooptie                                     <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;修改hooptie列表&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RENAME</span> <span style="color:#66d9ef">TO</span> car_table,                                    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;表名改为car_table &#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> car_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT <span style="color:#66d9ef">FIRST</span>,    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;添加ID列，该列必须为整数且无NULL &#34;</span>  
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>(car_id),                                <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;将ID列设为主键&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">COLUMN</span> VIN VARCHAR(<span style="color:#ae81ff">16</span>) <span style="color:#66d9ef">AFTER</span> car_id,                <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;添加vin列&#34;</span>
-</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> mo model VARCHAR(<span style="color:#ae81ff">20</span>),
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> color <span style="color:#66d9ef">AFTER</span> model,
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#66d9ef">year</span> SIXTH,
-</span></span><span style="display:flex;"><span>CHANGE <span style="color:#66d9ef">COLUMN</span> how much price DECIMAL(<span style="color:#ae81ff">7</span>.<span style="color:#ae81ff">2</span>);
-</span></span></code></pre></div><p>字符串函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> my_table
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> new_column <span style="color:#f92672">=</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CASE</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">WHEN</span> column1 <span style="color:#f92672">=</span> value1    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;当column1列的值等于value1时，将其值设定为newvalue1&#34;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">THEN</span> newvalue1
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHEN</span> column2 <span style="color:#f92672">=</span> value2
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">THEN</span> newvalue2
-</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">ELSE</span> newvalue3            <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;ELSE：任何不符合上述条件的记录都会被改为new value3&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>;
-</span></span></code></pre></div><p>排序ORDER BY &mdash;&ndash;DESC/ASC  (one column ,more column)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">hooptie</span><span class="w">                                     </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;修改hooptie列表&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RENAME</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">car_table</span><span class="p">,</span><span class="w">                                    </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;表名改为car_table &#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">car_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">FIRST</span><span class="p">,</span><span class="w">    </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;添加ID列，该列必须为整数且无NULL &#34;</span><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">car_id</span><span class="p">),</span><span class="w">                                </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;将ID列设为主键&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">VIN</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="k">AFTER</span><span class="w"> </span><span class="n">car_id</span><span class="p">,</span><span class="w">                </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;添加vin列&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">CHANGE</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">mo</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="k">AFTER</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="n">SIXTH</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">CHANGE</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">much</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>字符串函数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">my_table</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="n">new_column</span><span class="w"> </span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CASE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">WHEN</span><span class="w"> </span><span class="n">column1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value1</span><span class="w">    </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;当column1列的值等于value1时，将其值设定为newvalue1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">THEN</span><span class="w"> </span><span class="n">newvalue1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHEN</span><span class="w"> </span><span class="n">column2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">THEN</span><span class="w"> </span><span class="n">newvalue2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="n">newvalue3</span><span class="w">            </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;ELSE：任何不符合上述条件的记录都会被改为new value3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>排序ORDER BY &mdash;&ndash;DESC/ASC  (one column ,more column)</p>
 <p>SUM/AVG/MIN/MAX   SELECT SUM(sales) FROM cookie_sales WHERE first_name = &lsquo;Nicole&rsquo; ;</p>
 <p>LIMIT/OFFSET LIMIT19, 10 意思是查询第20-29名</p>
 <p>COUNT,计算天数 DISTINCT &amp; COUNT</p>
 <p>分组求和 /求平均AVG/MIN/MAX</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(sales) 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cookie_sales 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> first_name
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">SUM</span>(sales) <span style="color:#66d9ef">DESC</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(DISTICNT sale_date) 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cookie_sales ;
-</span></span></code></pre></div><p>进阶查询：兴趣标签字符串</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> my_contacts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;F&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> status <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;single&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;MA&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> seeking <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%single M%&#39;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> birthday <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;1950-08-28&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> birthday <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;1960-08-28&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> SUBSTRING_INDEX(interests,<span style="color:#e6db74">&#39;,&#39;</span>,<span style="color:#ae81ff">1</span>)
-</span></span></code></pre></div><p>跳出一张表： 遇事不决，多表联结 ———— 沃茨基·硕德</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> my_counts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> interests <span style="color:#f92672">=</span> SUBSTR(interests, <span style="color:#66d9ef">LENGTH</span>(interest1)<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
-</span></span></code></pre></div><p>一个表变成两个表第一范式1NF</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">cookie_sales</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">first_name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">DISTICNT</span><span class="w"> </span><span class="n">sale_date</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">cookie_sales</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>进阶查询：兴趣标签字符串</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">my_contacts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">gender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;single&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MA&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w"> </span><span class="n">seeking</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%single M%&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w"> </span><span class="n">birthday</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="s1">&#39;1950-08-28&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w"> </span><span class="n">birthday</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;1960-08-28&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AND</span><span class="w"> </span><span class="n">SUBSTRING_INDEX</span><span class="p">(</span><span class="n">interests</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>跳出一张表： 遇事不决，多表联结 ———— 沃茨基·硕德</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">my_counts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="n">interests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SUBSTR</span><span class="p">(</span><span class="n">interests</span><span class="p">,</span><span class="w"> </span><span class="k">LENGTH</span><span class="p">(</span><span class="n">interest1</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>一个表变成两个表第一范式1NF</p>
 <ol>
 <li>移除不具有原子性的列，并储存至新表</li>
 <li>添加识别新表中每个观测的列（外键foreign key），外键的值可以为空值，外键约束（父表，子表）</li>
@@ -791,14 +791,14 @@ INSERT语句不加单引号&mdash;DEC/INT</p>
 <li>符合2NF</li>
 <li>没有传递函数依赖性</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>CREAT <span style="color:#66d9ef">TABLE</span> interests(
-</span></span><span style="display:flex;"><span>int_id INT <span style="color:#66d9ef">NOT</span> NULL_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,  <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;加入主键&#34;</span>
-</span></span><span style="display:flex;"><span>interest VARCHAR(<span style="color:#ae81ff">50</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
-</span></span><span style="display:flex;"><span>contact_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,                    <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;创建外键索引&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CONSTRAINT</span> my_contacts_contact_id_          <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;称为CONSTRAINT，告知键的来源（my_contacts），键的名称（contact_id）&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span>(contact_id)                     <span style="color:#f92672">#</span> <span style="color:#e6db74">&#34;设定外键&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">REFERENCES my_contacts(contact_id)          
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">);                                         
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">CREAT</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">interests</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">int_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">NULL_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;加入主键&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">interest</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">contact_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                    </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;创建外键索引&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">my_contacts_contact_id_</span><span class="w">          </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;称为CONSTRAINT，告知键的来源（my_contacts），键的名称（contact_id）&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">contact_id</span><span class="p">)</span><span class="w">                     </span><span class="o">#</span><span class="w"> </span><span class="s2">&#34;设定外键&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">REFERENCES my_contacts(contact_id)          
+</span></span></span><span class="line"><span class="cl"><span class="s2">);                                         
 </span></span></span></code></pre></div><p>表间的关系：
 一对一（用得少）</p>
 <p>一对多（A表的某条记录对应B多条，B的每一条记录对应A每一条记录）</p>

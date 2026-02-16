@@ -234,18 +234,18 @@
 </li>
 <li>
 <p>启动jupyter notebook 或者ipython</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span> <span style="color:#f92672">import</span> requests
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://www.google.com&#34;</span>)
-</span></span><span style="display:flex;"><span> print(response<span style="color:#f92672">.</span>status_code)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"> <span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;https://www.google.com&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 <li>
 <p>导入ssl库，执行代码即可</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ssl 
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将默认的HTTPS上下文设置为未验证的上下文</span>
-</span></span><span style="display:flex;"><span>ssl<span style="color:#f92672">.</span>_create_default_https_context <span style="color:#f92672">=</span> ssl<span style="color:#f92672">.</span>_create_unverified_context 
-</span></span><span style="display:flex;"><span>penguins <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>load_dataset(<span style="color:#e6db74">&#34;penguins&#34;</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">ssl</span> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 将默认的HTTPS上下文设置为未验证的上下文</span>
+</span></span><span class="line"><span class="cl"><span class="n">ssl</span><span class="o">.</span><span class="n">_create_default_https_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span> 
+</span></span><span class="line"><span class="cl"><span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&#34;penguins&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><p>备注：</p>
 <ul>
 <li><code>import ssl</code>：导入Python的SSL（安全套接层）模块。</li>
@@ -258,7 +258,7 @@
 <p>请注意，绕过SSL证书验证可能会导致安全风险，因此在生产环境中应谨慎使用。这通常用于测试或在特定情况下解决与证书问题相关的临时性需求。</p>
 <p>方法二：</p>
 <p>下载seaborn数据库至python启动目录，我是Mac，放在了根目录。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>load_dataset(<span style="color:#e6db74">&#34;penguins&#34;</span>, data_home<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;seaborn-data&#39;</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&#34;penguins&#34;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="s1">&#39;seaborn-data&#39;</span><span class="p">)</span>
 </span></span></code></pre></div>
 
   </div>
