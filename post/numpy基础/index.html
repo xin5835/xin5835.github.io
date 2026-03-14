@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>numpy基础 | Robert&#39;s Blog</title>
+<meta name="keywords" content="Python">
+<meta name="description" content="numpy基础">
+<meta name="author" content="">
+<link rel="canonical" href="https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.acb920f5c18a56cace97b18ba22e442961ae61bcde07842f75b3ed642b32c7cc.css" integrity="sha256-rLkg9cGKVsrOl7GLoi5EKWGuYbzeB4QvdbPtZCsyx8w=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://xin5835.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://xin5835.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://xin5835.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://xin5835.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://xin5835.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:url" content="https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/">
+  <meta property="og:site_name" content="Robert&#39;s Blog">
+  <meta property="og:title" content="numpy基础">
+  <meta property="og:description" content="numpy基础">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-08-14T11:18:15+08:00">
+    <meta property="article:modified_time" content="2021-08-14T11:18:15+08:00">
+    <meta property="article:tag" content="Python">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="numpy基础">
+  <meta name="twitter:description" content="numpy基础">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://xin5835.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "numpy基础",
+      "item": "https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "numpy基础",
+  "name": "numpy基础",
+  "description": "numpy基础\n",
+  "keywords": [
+    "Python"
+  ],
+  "articleBody": "numpy基础\npython基础 启动shell\nipython 启动jupyter notebook\njupyter notebook jupyter notebook --port 9999 数据结构\nlist = [val1,val2,val3,val4]\ndict = {key1:val1,key2:val2}\ntuple = (val1,val2,val3,val4)\nset = {val1,val2,val3,val4}\n列表（list）：\n列表有顺序 列表元素可以修改 列表可以容纳任何对象 字典（dictionary）：\n字典中的数据必须以键值对的形式出现 键不能重复，值可以重复 键不能修改，值可以修改 元组（tuple）：\n不可修改，类似稳定的列表\n集合（set）：\n无序 不重复 不能被切片+索引 .可以修改 numpy 导入numpy\nimport numpy as np 理解Python中的数据类型 np.array 从 Python 列表创建数组:\n## 整型数组: np.array([1, 4, 2, 5, 3]) ## 嵌套列表构成的多维数组 np.array([range(i, i + 3) for i in [2, 4, 6]]) 从头创建数组 + 创建一个长度为10的数组，数组的值都是0 np.zeros(10, dtype=int) + 创建一个3×5的浮点型数组，数组的值都是1 np.ones((3, 5), dtype=float) + 创建一个3×5的浮点型数组，数组的值都是3.14 np.full((3, 5), 3.14) + 创建一个3×5的浮点型数组，数组的值是一个线性序列 ## 从0开始，到20结束，步长为2 np.arange(0, 20, 2) + 创建一个5个元素的数组，这5个数均匀地分配到0~1 np.linspace(0, 1, 5) + 创建一个3×3的、在0~1均匀分布的随机数组成的数组 np.random.random((3, 3)) + 创建一个3×3的、均值为0、方差为1的 正态分布的随机数数组 np.random.normal(0, 1, (3, 3)) + 创建一个3×3的、[0, 10)区间的随机整型数组 np.random.randint(0, 10, (3, 3)) + 创建一个3×3的单位矩阵 np.eye(3) + 创建一个由3个整型数组成的未初始化的数组,数组的值是内存空间中的任意值 np.empty(3) 数组的属性 : 确定数组的大小、形状、存储大小、数据类型。\n.ndim .shape .size .dtype 数组的索引 : 获取和设置数组各个元素的值。\nx[0] x[-1] ##多维索引 x[0, 0] ## 修改元素的值 x[0 , 0] = 12 数组的切分(slice) : 获取或设置更小的子数组。 x[ start: stop: step]，返回视图\nx[:5] ## 前五个元素 x[5:] ## 索引五之后的元素 x[4:7] ## 中间的子数组 x[::2] ## 每隔一个元素 x[1::2] ## 每隔一个元素，从索引1开始 x[::-1] ## 所有元素，逆序的 x[5::-2] ## 从索引5开始每隔一个元素逆序 多维子数组\nx2[:2, :3] ## 两行，三列 x2[:3, ::2] ## 所有行，每隔一列 x2[::-1, ::-1] ## 逆序 获取数组的行和列 :索引与切片组合起来实现这个功能\nprint(x2[:, 0]) ## x2的第一列 print(x2[0, :]) ## x2的第一行 print(x2[0]) ##等于x2[0, :] 非副本视图的子数组\n.copy() ## 创建数组的副本 数组的变形 :改变给定数组的形状。 x = np.array([1, 2, 3]) ## 通过变形获得的行向量 x.reshape((1, 3)) ## 通过newaxis获得的行向量 x[np.newaxis, :] ## 通过变形获得的列向量 x.reshape((3, 1)) ## 通过newaxis获得的列向量 x[:, np.newaxis] 数组的拼接和分裂 : 拼接:np.concatenate、np.vstack 和 np.hstack\nnp.concatenate([x, y]) ## 沿着第一个轴拼接 np.concatenate([x, y]) ## 沿着第二个轴拼接(从0开始索引) np.concatenate([x, y], axis=1) ## 垂直栈数组 np.vstack([x, y]) ## 水平栈数组 np.hstack([x, y]) 分裂:np.split、np.hsplit 和 np.vsplit\nx1, x2, x3 = np.split(x, [3, 5]) ## [3, 5]第3个和第5个未知是分割点 upper, lower = np.vsplit(grid, [2]) left, right = np.hsplit(grid, [2]) ",
+  "wordCount" : "271",
+  "inLanguage": "en",
+  "datePublished": "2021-08-14T11:18:15+08:00",
+  "dateModified": "2021-08-14T11:18:15+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://xin5835.github.io/post/numpy%E5%9F%BA%E7%A1%80/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Robert's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xin5835.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://xin5835.github.io/" accesskey="h" title="Robert&#39;s Blog (Alt + H)">Robert&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://xin5835.github.io/" title="🏠Home">
+                    <span>🏠Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/archives/" title="🗂Archives">
+                    <span>🗂Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/search/" title="🔍Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/tags/" title="🔖Tags">
+                    <span>🔖Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://xin5835.github.io/links/" title="💌Links">
+                    <span>💌Links</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      numpy基础
+    </h1>
+    <div class="post-meta"><span title='2021-08-14 11:18:15 +0800 CST'>August 14, 2021</span>
+
+</div>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
+
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#python%e5%9f%ba%e7%a1%80" aria-label="python基础">python基础</a></li>
+                    <li>
+                        <a href="#numpy" aria-label="numpy">numpy</a><ul>
+                            
+                    <li>
+                        <a href="#%e7%90%86%e8%a7%a3python%e4%b8%ad%e7%9a%84%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b" aria-label="理解Python中的数据类型">理解Python中的数据类型</a></li>
+                    <li>
+                        <a href="#%e4%bb%8e%e5%a4%b4%e5%88%9b%e5%bb%ba%e6%95%b0%e7%bb%84" aria-label="从头创建数组">从头创建数组</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e7%bb%84%e7%9a%84%e5%b1%9e%e6%80%a7-" aria-label="数组的属性 :">数组的属性 :</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e7%bb%84%e7%9a%84%e7%b4%a2%e5%bc%95-" aria-label="数组的索引 :">数组的索引 :</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e7%bb%84%e7%9a%84%e5%88%87%e5%88%86slice-" aria-label="数组的切分(slice) :">数组的切分(slice) :</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e7%bb%84%e7%9a%84%e5%8f%98%e5%bd%a2-%e6%94%b9%e5%8f%98%e7%bb%99%e5%ae%9a%e6%95%b0%e7%bb%84%e7%9a%84%e5%bd%a2%e7%8a%b6" aria-label="数组的变形 :改变给定数组的形状。">数组的变形 :改变给定数组的形状。</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e7%bb%84%e7%9a%84%e6%8b%bc%e6%8e%a5%e5%92%8c%e5%88%86%e8%a3%82-" aria-label="数组的拼接和分裂 :">数组的拼接和分裂 :</a>
+                    </li>
+                </ul>
+                </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    
+    document.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+    
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        if (elements.length > 0) {
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }
+    
+        
+        const topLink = document.getElementById('top-link');
+        if (topLink) {
+            topLink.addEventListener('click', (event) => {
+                
+                event.preventDefault();
+    
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }, false);
+    
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+    
+    window.addEventListener('scroll', () => {
+        
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+        
+        if (scrollPosition === 0) {
+            return;
+        }
+    
+        
+        if (elements && elements.length > 0) {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - scrollPosition) > 0 && 
+                    (getOffsetTop(element) - scrollPosition) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement;
+    
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                const tocLink = document.querySelector(`.inner ul li a[href="#${id}"]`);
+                if (element === activeElement){
+                    tocLink.classList.add('active');
+    
+                    
+                    const tocContainer = document.querySelector('.toc .inner');
+                    const linkOffsetTop = tocLink.offsetTop;
+                    const containerHeight = tocContainer.clientHeight;
+                    const linkHeight = tocLink.clientHeight;
+    
+                    
+                    const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+                    tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                } else {
+                    tocLink.classList.remove('active');
+                }
+            });
+        }
+    }, false);
+    
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+    
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+    
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+    
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+    
+</script>
+  <div class="post-content"><p>numpy基础</p>
+<h2 id="python基础">python基础<a hidden class="anchor" aria-hidden="true" href="#python基础">#</a></h2>
+<p>启动shell</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ipython
+</span></span></code></pre></div><p>启动jupyter notebook</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">jupyter notebook
+</span></span><span class="line"><span class="cl">jupyter notebook --port 9999
+</span></span></code></pre></div><p>数据结构</p>
+<p>list = [val1,val2,val3,val4]<br>
+dict = {key1:val1,key2:val2}<br>
+tuple = (val1,val2,val3,val4)<br>
+set = {val1,val2,val3,val4}</p>
+<ul>
+<li>
+<p>列表（list）：</p>
+<ol>
+<li>列表有顺序</li>
+<li>列表元素可以修改</li>
+<li>列表可以容纳任何对象</li>
+</ol>
+</li>
+<li>
+<p>字典（dictionary）：</p>
+<ol>
+<li>字典中的数据必须以键值对的形式出现</li>
+<li>键不能重复，值可以重复</li>
+<li>键不能修改，值可以修改</li>
+</ol>
+</li>
+<li>
+<p>元组（tuple）：</p>
+<p>不可修改，类似稳定的列表</p>
+</li>
+<li>
+<p>集合（set）：</p>
+<ol>
+<li>无序</li>
+<li>不重复</li>
+<li>不能被切片+索引</li>
+<li>.可以修改</li>
+</ol>
+</li>
+</ul>
+<h2 id="numpy">numpy<a hidden class="anchor" aria-hidden="true" href="#numpy">#</a></h2>
+<p>导入numpy</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span></code></pre></div><h3 id="理解python中的数据类型">理解Python中的数据类型<a hidden class="anchor" aria-hidden="true" href="#理解python中的数据类型">#</a></h3>
+<p>np.array 从 Python 列表创建数组:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">## 整型数组:</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 嵌套列表构成的多维数组</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+</span></span></code></pre></div><h3 id="从头创建数组">从头创建数组<a hidden class="anchor" aria-hidden="true" href="#从头创建数组">#</a></h3>
+<pre><code>+ 创建一个长度为10的数组，数组的值都是0
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是1 
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值都是3.14 
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mf">3.14</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×5的浮点型数组，数组的值是一个线性序列 ## 从0开始，到20结束，步长为2
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>+ 创建一个5个元素的数组，这5个数均匀地分配到0~1 
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的、在0~1均匀分布的随机数组成的数组 
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的、均值为0、方差为1的 正态分布的随机数数组
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的、[0, 10)区间的随机整型数组 
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>+ 创建一个3×3的单位矩阵 
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>+ 创建一个由3个整型数组成的未初始化的数组,数组的值是内存空间中的任意值
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="数组的属性-">数组的属性 :<a hidden class="anchor" aria-hidden="true" href="#数组的属性-">#</a></h3>
+<p>确定数组的大小、形状、存储大小、数据类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">.</span><span class="n">ndim</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">shape</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">size</span> 
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">dtype</span>
+</span></span></code></pre></div><h3 id="数组的索引-">数组的索引 :<a hidden class="anchor" aria-hidden="true" href="#数组的索引-">#</a></h3>
+<p>获取和设置数组各个元素的值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">##多维索引</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 修改元素的值</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span> 
+</span></span></code></pre></div><h3 id="数组的切分slice-">数组的切分(slice) :<a hidden class="anchor" aria-hidden="true" href="#数组的切分slice-">#</a></h3>
+<p>获取或设置更小的子数组。 x[ start: stop: step]，返回视图</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="c1">## 前五个元素</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span> <span class="c1">## 索引五之后的元素</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="c1">## 中间的子数组</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 每隔一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 每隔一个元素，从索引1开始</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">## 所有元素，逆序的</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">::</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 从索引5开始每隔一个元素逆序</span>
+</span></span></code></pre></div><p>多维子数组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x2</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1">## 两行，三列</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="c1">## 所有行，每隔一列</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">## 逆序</span>
+</span></span></code></pre></div><p>获取数组的行和列 :索引与切片组合起来实现这个功能</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1">## x2的第一列</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span> <span class="c1">## x2的第一行</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">##等于x2[0, :]</span>
+</span></span></code></pre></div><p>非副本视图的子数组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1">## 创建数组的副本</span>
+</span></span></code></pre></div><h3 id="数组的变形-改变给定数组的形状">数组的变形 :改变给定数组的形状。<a hidden class="anchor" aria-hidden="true" href="#数组的变形-改变给定数组的形状">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过变形获得的行向量 x.reshape((1, 3))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过newaxis获得的行向量 x[np.newaxis, :]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过变形获得的列向量 x.reshape((3, 1))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 通过newaxis获得的列向量 x[:, np.newaxis]</span>
+</span></span></code></pre></div><h3 id="数组的拼接和分裂-">数组的拼接和分裂 :<a hidden class="anchor" aria-hidden="true" href="#数组的拼接和分裂-">#</a></h3>
+<p>拼接:np.concatenate、np.vstack 和 np.hstack</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 沿着第一个轴拼接 </span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 沿着第二个轴拼接(从0开始索引) </span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 垂直栈数组 </span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 水平栈数组</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span></span></code></pre></div><p>分裂:np.split、np.hsplit 和 np.vsplit</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="c1">## [3, 5]第3个和第5个未知是分割点</span>
+</span></span><span class="line"><span class="cl"><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vsplit</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://xin5835.github.io/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://xin5835.github.io/post/%E7%B2%BE%E7%9B%8A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>精益数据分析</span>
+  </a>
+  <a class="next" href="https://xin5835.github.io/post/%E6%8E%8C%E6%8E%A7%E4%B9%A0%E6%83%AF-%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/">
+    <span class="title">Next »</span>
+    <br>
+    <span>《掌控习惯》读书心得</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://xin5835.github.io/">Robert&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
